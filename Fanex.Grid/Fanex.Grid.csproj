@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A1610366-5B57-4518-AF41-DE29695DABD3}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.Grid</RootNamespace>
+    <AssemblyName>Fanex.Grid</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <JSLintSkip>
+    </JSLintSkip>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.AccountingReports.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.AccountingReports.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\_Dependencies\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core">
+      <HintPath>..\_Dependencies\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20505.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="App_Data\SpNames.xml" />
+    <Content Include="Global.asax" />
+    <Content Include="ScriptsUnittest\angular\angular-mocks.js" />
+    <Content Include="ScriptsUnittest\angular\angular-scenario.js" />
+    <Content Include="ScriptsUnittest\angular\angular.js" />
+    <Content Include="ScriptsUnittest\jasmine-samples\Player.js" />
+    <Content Include="ScriptsUnittest\jasmine-samples\PlayerSpec.js" />
+    <Content Include="ScriptsUnittest\jasmine-samples\Song.js" />
+    <Content Include="ScriptsUnittest\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ko-KR.js" />
+    <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ja-JP.js" />
+    <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.vi-VN.js" />
+    <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.th-TH.js" />
+    <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.zh-TW.js" />
+    <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.zh-CN.js" />
+    <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.en-US.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shAutoloader.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushAppleScript.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushAS3.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushBash.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushColdFusion.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushCpp.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushCSharp.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushCss.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushDelphi.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushDiff.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushErlang.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushGroovy.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushJava.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushJavaFX.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushJScript.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushPerl.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushPhp.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushPlain.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushPowerShell.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushPython.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushRuby.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushSass.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushScala.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushSql.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushVb.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shBrushXml.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shCore.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\shLegacy.js" />
+    <Content Include="Scripts\HighLightSyntax\scripts\XRegExp.js" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCore.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreDefault.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreDjango.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreEclipse.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreEmacs.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreFadeToGrey.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreMDUltra.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreMidnight.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shCoreRDark.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeDefault.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeDjango.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeEclipse.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeEmacs.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeFadeToGrey.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeMDUltra.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeMidnight.css" />
+    <Content Include="Scripts\HighLightSyntax\styles\shThemeRDark.css" />
+    <Content Include="Scripts\jquery-1.10.1.js" />
+    <Content Include="Scripts\jquery-1.7.2.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-ui-1.9.1.js" />
+    <Content Include="Scripts\jquery\images\ui-bg_flat_60_4264ac_40x100.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_flat_75_5476bb_40x100.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_flat_90_466bb9_40x100.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_flat_90_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_glass_45_f4f3f1_1x400.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_highlight-soft_90_999999_1x100.png" />
+    <Content Include="Scripts\jquery\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Scripts\jquery\images\ui-icons_4264ac_256x240.png" />
+    <Content Include="Scripts\jquery\images\ui-icons_c6cddc_256x240.png" />
+    <Content Include="Scripts\jquery\images\ui-icons_cbd4e6_256x240.png" />
+    <Content Include="Scripts\jquery\images\ui-icons_d0d9ec_256x240.png" />
+    <Content Include="Scripts\jquery\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Scripts\jquery\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Scripts\jquery\jquery-ui-1.9.1.custom.css" />
+    <Content Include="Scripts\jquery\jquery-ui-1.9.1.custom.min.css" />
+    <Content Include="Styles\images\basic.png" />
+    <Content Include="Styles\images\gears.png" />
+    <Content Include="Styles\theme.css" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\GenerateData.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid.css" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid.js" />
+    <Content Include="Scripts\Fanex.Grid\images\1350530947_page_excel.png" />
+    <Content Include="Scripts\Fanex.Grid\images\ajax-loader.gif" />
+    <Content Include="Scripts\Fanex.Grid\images\back-icon.png" />
+    <Content Include="Scripts\Fanex.Grid\images\bgtitle.png" />
+    <Content Include="Scripts\Fanex.Grid\images\bg_gloss_wave.png" />
+    <Content Include="Scripts\Fanex.Grid\images\collapse-icon.png" />
+    <Content Include="Scripts\Fanex.Grid\images\collapse-small.png" />
+    <Content Include="Scripts\Fanex.Grid\images\email.png" />
+    <Content Include="Scripts\Fanex.Grid\images\excel-icon.png" />
+    <Content Include="Scripts\Fanex.Grid\images\expand-icon.png" />
+    <Content Include="Scripts\Fanex.Grid\images\expand-small.png" />
+    <Content Include="Scripts\Fanex.Grid\images\icn_add.png" />
+    <Content Include="Scripts\Fanex.Grid\images\icn_del.png" />
+    <Content Include="Scripts\Fanex.Grid\images\icn_edit.png" />
+    <Content Include="Scripts\Fanex.Grid\images\refresh_icon.png" />
+    <Content Include="Scripts\Fanex.Grid\images\report_check.png" />
+    <Content Include="Scripts\Fanex.Grid\images\send-mail.png" />
+    <Content Include="Scripts\Fanex.Grid\images\setting.png" />
+    <Content Include="Scripts\Fanex.Grid\images\sort-icon-new.png" />
+    <Content Include="Scripts\Fanex.Grid\images\sort-icon-new1.png" />
+    <Content Include="Scripts\Fanex.Grid\images\sort-icon-new3.png" />
+    <Content Include="Scripts\Fanex.Grid\images\sort-icon.png" />
+    <Content Include="Scripts\Fanex.Grid\images\sorting_asc.gif" />
+    <Content Include="Scripts\Fanex.Grid\images\sorting_bg.gif" />
+    <Content Include="Scripts\Fanex.Grid\images\sorting_desc.gif" />
+    <Content Include="Scripts\Fanex.Grid\images\white-top-bottom.gif" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\numeral.js" />
+    <Content Include="Scripts\Fanex.Grid\images\go-hover-icon.png" />
+    <Content Include="Scripts\Fanex.Grid\images\icon_page.gif" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Pagination.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Pagination.css" />
+    <Content Include="Scripts\Fanex.Grid\images\seperations.png" />
+    <Content Include="Styles\normalize.css" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Test\ExternalReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.AppSettings.config" />
+    <Content Include="Web.ConnectionString.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Test\WLByLicensee.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Test\DemoGrid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Test\TotalTransactionsPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Test\NewTest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DemoLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\DefaultFunctionality.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\HeaderGrouping.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\FrozenColumns.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\Sorting.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\Pager.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\GridTitle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\FormatNumber.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\ShowHideColumns.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\TreeGrid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\Merging.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\CustomCell.cshtml" />
+    <Content Include="Views\Demo\CustomOption.cshtml" />
+    <Content Include="Views\Demo\CustomPager.cshtml" />
+    <Content Include="Views\Demo\CustomSorting.cshtml" />
+    <Content Include="Views\Demo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\AutoTruncate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\Api.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fanex.Grid.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\Demo5000Rows.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Demo\AppendBodyRows.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Fanex.Grid\Fanex.Grid.less" />
+    <Content Include="Views\Demo\Popup.cshtml" />
+    <Content Include="Views\Demo\MultipleLanguage.cshtml" />
+    <Content Include="Views\Demo\AutoResizeColumns.cshtml" />
+    <Content Include="Views\Demo\Others.cshtml" />
+    <Content Include="Views\Demo\Demo1000Rows100Cols.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51756</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "TotalTransactionsPage";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<style type="text/css">
+    .marginleft
+    {
+        padding-left: 20px;
+    }
+</style>
+<div id="sourcecontainer">
+<div id="gridId" class="freegrid content-grid">
+</div>
+</div>
+<div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
+<pre name="code" class="groovy">
+    //// Html
+         <div id="gridId" class="freegrid">
+        </div>
+    //// Script
+           function GetGridOption(report) {
+            var gridOption = {
+                columns: [
+                    { HeaderText: "Licensee", Width: 550, Name: "Name", ShowCollapseExpand: true },
+                    { HeaderText: "Total Transactions", Width:480, Name: "BetCount", HeaderAlign:"center", CellAlign: "right", FormatNumber: "0,0" },
+                    { HeaderText: "Transaction Cost (EUR)", Width: 200, Name: "EURCostString", CellAlign: "right" }
+                ],
+                showFooter: true,
+                showTitle: true,
+                titleInfo:
+                {
+                    text: "Negative Balance Report for All Licensees",
+                    showExcelButton: true,
+                    exportExcelFunction: function () {
+                        alert("Export Excel Button Clicked.");
+                    },
+                    showCollapseExpandButton: true
+                },
+                showTree: true,
+                showDistinctRow: false,
+                numberOfFrozenColumn: 0,
+                gridExpandHeight: 150
+            };
+            var bodyData = [];
+            var footerData = [];
+            if (report && report.Childs.length > 0) {
+                var len = report.Childs.length;
+                for (var i = 0; i < len; i++) {
+                    var reseller = report.Childs[i];
+                    var childsLength = reseller.Childs.length;
+                    var currentRow =
+                    {
+                        Columns: [
+                            { Name: "Name", Value: reseller.Name },
+                            { Name: "BetCount", Value: reseller.BetCount },
+                            { Name: "EURCostString", Value: reseller.EURCostString }
+                        ],
+                        SubRows: []
+                    };
+                    if(i != 2)
+                    {
+                        for (var j = 0; j < childsLength; j++) {
+                            var licensee = reseller.Childs[j];
+                            var currentSubRow = {
+                                Columns: [
+                                { Name: "Name", Value: licensee.Name },
+                                { Name: "BetCount", Value: licensee.BetCount },
+                                { Name: "EURCostString", Value: licensee.EURCostString }
+                            ]
+                            };
+                            currentRow.SubRows.push(currentSubRow);
+                        }
+                    }
+                    bodyData.push(currentRow);
+                }
+
+                footerData.push(
+                {
+                    Columns: [
+                          { Name: "Name", Value: report.Name, CellAlign:'center' },
+                            { Name: "BetCount", Value: report.BetCount },
+                            { Name: "EURCostString", Value: report.EURCostString }
+                    ]
+                }
+               );
+            }
+            gridOption.bodyRows = bodyData;
+            gridOption.footerRows = footerData;
+            return gridOption;
+        }
+         $(function () {
+             var currentGrid = $("#gridId").fanexGrid(GetGridOption(rs));
+        });
+        </pre>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function GetGridOption(report) {
+            var gridOption = {
+                columns: [
+                    { HeaderText: "Licensee", Width: 550, Name: "Name", ShowCollapseExpand: true },
+                    { HeaderText: "Total Transactions", Width:480, Name: "BetCount", HeaderAlign:"center", CellAlign: "right", FormatNumber: "0,0", CellCssClass: "marginleft" },
+                    { HeaderText: "Transaction Cost (EUR)", Width: 200, Name: "EURCostString", CellAlign: "right" }
+                ],
+                showFooter: true,
+                showTitle: true,
+                titleInfo:
+                {
+                    text: "Negative Balance Report for All Licensees",
+                    showExcelButton: true,
+                    exportExcelFunction: function () {
+                        alert("Export Excel Button Clicked.");
+                    },
+                    showCollapseExpandButton: true
+                },
+                showTree: true,
+                showDistinctRow: false,
+                numberOfFrozenColumn: 1,
+                gridExpandHeight: 150
+            };
+            var bodyData = [];
+            var footerData = [];
+            if (report && report.Childs.length > 0) {
+                var len = report.Childs.length;
+                for (var i = 0; i < len; i++) {
+                    var reseller = report.Childs[i];
+                    var childsLength = reseller.Childs.length;
+                    var currentRow =
+                    {
+                        Columns: [
+                            { Name: "Name", Value: reseller.Name, MergeColNumber: 3 }
+//                            ,
+//                            { Name: "BetCount", Value: reseller.BetCount },
+//                            { Name: "EURCostString", Value: reseller.EURCostString }
+                        ],
+                        SubRows: []
+                    };
+                    if(i != 2)
+                    {
+                        for (var j = 0; j < childsLength; j++) {
+                            var licensee = reseller.Childs[j];
+                            var currentSubRow = {
+                                Columns: [
+                                { Name: "Name", Value: licensee.Name,CssClass: "marginleft"  },
+                                { Name: "BetCount", Value: licensee.BetCount },
+                                { Name: "EURCostString", Value: licensee.EURCostString }
+                            ]
+                            };
+                            currentRow.SubRows.push(currentSubRow);
+                        }
+                    }
+                    bodyData.push(currentRow);
+                }
+
+                footerData.push(
+                {
+                    Columns: [
+                          { Name: "Name", Value: report.Name, CellAlign:'center' },
+                            { Name: "BetCount", Value: report.BetCount },
+                            { Name: "EURCostString", Value: report.EURCostString }
+                    ]
+                }
+               );
+            }
+            gridOption.bodyRows = bodyData;
+            gridOption.footerRows = footerData;
+            return gridOption;
+        }
+
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetTotalTransReport","Test")",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "",
+                beforeSend: function () {
+                    try { $.blockUI(); } catch (e) { }
+                },
+                success: function (rs) {
+                    var currentGrid = $("#gridId").fanexGrid(GetGridOption(rs));
+                },
+                error: function (event, jqXHR, ajaxSettings) {
+                },
+                complete: function () {
+                    try { $.unblockUI(); } catch (e) { }
+                }
+            });
+            dp.SyntaxHighlighter.HighlightAll('code');
+        });
+     </script>
+}

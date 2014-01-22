@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="External Report">
+    <Setting Key="EAS_Rpt_WinLossDaily_Com14" SpName="EAS_Rpt_WinLossDaily_Com14" DbName="archive" ></Setting>
+  </Function>
+  <Function Name="LicenseeReports">
+    <Setting Key="Licensee_SelWinLossCurrencies" SpName="Acc_Rpt_LicWinloss2" DbName="archive"></Setting>
+    <Setting Key="Licensee_SelTotalTicket" SpName="Acc_Rpt_LicGetTotalTicket" DbName="archive" TimeOut="0"></Setting>
+    <Setting Key="Licensee_SelReseller" SpName="Acc_LicenseeByResellerSel" DbName="licensee" ></Setting>
+    <Setting Key="Licensee_SelResellerRates" SpName="OA_ResellerTransactionSel" DbName="licensee"></Setting>
+    <Setting Key="Licensee_SelCurrencies" SpName="Acc_SelCurrencyByLicensee" DbName="archive"></Setting>
+    <Setting Key="Licensee_SelExchangeCurrency" SpName="Acc_ExchangeCurrencySel" DbName="db053"></Setting>
+  </Function>
+  <Function Name="ReportUtils">
+    <Setting Key="SelBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="db053"  >
+    </Setting>
+  </Function>
+</Functions>

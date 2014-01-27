@@ -340,12 +340,13 @@
                     if (options.showFooter) {
                         var footerLength = options.footerRows[0].Columns.length;
                         var needHideCols = options.hiddenColumns.slice(0);
+                        var currentColIndex = 0;
                         for (var ftColIndex = 0; ftColIndex < footerLength; ftColIndex++) {
                             currentCol = options.footerRows[0].Columns[ftColIndex];
                             if (currentCol.MergeColNumber) {
                                 var removeArray = [];
                                 for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
-                                    if (ftColIndex + currentCol.MergeColNumber >= needHideCols[nhIndex]) {
+                                    if (ftColIndex + currentCol.MergeColNumber >= ftColIndex + needHideCols[nhIndex]) {
                                         removeArray.push(nhIndex);
                                     }
                                     else if (ftColIndex < needHideCols[nhIndex]) {
@@ -356,7 +357,10 @@
                                 for (var rmIndex = removeArray.length - 1; rmIndex >= 0; rmIndex--) {
                                     needHideCols.splice(removeArray[rmIndex], 1);
                                 }
+
+                                //currentColIndex += currentCol.MergeColNumber;
                             }
+                           // currentColIndex++;
                         }
 
                         for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {

@@ -4,6 +4,9 @@
 }
 
 <div id="sourcecontainer">
+    <div id="filter-bar">
+        <input type="button" value="Get Columns Identify" id="getColumnIdentify" />
+    </div>
     <div id="gridId" class="freegrid  content-grid">
     </div>
 </div>
@@ -141,5 +144,9 @@
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);
+        $('#getColumnIdentify').click(function () {
+            var columns = $("#gridId").fanexGrid('getColumnsIdentify', gridOptions);
+        }
+        );
     });
 </script>

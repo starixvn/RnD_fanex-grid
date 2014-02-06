@@ -114,6 +114,9 @@
             });
         },
         getCurrentPage: function () {
+        },
+        getColumnsIdentify: function (opts) {
+            return Fanex.Grid.Helper.GetColumnsHastable(opts.columns);
         }
     };
 

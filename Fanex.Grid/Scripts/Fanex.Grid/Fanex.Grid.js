@@ -277,8 +277,19 @@
             }
             var me = this;
             var options = me.Options;
+            var footer = '';
+            if (options.showFooter && options.bodyRows.length > 0) {
+                if (typeof (options.pagerOption.customRenderFooter) === 'function') {
+                    var startIndex = (options.pagerOption.currentPage * options.pagerOption.itemsPerPage);
+                    var endIndex = ((options.pagerOption.currentPage + 1) * options.pagerOption.itemsPerPage);
+                    var currentBodyRows = options.bodyRows.slice(startIndex, endIndex);
+                    me.Options.footerRows = options.pagerOption.customRenderFooter(currentBodyRows, options.pagerOption.currentPage, options.pagerOption.itemsPerPage);
+                }
+
+                footer = me.RenderFooter();
+            }
             //// Render Table Main Frame
-            var html = me.RenderBody(me.RenderHeader()) + (options.showFooter && options.bodyRows.length > 0 ? me.RenderFooter() : "");
+            var html = me.RenderBody(me.RenderHeader()) + footer;
             if (me.gridObject) {
                 me.gridObject.innerHTML = html;
             }

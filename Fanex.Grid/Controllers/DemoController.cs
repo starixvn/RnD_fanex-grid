@@ -140,5 +140,10 @@ namespace Fanex.Grid.Controllers
         {
             return View();
         }
+
+        public ActionResult CustomFooterPager()
+        {
+            return View();
+        }
     }
 }

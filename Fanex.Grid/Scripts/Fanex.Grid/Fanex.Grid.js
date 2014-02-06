@@ -360,7 +360,7 @@
 
                                 //currentColIndex += currentCol.MergeColNumber;
                             }
-                           // currentColIndex++;
+                            // currentColIndex++;
                         }
 
                         for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
@@ -1234,23 +1234,50 @@
 
             return Fanex.Grid.Helper.RemoveSpaceIE9(bodyHtml);
         },
-        RenderFooter: function () {
+        RenderFooter: function (reRender) {
+            var me = this,
+                options = me.Options,
+                footerHtml = [],
+                frozenFooterHtml = [],
+                reRender = reRender || false,
+                currentFooterHtml = me.RenderFooterBody();
+
+            if (reRender) {
+                //currentFooterHtml
+                me.$grid.find('.row_footer_content > thead').empty().append(currentFooterHtml.frozenFooterHtml);
+                me.$grid.find('.col_footer_content > thead').empty().append(currentFooterHtml.footerHtml);
+            }
+            else {
+                footerHtml.push('<div class="col_footer row-footer-background scroll-y">' +
+                                '<div class="footer-container">' +
+                                    '<table class="col_footer_content grid-fixed-table">' +
+                                        '<thead>');
+
+                frozenFooterHtml.push(' <div class="row_footer row-footer-background z999">' +
+                                    ' <table class="grid-fixed-table row_footer_content">' +
+                                    '    <thead>');
+
+
+                var currentFooterHtml = me.RenderFooterBody();
+
+                footerHtml.push(currentFooterHtml.footerHtml);
+
+                frozenFooterHtml.push(currentFooterHtml.frozenFooterHtml);
+
+                frozenFooterHtml.push('   </thead>' + '</table>' + '</div>');
+
+                footerHtml.push(' </thead>' + '</table>' + '</div>' + '</div>');
+
+                return frozenFooterHtml.join('') + footerHtml.join('');
+            }
+        },
+        RenderFooterBody: function () {
             var me = this;
             var options = me.Options;
             var footerHtml = [];
             var frozenFooterHtml = [];
             var footerRowsLength = options.footerRows.length,
                 currentRow;
-
-            footerHtml.push('<div class="col_footer row-footer-background scroll-y">' +
-                                '<div class="footer-container">' +
-                                    '<table class="col_footer_content grid-fixed-table">' +
-                                        '<thead>');
-
-            frozenFooterHtml.push(' <div class="row_footer row-footer-background z999">' +
-                                    ' <table class="grid-fixed-table row_footer_content">' +
-                                    '    <thead>');
-
 
             var currentFrozenRows = (options.numberOfFrozenColumn > 0) ?
                                     Fanex.Grid.Helper.CreateRowsForFrozenColumn(options.footerRows, options.numberOfFrozenColumn, me.frozenColsName) :
@@ -1271,11 +1298,10 @@
                 footerHtml.push(me.RenderNormalRow(currentRow, 'th', false, rowIndex, '', false, ''));
             }
 
-            frozenFooterHtml.push('   </thead>' + '</table>' + '</div>');
-
-            footerHtml.push(' </thead>' + '</table>' + '</div>' + '</div>');
-
-            return frozenFooterHtml.join('') + footerHtml.join('');
+            return {
+                footerHtml: footerHtml.join(''),
+                frozenFooterHtml: frozenFooterHtml.join('')
+            };
         },
         RenderPager: function () {
             var me = this;
@@ -1308,6 +1334,18 @@
                             me.Options.pagerOption.currentPage = pageIndex;
                             me.Options.pagerOption.itemsPerPage = itemsPerPage;
                             me.RenderBody('', true);
+                            ////Re-render footer 
+                            ////options.showFooter && options.bodyRows.length > 0 ? me.RenderFooter() : ""
+                            if (options.showFooter && options.bodyRows.length > 0 && typeof (options.pagerOption.customRenderFooter) === 'function') {
+                                var startIndex = (options.pagerOption.currentPage * options.pagerOption.itemsPerPage);
+                                var endIndex = ((options.pagerOption.currentPage + 1) * options.pagerOption.itemsPerPage);
+                                var currentBodyRows = options.bodyRows.slice(startIndex, endIndex);
+                                me.Options.footerRows = options.pagerOption.customRenderFooter(currentBodyRows, options.pagerOption.currentPage, options.pagerOption.itemsPerPage);
+                                me.RenderFooter(true);
+                            }
+                            //                            if (typeof (options.pagerOption.afterPagedFunction) === 'function') {
+                            //                                options.pagerOption.afterPagedFunction(options.pagerOption);
+                            //                            }
                             me.gridOptions.isResetScroller = true;
                             $(me.$grid).gridScroller(me.gridOptions);
                             me.RenderPager();

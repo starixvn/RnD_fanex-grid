@@ -140,5 +140,11 @@ namespace Fanex.Grid.Controllers
         {
             return View();
         }
+
+        public ActionResult PerformanceTest()
+        {
+            return View();
+        }
+
     }
 }

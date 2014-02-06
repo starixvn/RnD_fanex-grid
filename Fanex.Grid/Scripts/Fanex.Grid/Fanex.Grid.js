@@ -277,6 +277,7 @@
             //// Render Table Main Frame
             var html = me.RenderBody(me.RenderHeader()) + (options.showFooter && options.bodyRows.length > 0 ? me.RenderFooter() : "");
             if (me.gridObject) {
+                me.$grid.empty();
                 me.gridObject.innerHTML = html;
             }
             //me.$grid.empty().html(html);
@@ -360,7 +361,7 @@
 
                                 //currentColIndex += currentCol.MergeColNumber;
                             }
-                           // currentColIndex++;
+                            // currentColIndex++;
                         }
 
                         for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
@@ -866,7 +867,9 @@
                 }
             }
 
-            return rowHtml.join('');
+            var rowCombine = rowHtml.join('');
+            rowHtml = null;
+            return rowCombine;
         },
         RenderSubRow: function (currentRow, isMain, isBody, rowIndex, currentCollapseExpandId, parentHighlight, level) {
             var me = this;
@@ -1017,9 +1020,10 @@
 
             cellHtml.push(showRowIndexNumber ? currentRowIndexForCustomPager : cellContent);
             cellHtml.push('</div></' + container.HtmlTag + '>');
-
+            var cellCombine = cellHtml.join('');
+            cellHtml = null;
             return {
-                CellHtml: cellHtml.join(''),
+                CellHtml: cellCombine,
                 CurrentCollapseExpandId: currentCollapseExpandId,
                 CurrentColumnShowTree: isCurrentColShowTree
             };
@@ -1232,6 +1236,11 @@
                 }
             }
 
+
+            bodyFrozenHtml = null;
+            bodyHtmlTemp = null;
+            bodyRowsHtml = null;
+
             return Fanex.Grid.Helper.RemoveSpaceIE9(bodyHtml);
         },
         RenderFooter: function () {
@@ -1308,6 +1317,9 @@
                             me.Options.pagerOption.currentPage = pageIndex;
                             me.Options.pagerOption.itemsPerPage = itemsPerPage;
                             me.RenderBody('', true);
+
+                            
+
                             me.gridOptions.isResetScroller = true;
                             $(me.$grid).gridScroller(me.gridOptions);
                             me.RenderPager();
@@ -2163,10 +2175,10 @@
             var bar = 17;
             var o = $(this);
 
-            var isParentShow = o.parent().is(':visible');
-            if (!isParentShow) {
-                o.parent().css({ position: "absolute", visibility: "hidden", display: "block" });
-            }
+//            var isParentShow = o.parent().is(':visible');
+//            if (!isParentShow) {
+//                o.parent().css({ position: "absolute", visibility: "hidden", display: "block" });
+//            }
 
             var title = o.find(".grid-title");
             var titleHeight = (!title.hasClass('display-none') && title.length > 0) ? title.height() : 0;
@@ -2334,9 +2346,9 @@
                 xscrollbar.addClass("x-scrollbar-fix-height");
             }
 
-            if (!isParentShow) {
-                o.parent().css({ position: "", visibility: "", display: "" });
-            }
+//            if (!isParentShow) {
+//                o.parent().css({ position: "", visibility: "", display: "" });
+//            }
         });
     };
 

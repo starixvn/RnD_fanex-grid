@@ -355,27 +355,27 @@
                         var footerLength = options.footerRows[0].Columns.length;
                         var needHideCols = options.hiddenColumns.slice(0);
                         var currentColIndex = 0;
-                        for (var ftColIndex = 0; ftColIndex < footerLength; ftColIndex++) {
-                            currentCol = options.footerRows[0].Columns[ftColIndex];
-                            if (currentCol.MergeColNumber) {
-                                var removeArray = [];
-                                for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
-                                    if (ftColIndex + currentCol.MergeColNumber >= ftColIndex + needHideCols[nhIndex]) {
-                                        removeArray.push(nhIndex);
-                                    }
-                                    else if (ftColIndex < needHideCols[nhIndex]) {
-                                        needHideCols[nhIndex] -= currentCol.MergeColNumber - 1;
-                                    }
-                                }
+//                        for (var ftColIndex = 0; ftColIndex < footerLength; ftColIndex++) {
+//                            currentCol = options.footerRows[0].Columns[ftColIndex];
+//                            if (currentCol.MergeColNumber) {
+//                                var removeArray = [];
+//                                for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
+//                                    if (ftColIndex + currentCol.MergeColNumber >= ftColIndex + needHideCols[nhIndex]) {
+//                                        removeArray.push(nhIndex);
+//                                    }
+//                                    else if (ftColIndex < needHideCols[nhIndex]) {
+//                                        needHideCols[nhIndex] -= currentCol.MergeColNumber - 1;
+//                                    }
+//                                }
 
-                                for (var rmIndex = removeArray.length - 1; rmIndex >= 0; rmIndex--) {
-                                    needHideCols.splice(removeArray[rmIndex], 1);
-                                }
+//                                for (var rmIndex = removeArray.length - 1; rmIndex >= 0; rmIndex--) {
+//                                    needHideCols.splice(removeArray[rmIndex], 1);
+//                                }
 
-                                //currentColIndex += currentCol.MergeColNumber;
-                            }
-                            // currentColIndex++;
-                        }
+//                                //currentColIndex += currentCol.MergeColNumber;
+//                            }
+//                            // currentColIndex++;
+//                        }
 
                         for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
                             currentCol = needHideCols[nhIndex];
@@ -739,6 +739,7 @@
             var colsLength = currentRow.Columns.length;
             var currentCollapseExpandId = '';
             var parentRowClass = '';
+            var currentMergeColsIndex = 0;
             var trHighlightAtt = (options.showHighlightRow ? (' highlightatt="highlight-att-frozen-' + parentHighlight + '-' + rowIndex + '"') : '');
             var trClass = (options.showHighlightRow ? 'highlight-row ' : '') +
                             (treeCollapseExpandClass || '') +
@@ -747,6 +748,7 @@
             if (options.showTree === true && currentRow.SubRows) {
                 parentRowClass = 'parent-row parent-level-' + level;
             }
+
             frozenRowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.CustomAttr || '') + trHighlightAtt + '>');
             for (var columnIndex = 0; columnIndex < colsLength; columnIndex++) {
                 var currentCol = currentRow.Columns[columnIndex];
@@ -775,6 +777,11 @@
                                                                         options.enableHiddenColumns,
                                                                         options.columns);
                 }
+
+                if (currentCol.PrevRowsColMergeNumber) {
+                    currentMergeColsIndex += currentCol.PrevRowsColMergeNumber;
+                }
+
                 var renderObject = me.RenderBodyCell(
                         {
                             HtmlTag: colHtmlTag,
@@ -789,7 +796,8 @@
                             Width: currentWidth,
                             Align: (currentCol.CellAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'left')),
                             CustomAttr: (currentCol.CustomAttr || ''),
-                            ParentHighlight: parentHighlight
+                            ParentHighlight: parentHighlight,
+                            MergeColumnIndex: currentMergeColsIndex
                         },
                         currentCol,
                         currentRow,
@@ -799,6 +807,9 @@
                 frozenRowHtml.push(renderObject.CellHtml);
                 if (renderObject.CurrentColumnShowTree === true) {
                     currentCollapseExpandId = renderObject.CurrentCollapseExpandId;
+                }
+                if (isValid(currentCol.MergeColNumber)) {
+                    currentMergeColsIndex += currentCol.MergeColNumber - 1;
                 }
             }
             frozenRowHtml.push('</tr>');
@@ -816,6 +827,7 @@
             var colsLength = currentRow.Columns.length;
             var currentCollapseExpandId = '';
             var parentRowClass = '';
+            var currentMergeColsIndex = 0;
             var trHighlightAtt = (options.showHighlightRow && isBody ? (' highlightatt="highlight-att-main-' + parentHighlight + '-' + rowIndex + '"') : '');
             var trClass = (options.showHighlightRow ? 'highlight-row ' : '') +
                             (currentRow.CssClass || '') + ' ' +
@@ -849,6 +861,9 @@
                                                                             options.enableHiddenColumns,
                                                                             options.columns);
                     }
+                    if (currentCol.PrevRowsColMergeNumber) {
+                        currentMergeColsIndex += currentCol.PrevRowsColMergeNumber;
+                    }
                     var renderObject = me.RenderBodyCell({
                         HtmlTag: colHtmlTag,
                         CustomSpan: customSpan,
@@ -861,7 +876,8 @@
                         Width: currentWidth,
                         Align: (currentCol.CellAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'left')),
                         CustomAttr: (currentCol.CustomAttr || ''),
-                        ParentHighlight: parentHighlight
+                        ParentHighlight: parentHighlight,
+                        MergeColumnIndex: currentMergeColsIndex
                     },
                         currentCol,
                         currentRow,
@@ -871,6 +887,9 @@
                     rowHtml.push(renderObject.CellHtml);
                     if (renderObject.CurrentColumnShowTree === true) {
                         currentCollapseExpandId = renderObject.CurrentCollapseExpandId;
+                    }
+                    if (isValid(currentCol.MergeColNumber)) {
+                        currentMergeColsIndex += currentCol.MergeColNumber - 1;
                     }
                 }
                 rowHtml.push('</tr>');
@@ -964,7 +983,7 @@
             }
 
             //// If show tree, then add icon expand
-            var tdClass = 'free-grid-td-' + cell.ColIndex + ' ' + (currentCol.TdClass || (me.columnsHastable[currentCol.Name].TdClass || ''));
+            var tdClass = 'free-grid-td-' + (cell.ColIndex + cell.MergeColumnIndex) + ' ' + (currentCol.TdClass || (me.columnsHastable[currentCol.Name].TdClass || ''));
             if (options.showTree === true && currentRow.SubRows && me.columnsHastable[currentCol.Name].ShowCollapseExpand === true) {
                 tdClass = 'tr-grid-collapse-expand';
             }

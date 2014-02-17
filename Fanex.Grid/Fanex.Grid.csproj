@@ -365,6 +365,7 @@
     <Content Include="Views\Demo\Others.cshtml" />
     <Content Include="Views\Demo\Demo1000Rows100Cols.cshtml" />
     <Content Include="Views\Demo\CustomFooterPager.cshtml" />
+    <Content Include="Views\Demo\PagePerformance.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

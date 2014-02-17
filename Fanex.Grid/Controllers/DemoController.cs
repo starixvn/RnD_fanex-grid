@@ -145,5 +145,11 @@ namespace Fanex.Grid.Controllers
         {
             return View();
         }
+
+        public ActionResult PagePerformance()
+        {
+            return View();
+        }
+                
     }
 }

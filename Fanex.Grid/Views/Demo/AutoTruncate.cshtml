@@ -48,7 +48,7 @@
                      }
             ],
             columns: [
-                { HeaderText: "Header 1", Width: 120, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 1", Width: 120, Name: "No", HeaderAlign: "center", CellAlign: "center", AllowTruncate: true },
                 { HeaderText: "Header 2", Width: 140, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 3", Width: 130, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 4", Width: 140, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
@@ -65,7 +65,8 @@
             showFooter: true,
             footerRows: footerRows,
             showDistinctRow: false,
-            allowTruncate: true
+            allowTruncate: true //// Set all column, recommend that if there is only column need be set, 
+                                //// then only set to that column, set AllowTruncate: true, see example above
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);
@@ -113,7 +114,7 @@
                      }
             ],
             columns: [
-                { HeaderText: "Header 1", Width: 120, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 1", Width: 120, Name: "No", HeaderAlign: "center", CellAlign: "center", AllowTruncate: true },
                 { HeaderText: "Header 2", Width: 140, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 3", Width: 130, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 4", Width: 140, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
@@ -130,7 +131,8 @@
             showFooter: true,
             footerRows: footerRows,
             showDistinctRow: false,
-            allowTruncate: true
+            allowTruncate: true //// Set all column, recommend that if there is only column need be set, 
+                                //// then only set to that column, set AllowTruncate: true, see example above
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

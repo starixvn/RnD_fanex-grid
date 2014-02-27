@@ -2,9 +2,12 @@
 // <copyright file="Fanex.Grid.js" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // Revision:
-//          + 01/10/2014: Auto re-size column
-//          + 01/21/2014: Supported Sort with SortType for each column
-//          + 01/22/2014: Fixed bug Auto reset scroller when resize grid
+//          + 01/10/2014: Auto re-size column.
+//          + 01/21/2014: Supported Sort with SortType for each column.
+//          + 01/22/2014: Fixed bug Auto reset scroller when resize grid.
+//          + 02/06/2014: Customize Render footer when auto paging + Update initialize footer.
+//          + 02/06/2014: Customize Render footer when auto paging + Update initialize footer.
+//          + 02/27/2014: Update show "..." when auto truncate.
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false*/
@@ -220,7 +223,7 @@
             this.currentFontSize = 12;
         }
         this.currentFontSize -= 4;
-        if (options.pixelsPerCharacter == 0) {
+        if (options.pixelsPerCharacter === 0) {
             options.pixelsPerCharacter = this.currentFontSize;
         }
         this.Options = options.autoResizeColumn ? Fanex.Grid.Helper.ComputeResizeColumn(this.$grid, options) : options;
@@ -283,7 +286,10 @@
                     var startIndex = (options.pagerOption.currentPage * options.pagerOption.itemsPerPage);
                     var endIndex = ((options.pagerOption.currentPage + 1) * options.pagerOption.itemsPerPage);
                     var currentBodyRows = options.bodyRows.slice(startIndex, endIndex);
-                    me.Options.footerRows = options.pagerOption.customRenderFooter(currentBodyRows, options.pagerOption.currentPage, options.pagerOption.itemsPerPage);
+                    me.Options.footerRows = options.pagerOption.customRenderFooter(
+                                                                                currentBodyRows,
+                                                                                options.pagerOption.currentPage,
+                                                                                options.pagerOption.itemsPerPage);
                 }
 
                 footer = me.RenderFooter();
@@ -352,31 +358,31 @@
                     }
 
                     if (options.showFooter) {
-                        var footerLength = options.footerRows[0].Columns.length;
+                        //                        var footerLength = options.footerRows[0].Columns.length;
+                        //                        var needHideCols = options.hiddenColumns.slice(0);
+                        //                        var currentColIndex = 0;
+                        //                        for (var ftColIndex = 0; ftColIndex < footerLength; ftColIndex++) {
+                        //                            currentCol = options.footerRows[0].Columns[ftColIndex];
+                        //                            if (currentCol.MergeColNumber) {
+                        //                                var removeArray = [];
+                        //                                for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
+                        //                                    if (ftColIndex + currentCol.MergeColNumber >= ftColIndex + needHideCols[nhIndex]) {
+                        //                                        removeArray.push(nhIndex);
+                        //                                    }
+                        //                                    else if (ftColIndex < needHideCols[nhIndex]) {
+                        //                                        needHideCols[nhIndex] -= currentCol.MergeColNumber - 1;
+                        //                                    }
+                        //                                }
+
+                        //                                for (var rmIndex = removeArray.length - 1; rmIndex >= 0; rmIndex--) {
+                        //                                    needHideCols.splice(removeArray[rmIndex], 1);
+                        //                                }
+
+                        //                                //currentColIndex += currentCol.MergeColNumber;
+                        //                            }
+                        //                            // currentColIndex++;
+                        //                        }
                         var needHideCols = options.hiddenColumns.slice(0);
-                        var currentColIndex = 0;
-//                        for (var ftColIndex = 0; ftColIndex < footerLength; ftColIndex++) {
-//                            currentCol = options.footerRows[0].Columns[ftColIndex];
-//                            if (currentCol.MergeColNumber) {
-//                                var removeArray = [];
-//                                for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
-//                                    if (ftColIndex + currentCol.MergeColNumber >= ftColIndex + needHideCols[nhIndex]) {
-//                                        removeArray.push(nhIndex);
-//                                    }
-//                                    else if (ftColIndex < needHideCols[nhIndex]) {
-//                                        needHideCols[nhIndex] -= currentCol.MergeColNumber - 1;
-//                                    }
-//                                }
-
-//                                for (var rmIndex = removeArray.length - 1; rmIndex >= 0; rmIndex--) {
-//                                    needHideCols.splice(removeArray[rmIndex], 1);
-//                                }
-
-//                                //currentColIndex += currentCol.MergeColNumber;
-//                            }
-//                            // currentColIndex++;
-//                        }
-
                         for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
                             currentCol = needHideCols[nhIndex];
                             me.$grid.find('.row_footer, .col_footer').find('.free-grid-td-' + currentCol).addClass("grid-show-hide-column");
@@ -398,7 +404,7 @@
             me.gridOptions = Fanex.Grid.List[me.tableContentId].gridOptions;
             me.gridOptions.isResetScroller = false;
             me.RegisterMouseHoverEvent();
-            me.AutoResizeRowHeight()
+            me.AutoResizeRowHeight();
             $(me.$grid).gridScroller(me.gridOptions);
             //// Save Current Sor
             Fanex.Grid.List[me.tableContentId].sortOption =
@@ -983,7 +989,8 @@
             }
 
             //// If show tree, then add icon expand
-            var tdClass = 'free-grid-td-' + (cell.ColIndex + cell.MergeColumnIndex) + ' ' + (currentCol.TdClass || (me.columnsHastable[currentCol.Name].TdClass || ''));
+            var tdClass = 'free-grid-td-' + (cell.ColIndex + cell.MergeColumnIndex) + ' '
+                            + (currentCol.TdClass || (me.columnsHastable[currentCol.Name].TdClass || ''));
             if (options.showTree === true && currentRow.SubRows && me.columnsHastable[currentCol.Name].ShowCollapseExpand === true) {
                 tdClass = 'tr-grid-collapse-expand';
             }
@@ -1158,7 +1165,7 @@
                 currentDirection = '';
                 for (var colIndex = 0; colIndex < options.columns.length; colIndex++) {
                     if (options.columns[colIndex].SortDirection != null
-                    && options.columns[colIndex].SortDirection != '') {
+                    && options.columns[colIndex].SortDirection !== '') {
                         defaultSort = true;
                         currentDirection = options.columns[colIndex].SortDirection;
                         customSortFunction = options.columns[colIndex].CustomSortFunction;
@@ -1269,12 +1276,11 @@
         },
         RenderFooter: function (reRender) {
             var me = this,
-                options = me.Options,
+            //options = me.Options,
                 footerHtml = [],
                 frozenFooterHtml = [],
-                reRender = reRender || false,
                 currentFooterHtml = me.RenderFooterBody();
-
+            reRender = reRender || false;
             if (reRender) {
                 //currentFooterHtml
                 me.$grid.find('.row_footer_content > thead').empty().append(currentFooterHtml.frozenFooterHtml);
@@ -1291,7 +1297,7 @@
                                     '    <thead>');
 
 
-                var currentFooterHtml = me.RenderFooterBody();
+                currentFooterHtml = me.RenderFooterBody();
 
                 footerHtml.push(currentFooterHtml.footerHtml);
 
@@ -1373,7 +1379,10 @@
                                 var startIndex = (options.pagerOption.currentPage * options.pagerOption.itemsPerPage);
                                 var endIndex = ((options.pagerOption.currentPage + 1) * options.pagerOption.itemsPerPage);
                                 var currentBodyRows = options.bodyRows.slice(startIndex, endIndex);
-                                me.Options.footerRows = options.pagerOption.customRenderFooter(currentBodyRows, options.pagerOption.currentPage, options.pagerOption.itemsPerPage);
+                                me.Options.footerRows = options.pagerOption.customRenderFooter(
+                                                                                                currentBodyRows,
+                                                                                                options.pagerOption.currentPage,
+                                                                                                options.pagerOption.itemsPerPage);
                                 me.RenderFooter(true);
                             }
                             //                            if (typeof (options.pagerOption.afterPagedFunction) === 'function') {
@@ -1650,7 +1659,7 @@
                 browserDectect[matchedBrowser.browserDectect] = true;
                 browserDectect.version = matchedBrowser.version;
 
-                if (matchedBrowser.browserDectect == 'trident') {
+                if (matchedBrowser.browserDectect === 'trident') {
                     browserDectect.msie = true;
                 }
             }
@@ -2010,8 +2019,8 @@
             return options;
         },
         ComputeMaxWidthInRows: function (rows, resizeObject, columnHashtable, pixelsPerCharacter) {
-            var rowLength = rows.length,
-                currentPixelsPerChar = 0;
+            var rowLength = rows.length;
+            //currentPixelsPerChar = 0;
 
             for (var rowIndex = 0; rowIndex < rowLength; rowIndex++) {
                 var currentRow = rows[rowIndex],
@@ -2021,7 +2030,7 @@
                     if (columnHashtable[currentCol.Name].CanResize === true) {
                         var textLength = 0;
                         var calculated = true;
-                        if (typeof (resizeObject[currentCol.Name]) == 'undefined') {
+                        if (typeof (resizeObject[currentCol.Name]) === 'undefined') {
                             resizeObject[currentCol.Name] = {
                                 length: columnHashtable[currentCol.Name].Width,
                                 calculated: true,
@@ -2342,7 +2351,7 @@
 
             //// Fixed bug for IE10, wrong body Height
             var newTblHeight = tblContent.height();
-            if (ub.msie && tblHeight != newTblHeight) {
+            if (ub.msie && tblHeight !== newTblHeight) {
                 tblHeight = newTblHeight;
                 o.find(".scrollbar-y-content").css("height", (tblHeight - freezeHeight) + "px");
             }
@@ -2619,6 +2628,7 @@
 })(jQuery);
 
 //// Language
+/* jshint ignore:start */
 if (typeof (fanexGridLanguage) === 'undefined') {
     /* File Created: December 4, 2013 */
     var fanexGridLanguage = {};
@@ -2631,7 +2641,7 @@ if (typeof (fanexGridLanguage) === 'undefined') {
 
     var fanexGridCurrentLanguage = fanexGridLanguage['en-US'];
 }
-
+/* jshint ignore:end */
 // Array Remove - By John Resig (MIT Licensed)
 //Array.prototype.removeArrayItem1 = function (from, to) {
 //    var rest = this.slice((to || from) + 1 || this.length);

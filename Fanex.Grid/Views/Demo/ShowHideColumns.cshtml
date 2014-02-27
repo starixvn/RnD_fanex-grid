@@ -15,12 +15,40 @@
 </div>
 <div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
     <pre name="code" class="groovy">
-    var footerRows = [
+       var footerRows = [
                   {
                       Columns: [
-                        { Value: "Total", Name: "No" },
-                        { Value: "Footer 1", Name: "Text1" },
+                        { Value: "Total", Name: "No", MergeColNumber: 2, MergeRowNumber: 3 },
+//                        { Value: "Footer 1", Name: "Text1" },
                         { Value: "Footer 3", Name: "Number1" },
+                        { Value: "Footer 4", Name: "Number2" },
+                        { Value: "Footer 5", Name: "Number3" },
+                        { Value: "Footer 2", Name: "Text2" },
+                        { Value: "Footer 6", Name: "Text3" },
+                        { Value: "Footer 8", Name: "Text4" },
+                        { Value: "Footer 9", Name: "Number4" },
+                        { Value: "Footer 10", Name: "Number5" }
+                    ]
+                  },
+                  {
+                      Columns: [
+//                        { Value: "Total", Name: "No" },
+//                        { Value: "Footer 1", Name: "Text1" },
+                        { Value: "Footer 3", Name: "Number1", PrevRowsColMergeNumber: 2 },
+                        { Value: "Footer 4", Name: "Number2" },
+                        { Value: "Footer 5", Name: "Number3" },
+                        { Value: "Footer 2", Name: "Text2" },
+                        { Value: "Footer 6", Name: "Text3" },
+                        { Value: "Footer 8", Name: "Text4" },
+                        { Value: "Footer 9", Name: "Number4" },
+                        { Value: "Footer 10", Name: "Number5" }
+                    ]
+                  },
+                  {
+                      Columns: [
+//                        { Value: "Total", Name: "No" },
+//                        { Value: "Footer 1", Name: "Text1" },
+                        {Value: "Footer 3", Name: "Number1", PrevRowsColMergeNumber: 2 },
                         { Value: "Footer 4", Name: "Number2" },
                         { Value: "Footer 5", Name: "Number3" },
                         { Value: "Footer 2", Name: "Text2" },

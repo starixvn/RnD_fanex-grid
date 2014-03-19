@@ -8,6 +8,7 @@
 //          + 02/06/2014: Customize Render footer when auto paging + Update initialize footer.
 //          + 02/06/2014: Customize Render footer when auto paging + Update initialize footer.
 //          + 02/27/2014: Update show "..." when auto truncate.
+//          + 03/19/2014: Support Time Zone Config
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false*/
@@ -208,7 +209,8 @@
         autoFixFrozenRowHeight: false,
         autoResizeColumn: false,
         pixelsPerCharacter: 0,
-        calTextWidthWithFontSize: true
+        calTextWidthWithFontSize: true,
+        timeZone: ''
     };
 
     var Fanex = Fanex || {};
@@ -960,6 +962,10 @@
                 currentValue != null) {
                 var momentObject = moment(currentValue);
                 if (momentObject.isValid()) {
+                    if (options.timeZone !== '') {
+                        momentObject = momentObject.zone(options.timeZone);
+                    }
+
                     currentValue = momentObject.format(me.columnsHastable[currentCol.Name].FormatDateTime);
                 }
             }
@@ -1157,7 +1163,8 @@
             var currentPageStartIndex = 0,
                 currentRow;
 
-            if (options.sortOption.serverSortFunction == null) {
+            if (options.sortOption.serverSortFunction == null && 
+                options.sortOption.customGridSort == null) {
                 var defaultSort = false,
                 customSortFunction = null,
                 sortType = null,

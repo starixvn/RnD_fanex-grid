@@ -58,7 +58,7 @@
             columns: [
                 { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Header 2", Width: 70, Name: "Text1", HeaderAlign: "center", CellAlign: "right", FormatNumber: "0,0.00", FormatNegative: '($)' },
-                { HeaderText: "Header 3", Width: 200, Name: "Number1", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "MMMM Do YYYY" },
+                { HeaderText: "Header 3", Width: 200, Name: "Number1", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "YYYY-MM-DD HH:mm Z" },
                 { HeaderText: "Header 4", Width: 100, Name: "Number2", HeaderAlign: "center", CellAlign: "right", FormatNumber: "0,0." },
                 { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right", FormatNumber: "0,0.0" },
                 { HeaderText: "Header 6", Width: 110, Name: "Text2" },
@@ -68,7 +68,8 @@
                 { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right", FormatNumber: "0,0.00", FormatPositive: '[$]', FormatNegative: '($)', IsAbs: true }
             ],
             bodyRows: generateDataTime(100),
-            gridExpandHeight: 150
+            gridExpandHeight: 150,
+            timeZone: '-04:00'
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

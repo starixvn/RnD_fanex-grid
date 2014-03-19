@@ -171,7 +171,7 @@ function generateDataTime(numberRows) {
                 Columns: [
                     { Name: "No", Value: index * 2 },
                     { Name: "Text1", Value: (Math.random() > 0.5 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3)) },
-                    { Name: "Number1", Value: '10/10/2012' },
+                    { Name: "Number1", Value: new Date() },
                     { Name: "Number2", Value: (Math.random() * 100).toFixed(2) },
                     { Name: "Number3", Value: (Math.random() * 500).toFixed(3) },
                     { Name: "Text2", Value: Math.random().toString(36).substring(7) },

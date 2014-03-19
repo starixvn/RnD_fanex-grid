@@ -144,6 +144,7 @@
     <Content Include="ScriptsUnittest\jasmine-samples\PlayerSpec.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\Song.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ko-KR.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ja-JP.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.vi-VN.js" />
@@ -224,7 +225,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\GenerateData.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Grid.css" />
-    <Content Include="Scripts\Fanex.Grid\Fanex.Grid.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid1.js" />
     <Content Include="Scripts\Fanex.Grid\images\1350530947_page_excel.png" />
     <Content Include="Scripts\Fanex.Grid\images\ajax-loader.gif" />
     <Content Include="Scripts\Fanex.Grid\images\back-icon.png" />

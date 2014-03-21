@@ -1227,7 +1227,7 @@
             }
             else {
                 //// Render There is no data, showNoDataOnFrozen
-                var emptyData = options.noDataText;
+                var emptyData = fanexGridCurrentLanguage.noData;
                 if (options.numberOfFrozenColumn > 0) {
                     if (options.showNoDataOnFrozen) {
                         //// Show No Info on the frozen table

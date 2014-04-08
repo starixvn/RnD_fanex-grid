@@ -54,6 +54,27 @@ function generateLongData(numberRows) {
     return rows;
 }
 
+function generateShortData(numberRows) {
+    var rows = [];
+    for (var index = 0; index < numberRows; index++) {
+        rows.push(
+            {
+                Columns: [
+                    { Name: "No", Value: index * 2 },
+                    { Name: "Text1", Value: parseFloat((Math.random() > 0.5 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) },
+                    { Name: "Number1", Value: parseFloat((Math.random() * 20000).toFixed(4)) },
+                    { Name: "Number2", Value: parseFloat((Math.random() * 100).toFixed(2)) },
+                    { Name: "Number3", Value: parseFloat((Math.random() * 500).toFixed(3)) }
+                  ],
+                CssClass: '',
+                CustomAttr: '',
+                SubRows: ''
+            }
+        );
+    }
+    return rows;
+}
+
 function generateTreeData(numberParentRows) {
     var rows = [];
     for (var index = 0; index < numberParentRows; index++) {

@@ -150,6 +150,10 @@ namespace Fanex.Grid.Controllers
         {
             return View();
         }
-                
+
+        public ActionResult AutoResizeToFullScreen()
+        {
+            return View();
+        }
     }
 }

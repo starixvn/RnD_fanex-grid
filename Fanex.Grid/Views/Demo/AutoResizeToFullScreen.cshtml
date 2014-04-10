@@ -103,7 +103,7 @@
                 }
             ];
                 var bodyRows = generateShortData(20);
-    bodyRows[1].Columns[1].Value = 232323200323232;
+    bodyRows[1].Columns[1].Value = '23232320032 asdas dasd asd asd asdasd as dasasdasd asd asd as dasd asd3232';
     //bodyRows[1].Columns[5].Value = 'aasd asdsad sad asdasdasdasdasdasdas ';
     var gridOptions =
         {
@@ -124,10 +124,10 @@
                         return value.toString().length * 20;
                     }
                 },
-                { HeaderText: "Header 2", Width: 120, Name: "Text1", HeaderAlign: "center", CellAlign: "right", CanResize: true },
+                { HeaderText: "Header 2", Width: 120, Name: "Text1", HeaderAlign: "center", CellAlign: "right", CanResize: true, MaxResizeWidth: 200, AllowTruncate: true },
                 { HeaderText: "Header 3", Width: 120, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
-                { HeaderText: "Header 4", Width: 70, Name: "Number2", HeaderAlign: "center", CellAlign: "right", CanResize: true, PixelsPerCharacter: 25 },
-                { HeaderText: "Header 5", Width: 70, Name: "Number3", HeaderAlign: "center", CellAlign: "right", CanResize: true }
+                { HeaderText: "Header 4", Width: 70, Name: "Number2", HeaderAlign: "center", CellAlign: "right", CanResize: true, PixelsPerCharacter: 25, MaxResizeWidth: 150 },
+                { HeaderText: "Header 5", Width: 70, Name: "Number3", HeaderAlign: "center", CellAlign: "right", CanResize: true, MaxResizeWidth: 200 }
             ],
             bodyRows: bodyRows,
             gridExpandHeight: 150,

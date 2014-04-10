@@ -212,7 +212,7 @@
         pixelsPerCharacter: 0,
         calTextWidthWithFontSize: true,
         timeZone: '',
-        scrollWidth: 20
+        scrollWidth: 22
     };
 
     var Fanex = Fanex || {};
@@ -2037,14 +2037,20 @@
 
             for (var i = 0; i < colLength; i++) {
                 var currentCol = options.columns[i];
-                totalCalulatedWidth += currentCol.Width;
                 if (currentCol.CanResize === true) {
-                    resizeCols.push({
-                        colIndex: i,
-                        colName: currentCol.Name,
-                        colWidth: currentCol.Width
-                    });
+                    if (typeof (currentCol.MaxResizeWidth) !== 'undefined' && currentCol.Width > currentCol.MaxResizeWidth) {
+                        currentCol.Width = currentCol.MaxResizeWidth;
+                    }
+                    else {
+                        resizeCols.push({
+                            colIndex: i,
+                            colName: currentCol.Name,
+                            colWidth: currentCol.Width
+                        });
+                    }
                 }
+                totalCalulatedWidth += currentCol.Width;
+
             }
 
             //// Add width for others columns

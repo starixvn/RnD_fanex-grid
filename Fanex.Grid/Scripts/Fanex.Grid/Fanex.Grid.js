@@ -11,6 +11,7 @@
 //          + 03/19/2014: Support Time Zone Config
 //          + 04/08/2014: Support auto resize to full-screen width
 //          + 04/11/2014: Remove class "Container" 
+//          + 04/16/2014: Auto fix header height, fix bug collapse/expand
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false*/
@@ -213,7 +214,7 @@
         pixelsPerCharacter: 0,
         calTextWidthWithFontSize: true,
         timeZone: '',
-        scrollWidth: 22
+        scrollWidth: 24
     };
 
     var Fanex = Fanex || {};
@@ -1458,6 +1459,10 @@
                             me.$grid.find('.child-row').show();
                         }
                         me.gridOptions.isResetScroller = false;
+                        var gridOptions = Fanex.Grid.List[me.tableContentId].gridOptions;
+                        if (gridOptions) {
+                            me.gridOptions.gridHeight = gridOptions.gridHeight;
+                        }
                         $(me.$grid).gridScroller(me.gridOptions);
                     });
                 }
@@ -1631,6 +1636,28 @@
                         me.$grid.find('.row_header tr[highlightatt="' + hlattr.replace('main', 'frozen') + '"]').css('height', currentHeight + 'px');
                     }
                 });
+                // Header
+                var currentFrozenHeader = me.$grid.find('.grid-fixed-table.free-cell-top-left thead tr'),
+                    currentFrozenBody = me.$grid.find('.grid-fixed-table.row_header_content thead tr');
+                if (currentFrozenHeader.length > 0 && currentFrozenBody.length) {
+                    me.$grid.find('.grid-fixed-table.col_header_content thead tr').each(function (index) {
+                        var $trTable = $(this),
+                            currentHeight = $trTable.height();
+
+                        $(currentFrozenHeader[index]).css('height', currentHeight + 'px');
+                        $(currentFrozenBody[index]).css('height', currentHeight + 'px');s
+                    });
+                }
+                // Footer
+                var currentFrozenFooter = me.$grid.find('.grid-fixed-table.row_footer_content thead tr');
+                if (currentFrozenFooter.length > 0) {
+                    me.$grid.find('.col_footer_content.grid-fixed-table thead tr').each(function (index) {
+                        var $trTable = $(this),
+                            currentHeight = $trTable.height();
+
+                        $(currentFrozenFooter[index]).css('height', currentHeight + 'px');
+                    });
+                }
             }
         }
     };
@@ -2031,7 +2058,7 @@
             return options;
         },
         AutoAddWidthForFullScreen: function (options, mainContainer) {
-            var currentContainerWidth = mainContainer.width(),
+            var currentContainerWidth = mainContainer.parent().width(),
                 totalCalulatedWidth = 0,
                 colLength = options.columns.length,
                 resizeCols = [];
@@ -2059,7 +2086,7 @@
                 var totalAddWidth = currentContainerWidth - totalCalulatedWidth,
                     addRowForEachColumn = totalAddWidth / resizeCols.length;
 
-                for (var i = 0; i < resizeCols.length; i++) {
+                for (i = 0; i < resizeCols.length; i++) {
                     var currentResizeCol = resizeCols[i];
                     options.columns[currentResizeCol.colIndex].Width = currentResizeCol.colWidth + addRowForEachColumn;
                 }

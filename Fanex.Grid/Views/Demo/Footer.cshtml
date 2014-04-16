@@ -85,7 +85,7 @@
                 {
                     Columns: [
                     { Value: "Total 2", Name: "No", MergeColNumber: 3 },
-                    { Value: "Footer 6", Name: "Text2" },
+                    { Value: "Footer 6a sdas dasdasd asdas dasd as asd asd asdas dasdasd asdasd", Name: "Text2" },
                     { Value: "Footer 7", Name: "Text3" },
                     { Value: "Footer 8", Name: "Text4" },
                     { Value: "Footer Merge 9", Name: "Number4", MergeColNumber: 2 }
@@ -120,10 +120,11 @@
                 { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
             bodyRows: generateData(100),
-           gridExpandHeight: 150,
+            gridExpandHeight: 150,
             numberOfFrozenColumn: 3,
             showFooter: true,
-            footerRows: footerRows
+            footerRows: footerRows,
+            autoFixFrozenRowHeight: true
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

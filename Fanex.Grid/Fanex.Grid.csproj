@@ -218,6 +218,13 @@
     <Content Include="Scripts\jquery\images\ui-icons_fcd113_256x240.png" />
     <Content Include="Scripts\jquery\jquery-ui-1.9.1.custom.css" />
     <Content Include="Scripts\jquery\jquery-ui-1.9.1.custom.min.css" />
+    <Content Include="Styles\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Styles\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Styles\bootstrap\css\bootstrap.css" />
+    <Content Include="Styles\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\bootstrap\js\bootstrap.js" />
+    <Content Include="Styles\bootstrap\js\bootstrap.min.js" />
     <Content Include="Styles\images\basic.png" />
     <Content Include="Styles\images\gears.png" />
     <Content Include="Styles\theme.css" />
@@ -366,6 +373,11 @@
     <Content Include="Views\Demo\CustomFooterPager.cshtml" />
     <Content Include="Views\Demo\PagePerformance.cshtml" />
     <Content Include="Views\Demo\AutoResizeToFullScreen.cshtml" />
+    <None Include="Styles\bootstrap\css\bootstrap-theme.css.map" />
+    <None Include="Styles\bootstrap\css\bootstrap.css.map" />
+    <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

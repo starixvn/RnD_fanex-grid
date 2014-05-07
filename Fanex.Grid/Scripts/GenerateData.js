@@ -1,11 +1,10 @@
 ﻿/* File Created: January 23, 2013 */
 
-function generateData(numberRows) {
+function generateData(numberRows, autoHeight) {
     var rows = [];
     for (var index = 0; index < numberRows; index++) {
-        rows.push(
-            {
-                Columns: [
+        var row = {
+            Columns: [
                     { Name: "No", Value: index * 2 },
                     { Name: "Text1", Value: parseFloat((Math.random() > 0.5 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) },
                     { Name: "Number1", Value: parseFloat((Math.random() * 20000).toFixed(4)) },
@@ -17,12 +16,14 @@ function generateData(numberRows) {
                     { Name: "Number4", Value: parseFloat((Math.random() * 1000).toFixed(3)) },
                     { Name: "Number5", Value: parseFloat((index % 2 == 0 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) }
                 ],
-                CssClass: '',
-                CustomAttr: '',
-                SubRows: '',
-                RowHeight: Math.random() * 100
-            }
-        );
+            CssClass: '',
+            CustomAttr: '',
+            SubRows: ''
+        };
+        if (autoHeight) {
+            row.RowHeight = Math.random() * 100;
+        }
+        rows.push(row);
     }
     return rows;
 }

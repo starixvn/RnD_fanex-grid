@@ -35,10 +35,18 @@
                 { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
-            bodyRows: generateLongData(100),
+            bodyRows: generateLongData(800),
             gridExpandHeight: 150,
             numberOfFrozenColumn: 2,
-            autoFixFrozenRowHeight: true
+            autoFixFrozenRowHeight: true,
+            showHighlightRow: false,
+            showPager: true,
+            pagerOption: {     
+                itemsPerPage: 100,
+                currentPage: 0,
+                itemsPerPageArray: [50, 100, 500],
+                showDetail: true
+            }
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);
@@ -72,10 +80,18 @@
                 { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
-            bodyRows: generateLongData(100),
+            bodyRows: generateLongData(800),
             gridExpandHeight: 150,
             numberOfFrozenColumn: 2,
-            autoFixFrozenRowHeight: true
+            autoFixFrozenRowHeight: true,
+            showHighlightRow: false,
+            showPager: true,
+            pagerOption: {     
+                itemsPerPage: 100,
+                currentPage: 0,
+                itemsPerPageArray: [50, 100, 500],
+                showDetail: true
+            }
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

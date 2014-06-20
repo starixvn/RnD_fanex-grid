@@ -66,7 +66,7 @@
                 { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
-            bodyRows: [],
+            bodyRows: generateData(100),
             gridExpandHeight: 150,
             showTitle: true,
             titleInfo:
@@ -86,7 +86,9 @@
                     },
                     showButtonsWhenNoData: true
                 },
-                language: 'zh-TW'
+                language: 'zh-TW',
+                headerColumnHeight: 35,
+            bodyRowHeight: 35,
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

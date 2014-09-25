@@ -13,6 +13,7 @@
 //          + 04/11/2014: Remove class "Container"
 //          + 04/16/2014: Auto fix header height, fix bug collapse/expand
 //          + 06/20/2014: Fix bug auto fix row height.
+//          + 09/25/2014: Update auto parseInt for paging option.
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false*/
@@ -1421,9 +1422,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                 pagerOption.startPerPage = options.pagerOption.startPerPage;
                 pagerOption.stepPerPage = options.pagerOption.pageStep;
-                pagerOption.maxTtemsPerPage = options.pagerOption.maxItemsPerPage;
-                pagerOption.itemsPerPage = options.pagerOption.itemsPerPage;
-                pagerOption.currentPage = options.pagerOption.currentPage;
+                pagerOption.maxTtemsPerPage = parseInt(options.pagerOption.maxItemsPerPage || 0);
+                pagerOption.itemsPerPage = parseInt(options.pagerOption.itemsPerPage);
+                pagerOption.currentPage = parseInt(options.pagerOption.currentPage);
                 pagerOption.totalItem = options.pagerOption.totalItem;
                 pagerOption.itemsPerPageArray = options.pagerOption.itemsPerPageArray;
                 pagerOption.showDetail = options.pagerOption.showDetail;

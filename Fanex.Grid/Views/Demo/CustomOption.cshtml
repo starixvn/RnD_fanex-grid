@@ -105,8 +105,7 @@
                 { HeaderText: "Header 9", Width: 190, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 10", Width: 220, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
-            bodyRows: generateData(100),
-            gridExpandHeight: 500,
+            bodyRows: generateData(1),
             //// Custom Option
             headerColumnHeight: 35,
             bodyRowHeight: 30,
@@ -124,7 +123,7 @@
             bottomBorderWidth: 6,
             treeParentPaddingLeft: 20,
             fullHeight: false,
-            gridHeight: 200
+            gridHeight: 500
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

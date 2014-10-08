@@ -155,5 +155,10 @@ namespace Fanex.Grid.Controllers
         {
             return View();
         }
+
+        public ActionResult MultipleGrids()
+        {
+            return View();
+        }
     }
 }

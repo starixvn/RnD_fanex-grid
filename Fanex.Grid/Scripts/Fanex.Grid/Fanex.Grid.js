@@ -14,6 +14,7 @@
 //          + 04/16/2014: Auto fix header height, fix bug collapse/expand
 //          + 06/20/2014: Fix bug auto fix row height.
 //          + 09/25/2014: Update auto parseInt for paging option.
+//          + 10/08/2014: Fix dont resize grid hidden.
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false*/
@@ -2195,15 +2196,11 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             if (!isValid(Fanex.Grid.List[options.tblContentId])) {
                 $(window).resize(function () {
-                    if (!o.hasClass("display-none")) {
-                        //o.resetGrid(options.tblContentId);
+                    if (o.is(':visible') || o.parent().is(':visible')) {
+                        
                         var opt = $.extend({}, {}, Fanex.Grid.List[options.tblContentId].gridOptions);
                         opt.manualCopyHeader = true;
                         o.renderScroller(opt);
-                        //                        o.find('.grid-fixed-table').each(function () {
-                        //                            $(this).append(' ');
-                        //                        });
-                        //console.log("resize-" + options.tblContentId);
                     }
                 });
                 Fanex.Grid.List[options.tblContentId] =

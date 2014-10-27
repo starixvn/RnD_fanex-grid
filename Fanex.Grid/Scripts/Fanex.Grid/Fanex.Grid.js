@@ -19,7 +19,7 @@
 //          + 10/14/2014: Remove use strict
 // </copyright>
 // --------------------------------------------------------------------------
-/*jshint maxdepth:false, maxstatements:false*/
+/*jshint maxdepth:false, maxstatements:false, strict:false*/
 /*global fanexGridLanguage, moment,numeral*/
 
 var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
@@ -1631,7 +1631,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 });
             }
         },
-
         AutoResizeRowHeight: function () {
             var me = this,
                 options = me.Options;
@@ -2677,7 +2676,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         else {
             return false;
         }
-    };
+    }
 
     var isOnSmartPhoneBrowser = detectSmartPhone();
     var isOnChromeBrowser = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
@@ -2693,7 +2692,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             return true;
         }
         return false;
-    };
+    }
 
     function clone(obj) {
         var target = {};
@@ -2703,7 +2702,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             }
         }
         return target;
-    };
+    }
 
 })(jQuery);
 

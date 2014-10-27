@@ -12,23 +12,23 @@
     <input type="button" value="Show/Hide Grid 5" onclick="toggleGrid('gridId5');" />
 </div>
 <div id="sourcecontainer">
-    <div id="gridId1Container">
+    <div id="gridId1Container" class="display-none-1">
         <div id="gridId1" class="freegrid  content-grid">
         </div>
     </div>
-    <div id="gridId1Container">
+    <div id="gridId2Container">
         <div id="gridId2" class="freegrid  content-grid">
         </div>
     </div>
-    <div id="gridId1Container">
+    <div id="gridId3Container">
         <div id="gridId3" class="freegrid  content-grid">
         </div>
     </div>
-    <div id="gridId1Container">
+    <div id="gridId4Container">
         <div id="gridId4" class="freegrid  content-grid">
         </div>
     </div>
-    <div id="gridId1Container">
+    <div id="gridId5Container">
         <div id="gridId5" class="freegrid  content-grid">
         </div>
     </div>
@@ -57,6 +57,12 @@
         });
     </pre>
 </div>
+<style type="text/css">
+   @* .display-none-1
+    {
+        display: none;
+    }*@
+</style>
 <script type="text/javascript">
     function toggleGrid(gridId) {
         $('#' + gridId).toggle().parent().toggle();
@@ -88,31 +94,45 @@
                 }
             }
         };
+        function clone(obj) {
+            var target = {};
+            for (var i in obj) {
+                if (obj.hasOwnProperty(i)) {
+                    target[i] = obj[i];
+                }
+            }
+            return target;
+        };
+
+        $(function () {
+
+            var gridOptions1 = clone(gridOptions);
+            gridOptions1.gridHeight = 600;
+            gridOptions1.titleInfo = clone(gridOptions.titleInfo);
+            gridOptions1.titleInfo.text += '1';
+            var gridOptions2 = clone(gridOptions);
+            gridOptions2.gridHeight = 700;
+            gridOptions2.titleInfo = clone(gridOptions.titleInfo);
+            gridOptions2.titleInfo.text += '2';
+            var gridOptions3 = clone(gridOptions);
+            gridOptions3.gridHeight = 800;
+            gridOptions3.titleInfo = clone(gridOptions.titleInfo);
+            gridOptions3.titleInfo.text += '3';
+            var gridOptions4 = clone(gridOptions);
+            gridOptions4.gridHeight = 900;
+            gridOptions4.titleInfo = clone(gridOptions.titleInfo);
+            gridOptions4.titleInfo.text += '4';
+            var gridOptions5 = clone(gridOptions);
+            gridOptions5.gridHeight = 500;
+            gridOptions5.titleInfo = clone(gridOptions.titleInfo);
+            gridOptions5.titleInfo.text += '5';
 
 
-    $(function () {
+            var gridId1 = $("#gridId1").fanexGrid(gridOptions1);
+            var gridId2 = $("#gridId2").fanexGrid(gridOptions2);
+            var gridId3 = $("#gridId3").fanexGrid(gridOptions3);
+            var gridId4 = $("#gridId4").fanexGrid(gridOptions4);
+            var gridId5 = $("#gridId5").fanexGrid(gridOptions5);
 
-        var gridOptions1 = $.extend({}, gridOptions);
-        gridOptions1.gridHeight = 600;
-        gridOptions1.titleInfo.text += '1';
-        var gridOptions2 = $.extend({}, gridOptions);
-        gridOptions2.gridHeight = 700;
-        gridOptions1.titleInfo.text += '2';
-        var gridOptions3 = $.extend({}, gridOptions);
-        gridOptions3.gridHeight = 800;
-        gridOptions1.titleInfo.text += '3';
-        var gridOptions4 = $.extend({}, gridOptions);
-        gridOptions4.gridHeight = 900;
-        gridOptions1.titleInfo.text += '4';
-        var gridOptions5 = $.extend({}, gridOptions);
-        gridOptions5.gridHeight = 500;
-        gridOptions1.titleInfo.text += '5';
-
-        var gridId5 = $("#gridId5").fanexGrid(gridOptions5);
-        var gridId1 = $("#gridId1").fanexGrid(gridOptions1);
-        var gridId2 = $("#gridId2").fanexGrid(gridOptions2);
-        var gridId3 = $("#gridId3").fanexGrid(gridOptions3);
-        var gridId4 = $("#gridId4").fanexGrid(gridOptions4);
-
-    });
+        });
 </script>

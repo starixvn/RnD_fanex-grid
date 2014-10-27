@@ -15,6 +15,8 @@
 //          + 06/20/2014: Fix bug auto fix row height.
 //          + 09/25/2014: Update auto parseInt for paging option.
 //          + 10/08/2014: Fix dont resize grid hidden.
+//          + 10/09/2014: Update default page index for pager
+//          + 10/14/2014: Remove use strict
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false*/
@@ -23,7 +25,7 @@
 var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
 (function ($) {
-    'use strict';
+    //'use strict';
 
     //// Method expose for user use
     var methods =
@@ -176,7 +178,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         {
             itemsPerPage: 100,
             maxItemsPerPage: 500,
-            currentPage: 1,
+            currentPage: 0,
             totalItem: 0,
             startPerPage: 100,
             pageStep: 50,
@@ -759,8 +761,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var trAutoFixRowAtt = (options.autoFixFrozenRowHeight ? (' autofixatt="autofix-att-frozen-' + parentHighlight + '-' + rowIndex + '"') : '');
             var trClass = (options.showHighlightRow ? 'highlight-row ' : '') +
                             (options.autoFixFrozenRowHeight ? 'auto-fix-row ' : '') +
-                            (treeCollapseExpandClass || '') +
-                            (currentRow.CssClass || '') +
+                            (treeCollapseExpandClass || '') + ' ' +
+                            (currentRow.CssClass || '') + ' ' +
                             (options.showDistinctRow ? ((rowIndex + 1) % 2 === 0 ? ' freegrid-even' : '') : '');
             if (options.showTree === true && currentRow.SubRows) {
                 parentRowClass = 'parent-row parent-level-' + level;
@@ -2196,12 +2198,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             if (!isValid(Fanex.Grid.List[options.tblContentId])) {
                 $(window).resize(function () {
-                    if (o.is(':visible') || o.parent().is(':visible')) {
-                        
-                        var opt = $.extend({}, {}, Fanex.Grid.List[options.tblContentId].gridOptions);
+                    if (o.is(':hidden') || o.parent().is(':hidden')) {
+                        return null;
+                    }
+
+                    var opt = $.extend({}, {}, Fanex.Grid.List[options.tblContentId].gridOptions);
                         opt.manualCopyHeader = true;
                         o.renderScroller(opt);
-                    }
                 });
                 Fanex.Grid.List[options.tblContentId] =
                 {
@@ -2426,9 +2429,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             container.css("height", containerHeight + "px");
             rowHeaderWarpper.css("height", containerHeight + "px");
             yscrollbar.css("height", (containerHeight - freezeHeight - (ub.chrome || ub.msie ? 1 : 0) - options.heightScrollYAdd) + "px");
-            o.find(".free-cell-top-right")
-            .css("height", (freezeHeight - ((ub.msie || ub.chrome || ff16) ? (options.padding * 2 + 1) : 0) + (ub.chrome ? 1 : 0)) + "px");
-             
+            var freeCellTopRightHeight = freezeHeight - ((ub.msie || ub.chrome || ff16) ? (options.padding * 2 + 1) : 0) + (ub.chrome ? 1 : 0);
+            o.find(".free-cell-top-right").css("height", freeCellTopRightHeight + "px");
+
             if (isShowFooter) {
                 o.find(".free-cell-bottom-right").css("height", (freezeFooterHeight + (isScrollX ? bar : 0) + 1) + "px");
             }
@@ -2674,7 +2677,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         else {
             return false;
         }
-    }
+    };
 
     var isOnSmartPhoneBrowser = detectSmartPhone();
     var isOnChromeBrowser = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
@@ -2690,7 +2693,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             return true;
         }
         return false;
-    }
+    };
 
     function clone(obj) {
         var target = {};
@@ -2700,7 +2703,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             }
         }
         return target;
-    }
+    };
 
 })(jQuery);
 

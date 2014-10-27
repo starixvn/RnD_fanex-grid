@@ -16,7 +16,7 @@ function generateData(numberRows, autoHeight) {
                     { Name: "Number4", Value: parseFloat((Math.random() * 1000).toFixed(3)) },
                     { Name: "Number5", Value: parseFloat((index % 2 == 0 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) }
                 ],
-            CssClass: '',
+            CssClass: 'custom-css-class',
             CustomAttr: '',
             SubRows: ''
         };
@@ -92,7 +92,8 @@ function generateTreeData(numberParentRows) {
                     { Name: "No", Value: 'Group - ' + index + ' - ' + j, MergeColNumber: 3 },
                     { Name: "Number2", Value: 'Group - ' + index + ' - ' + j, MergeColNumber: 7 }
                 ],
-                SubRows: generateData(5)
+                SubRows: generateData(5),
+                CssClass: 'sub-row-class'
             };
             currentRow.SubRows.push(currentSubRow);
         }

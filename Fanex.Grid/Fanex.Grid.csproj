@@ -15,9 +15,13 @@
     <AssemblyName>Fanex.Grid</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <JSLintSkip>
     </JSLintSkip>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -144,6 +148,7 @@
     <Content Include="ScriptsUnittest\jasmine-samples\PlayerSpec.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\Song.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid.bk.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ko-KR.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ja-JP.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.vi-VN.js" />
@@ -394,12 +399,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51756</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:51755/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

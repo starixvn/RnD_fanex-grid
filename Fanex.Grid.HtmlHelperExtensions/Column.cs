@@ -1,0 +1,137 @@
+﻿
+
+namespace Fanex.Grid.HtmlHelperExtensions
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Fanex.Grid.HtmlHelperExtensions.Enumerations;
+
+    public class Column
+    {
+        public Column(string name, string headerText, int width)
+        {
+            _name = name;
+            _headerText = headerText;
+            _width = width;
+        }
+
+        private string _headerText = string.Empty;
+
+        private string _name = string.Empty;
+
+        private int _width;
+
+        private string _cssClass = string.Empty;
+
+        private string _tdClass = string.Empty;
+
+        private string _cellCssClass = string.Empty;
+
+        private TextAlign _headerAlign = TextAlign.Center;
+
+        private TextAlign _cellAlign = TextAlign.Left;
+
+        private bool _isSortable = false;
+
+        private string _formatNumber = string.Empty;
+
+        private string _formatNegative = string.Empty;
+
+        private string _formatPositive = string.Empty;
+
+        private bool _showCollapseExpandIcon = false;
+
+        private bool _allowTruncate = false;
+
+        private string _customHeaderRender = string.Empty;
+
+        private string _customCellRender = string.Empty;
+
+        public Column SetCssClass(string cssClass)
+        {
+            _cssClass = cssClass;
+
+            return this;
+        }
+
+        public Column SetTdClass(string tdClass)
+        {
+            _tdClass = tdClass;
+            return this;
+        }
+
+        public Column SetCellCssClass(string cellCssClass)
+        {
+            _cellCssClass = cellCssClass;
+
+            return this;
+        }
+
+        public Column SetHeaderTextAlign(TextAlign headerTextAlign)
+        {
+            _headerAlign = headerTextAlign;
+            return this;
+        }
+
+        public Column SetCellTextAlign(TextAlign cellTextAlign)
+        {
+            _cellAlign = cellTextAlign;
+            return this;
+        }
+
+        public Column SetSortable()
+        {
+            _isSortable = true;
+            return this;
+        }
+
+        public Column SetFormatNumber(string formatNumber)
+        {
+            _formatNumber = formatNumber;
+            return this;
+        }
+
+        public Column SetFormatNegative(string formatNegative)
+        {
+            _formatNegative = formatNegative;
+            return this;
+        }
+
+        public Column SetFormatPositive(string formatPositive)
+        {
+            _formatPositive = formatPositive;
+            return this;
+        }
+
+        public Column SetCollapseExpandIcon()
+        {
+            _showCollapseExpandIcon = true;
+            return this;
+        }
+
+        public Column SetTextTruncate()
+        {
+            _allowTruncate = true;
+            return this;
+        }
+
+        public Column SetCustomHeaderRender(string customHeaderRenderFunction)
+        {
+            _customHeaderRender = customHeaderRenderFunction;
+            return this;
+        }
+
+        public Column SetCustomCellRender(string customCellRenderFunction)
+        {
+            _customCellRender = customCellRenderFunction;
+            return this;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
+}

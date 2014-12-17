@@ -8,9 +8,9 @@
 
     public static class FanexGridExtensions 
     {
-        public static GridBuilder Tag(this HtmlHelper helper, string id)
+        public static Grid Tag(this HtmlHelper helper, string id)
         {
-            return new GridBuilder(id);
+            return new Grid(id);
         }
     }
 }

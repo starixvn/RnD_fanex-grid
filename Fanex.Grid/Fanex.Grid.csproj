@@ -386,12 +386,15 @@
     <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Demo\MultipleGrids.cshtml" />
     <Content Include="Views\Demo\VirtualRendering.cshtml" />
+    <Content Include="Views\Demo\HtmlHelper.cshtml" />
   </ItemGroup>
+
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <ProjectReference Include="..\Fanex.Grid.HtmlHelperExtensions\Fanex.Grid.HtmlHelperExtensions.csproj">
+      <Project>{ca8b3e77-572c-46f7-a74e-4a7b27e7f110}</Project>
+      <Name>Fanex.Grid.HtmlHelperExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

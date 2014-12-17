@@ -40,5 +40,38 @@
         private string _customButtons = string.Empty;
 
         private bool _showButtonsWhenNoData;
+
+        public TitleOption SetVisibleWhenNoData()
+        {
+            _hideWhenNoData = false;
+            return this;
+        }
+
+        public TitleOption SetExcelButtonVisible()
+        {
+            _showExcelButton = true;
+            return this;
+        }
+
+        public TitleOption SetExportExcelFunction(string exportExcelFunction)
+        {
+            _exportExcelFunction = exportExcelFunction;
+            return this;
+        }
+
+        public TitleOption SetBackButtonVisible()
+        {
+            _showBackButton = true;
+
+            return this;
+        }
+
+        public TitleOption SetBackFunction(string backFunction)
+        {
+            _backFunction = backFunction;
+
+            return this;
+        }
+
     }
 }

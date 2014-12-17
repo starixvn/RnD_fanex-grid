@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Column.cs" />
     <Compile Include="Enumerations\TextAlign.cs" />
+    <Compile Include="Extensions\JavascriptStringExtensions.cs" />
     <Compile Include="FanexGridExtensions.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="IGridBuilder.cs" />

@@ -165,5 +165,9 @@ namespace Fanex.Grid.Controllers
         {
             return View();
         }
+        public ActionResult HtmlHelper()
+        {
+            return View();
+        }
     }
 }

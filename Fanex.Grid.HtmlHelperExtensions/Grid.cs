@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Web;
+    using Fanex.Grid.HtmlHelperExtensions.Extensions;
 
     public class Grid : IHtmlString
     {
@@ -12,9 +13,9 @@
 
         private string _class = "freegrid";
 
-        private string _customClasses = string.Empty;
+        private string _customClasses;
         //customizeHeader: false,
-        private bool _isHeaderCustomized;
+        private bool? _isHeaderCustomized;
 
         //headerRows: [],
         private List<Row> _headerRows;
@@ -24,22 +25,22 @@
         private List<Row> _bodyRows;
 
         //numberOfFrozenColumn: 0,
-        private int _numberOfFrozenColumn;
+        private int? _numberOfFrozenColumn;
 
         //showFooter: false,
-        private bool _showFooter;
+        private bool? _showFooter;
         //footerRows: [],
         private List<Row> _footerRows;
         
         //headerColumnHeight: 25,
-        private int _headerColumnHeight = 25;
+        private int? _headerColumnHeight;
         //bodyRowHeight: 21,
-        private int _bodyRowHeight = 21;
+        private int? _bodyRowHeight;
         //footerRowHeight: 21,
-        private int _footerRowHeight = 21;
+        private int? _footerRowHeight;
 
         //showTitle: false,
-        private bool _showTitle;
+        private bool? _showTitle;
         //titleInfo:
         //{
         //    text: "",
@@ -57,7 +58,7 @@
         private TitleOption _titleOption;
 
         //showPager: false,
-        private bool _showPager;
+        private bool? _showPager;
         //pagerOption:
         //{
         //    itemsPerPage: 100,
@@ -72,26 +73,26 @@
         private PagerOption _pagerOption;
 
         //showTree: false,
-        private bool _showTree;
+        private bool? _showTree;
         //gridExpandHeight: 150,
-        private int _gridExpandHeight = 150;
+        private int? _gridExpandHeight;
         //showNoDataOnFrozen: false,
-        private bool _showNoDataOnFrozen;
+        private bool? _showNoDataOnFrozen;
         //showColumnsShowHide: true,
         //enableHiddenColumns: true,
-        private bool _enableHiddenColumns = true;
+        private bool? _enableHiddenColumns;
         //showDistinctRow: true,
-        private bool _showDistinctRow = true;
+        private bool? _showDistinctRow;
         //showHighlightRow: true,
-        private bool _showHighlightRow = true;
+        private bool? _showHighlightRow;
         //highlightFrozenWidth: 1,
-        private int _highlightFrozenWidth = 1;
+        private int? _highlightFrozenWidth;
         //showNumberColumn: false,
-        private bool _showNumberColumn;
+        private bool? _showNumberColumn;
         //marginRight: 5,
-        private int _marginRight = 5;
+        private int? _marginRight;
         //allowTruncate: false,
-        private bool _allowTruncate;
+        private bool? _allowTruncate;
         //columnsNeedHide: [],
         //private string[] _columnsNeedHide;
         //hiddenColumns: [],
@@ -106,38 +107,45 @@
         private SortOption _sortOption;
 
         //hideYBackGroundScroller: false,
-        private bool _hideYBackGroundScroller;
+        private bool? _hideYBackGroundScroller;
         //bottomBorderWidth: 1,
-        private int _bottomBorderWidth = 1;
+        private int? _bottomBorderWidth;
         //treeParentPaddingLeft: 20,
-        private int _treeParentPaddingLeft = 20;
+        private int? _treeParentPaddingLeft;
         //isResetScroller: false,
-        private bool _isResetScroller;
+        private bool? _isResetScroller;
         //fullHeight: true,
-        private bool _isFullHeight = true;
+        private bool? _isFullHeight;
         //gridHeight: 400,
-        private int _gridHeight = 400;
+        private int? _gridHeight;
         //gridWidth: 0,
-        private int _gridWidth = 0;
+        private int? _gridWidth;
         //noDataText: "There is no data",
         //language: 'en-US',
-        private string _language = "en-US";
+        private string _language;
         //autoFixFrozenRowHeight: false,
-        private bool _autoFixFrozenRowHeight;
+        private bool? _autoFixFrozenRowHeight;
         //autoResizeColumn: false,
-        private bool _autoResizeColumn;
+        private bool? _autoResizeColumn;
         //pixelsPerCharacter: 0,
-        private int _pixelsPerCharacter;
+        private int? _pixelsPerCharacter;
         //calTextWidthWithFontSize: true,
-        private bool _calTextWidthWithFontSize = true;
+        private bool? _calTextWidthWithFontSize;
         //timeZone: '',
-        private string _timeZone = string.Empty;
+        private string _timeZone;
         //scrollWidth: 24
-        private int _scrollWidth = 24;
+        private int? _scrollWidth;
 
         public Grid(string id)
         {
+            _id = id;
+        }
 
+        public Grid SetCustomClasses(string customClasses)
+        {
+            _customClasses = customClasses;
+
+            return this;
         }
 
         public Grid SetHeaderCustomized()
@@ -382,9 +390,196 @@
             return this;
         }
 
+        public string RenderHtml()
+        {
+            var html = new StringBuilder();
+
+            //<div id="sourcecontainer">
+            //    <div id="gridId" class="freegrid  content-grid">
+            //    </div>
+            //</div>
+
+            html.AppendLine(string.Format("<div id=\"{0}-fanex-grid-container\">", _id));
+
+            var fanexGridClass = "freegrid";
+
+            if(!string.IsNullOrEmpty(_customClasses))
+            {
+                fanexGridClass += " " + _customClasses;
+            }
+
+            html.AppendLine(string.Format("<div id=\"{0}\" class=\"{1}\">", _id, fanexGridClass));
+
+            html.AppendLine("</div></div>");
+
+            return html.ToString();
+        }
+
+        public string RenderJavascript()
+        {
+            // Create javascript
+            var script = new StringBuilder();
+
+            script.AppendLine("<script type=\"text/javascript\">jQuery(function () {");
+
+            script.AppendLine("jQuery('#" + _id + "').fanexGrid({");
+
+            if(_isHeaderCustomized.HasValue)
+            {
+                script.AppendLine(_isHeaderCustomized.Value.ToJavascriptProperty("customizeHeader"));
+            }
+
+            if (_numberOfFrozenColumn.HasValue)
+            {
+                script.AppendLine(_numberOfFrozenColumn.Value.ToJavascriptProperty("numberOfFrozenColumn"));
+            }
+
+            if (_pagerOption != null)
+            {
+                script.AppendLine("showFooter:true,");
+            }
+
+            if (_headerColumnHeight.HasValue)
+            {
+                script.AppendLine(_headerColumnHeight.Value.ToJavascriptProperty("headerColumnHeight"));
+            }
+
+            if (_bodyRowHeight.HasValue)
+            {
+                script.AppendLine(_bodyRowHeight.Value.ToJavascriptProperty("bodyRowHeight"));
+            }
+
+            if (_footerRowHeight.HasValue)
+            {
+                script.AppendLine(_footerRowHeight.Value.ToJavascriptProperty("footerRowHeight"));
+            }
+
+            if (_showTree.HasValue)
+            {
+                script.AppendLine(_showTree.Value.ToJavascriptProperty("showTree"));
+            }
+
+            if (_gridExpandHeight.HasValue)
+            {
+                script.AppendLine(_gridExpandHeight.Value.ToJavascriptProperty("gridExpandHeight"));
+            }
+
+            if (_showNoDataOnFrozen.HasValue)
+            {
+                script.AppendLine(_showNoDataOnFrozen.Value.ToJavascriptProperty("showNoDataOnFrozen"));
+            }
+
+            if (_enableHiddenColumns.HasValue)
+            {
+                script.AppendLine(_enableHiddenColumns.Value.ToJavascriptProperty("enableHiddenColumns"));
+            }
+
+            if (_showDistinctRow.HasValue)
+            {
+                script.AppendLine(_showDistinctRow.Value.ToJavascriptProperty("showDistinctRow"));
+            }
+
+            if (_showHighlightRow.HasValue)
+            {
+                script.AppendLine(_showHighlightRow.Value.ToJavascriptProperty("showHighlightRow"));
+            }
+
+            if (_highlightFrozenWidth.HasValue)
+            {
+                script.AppendLine(_highlightFrozenWidth.Value.ToJavascriptProperty("highlightFrozenWidth"));
+            }
+
+            if (_showNumberColumn.HasValue)
+            {
+                script.AppendLine(_showNumberColumn.Value.ToJavascriptProperty("showNumberColumn"));
+            }
+
+            if (_marginRight.HasValue)
+            {
+                script.AppendLine(_marginRight.Value.ToJavascriptProperty("marginRight"));
+            }
+
+            if (_allowTruncate.HasValue)
+            {
+                script.AppendLine(_allowTruncate.Value.ToJavascriptProperty("allowTruncate"));
+            }
+
+            if (_hideYBackGroundScroller.HasValue)
+            {
+                script.AppendLine(_hideYBackGroundScroller.Value.ToJavascriptProperty("hideYBackGroundScroller"));
+            }
+
+            if (_bottomBorderWidth.HasValue)
+            {
+                script.AppendLine(_bottomBorderWidth.Value.ToJavascriptProperty("bottomBorderWidth"));
+            }
+
+            if (_treeParentPaddingLeft.HasValue)
+            {
+                script.AppendLine(_treeParentPaddingLeft.Value.ToJavascriptProperty("treeParentPaddingLeft"));
+            }
+
+            if (_isResetScroller.HasValue)
+            {
+                script.AppendLine(_isResetScroller.Value.ToJavascriptProperty("isResetScroller"));
+            }
+
+            if (_isFullHeight.HasValue)
+            {
+                script.AppendLine(_isFullHeight.Value.ToJavascriptProperty("fullHeight"));
+            }
+
+            if (_gridHeight.HasValue)
+            {
+                script.AppendLine(_gridHeight.Value.ToJavascriptProperty("gridHeight"));
+            }
+
+            if (!string.IsNullOrEmpty(_language))
+            {
+                script.AppendLine(_language.ToJavascriptProperty("language"));
+            }
+
+            if (_autoFixFrozenRowHeight.HasValue)
+            {
+                script.AppendLine(_autoFixFrozenRowHeight.Value.ToJavascriptProperty("autoFixFrozenRowHeight"));
+            }
+
+            if (_autoResizeColumn.HasValue)
+            {
+                script.AppendLine(_autoResizeColumn.Value.ToJavascriptProperty("autoResizeColumn"));
+            }
+
+            if (_pixelsPerCharacter.HasValue)
+            {
+                script.AppendLine(_pixelsPerCharacter.Value.ToJavascriptProperty("pixelsPerCharacter"));
+            }
+
+            if (_calTextWidthWithFontSize.HasValue)
+            {
+                script.AppendLine(_calTextWidthWithFontSize.Value.ToJavascriptProperty("calTextWidthWithFontSize"));
+            }
+
+            if (!string.IsNullOrEmpty(_timeZone))
+            {
+                script.AppendLine(_timeZone.ToJavascriptProperty("timeZone"));
+            }
+
+            if (_scrollWidth.HasValue)
+            {
+                script.AppendLine(_scrollWidth.Value.ToJavascriptProperty("scrollWidth"));
+            }
+
+            script.AppendLine("});");
+
+            script.AppendLine("});</script>");
+
+            return script.ToString();
+        }
+
+
         public string ToHtmlString()
         {
-            throw new NotImplementedException();
+            return RenderHtml() + RenderJavascript();
         }
     }
 }

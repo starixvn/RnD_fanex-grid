@@ -384,6 +384,7 @@
     <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Demo\MultipleGrids.cshtml" />
+    <Content Include="Views\Demo\VirtualRendering.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

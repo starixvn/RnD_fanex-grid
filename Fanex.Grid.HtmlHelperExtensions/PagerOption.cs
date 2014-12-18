@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Fanex.Grid.HtmlHelperExtensions.Extensions;
 
     public class PagerOption
     {
@@ -16,25 +17,25 @@
         //    afterPagedFunction: null,
         //    showDetail: true
 
-        private int _itemsPerPage = 100;
+        private int? _itemsPerPage;
 
-        private int _maxItemsPerPage = 500;
+        private int? _maxItemsPerPage;
 
-        private int _currentPage = 0;
+        private int? _currentPage;
 
-        private int _totalItem = 0;
+        private int? _totalItem;
 
-        private int _startPerPage = 100;
+        private int? _startPerPage;
 
-        private int _pageStep = 50;
+        private int? _pageStep;
 
-        private string _afterPagedFunction = string.Empty;
+        private string _afterPagedFunction;
 
-        private bool _showDetail = true;
+        private bool? _showDetail = true;
 
         private string[] _itemsPerPageArray;
 
-        private string _customRenderFooterFunction = string.Empty;
+        private string _customRenderFooterFunction;
 
         public PagerOption SetItemsPerPage(int itemsPerPage)
         {
@@ -94,6 +95,27 @@
         {
             _customRenderFooterFunction = customRenderFooterFunction;
             return this;
+        }
+
+        public override string ToString()
+        {
+            var script = new StringBuilder();
+
+            script.AppendLine("{");
+
+            script.AppendJavascriptPropertyLine(_afterPagedFunction, "afterPagedFunction");
+            script.AppendJavascriptPropertyLine(_currentPage, "currentPage");
+            script.AppendJavascriptPropertyLine(_itemsPerPage, "itemsPerPage");
+            script.AppendJavascriptPropertyLine(_maxItemsPerPage, "maxItemsPerPage");
+            script.AppendJavascriptPropertyLine(_currentPage, "currentPage");
+            script.AppendJavascriptPropertyLine(_totalItem, "totalItem");
+            script.AppendJavascriptPropertyLine(_startPerPage, "startPerPage");
+            script.AppendJavascriptPropertyLine(_pageStep, "pageStep");
+            script.AppendJavascriptPropertyLine(_showDetail, "showDetail");
+
+            script.AppendLine("}");
+
+            return script.ToString();
         }
     }
 }

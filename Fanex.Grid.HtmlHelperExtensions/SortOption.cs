@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Fanex.Grid.HtmlHelperExtensions.Extensions;
 
     public class SortOption
     {
@@ -48,5 +49,20 @@
             return this;
         }
 
+        public override string ToString()
+        {
+            var script = new StringBuilder();
+
+            script.AppendLine("{");
+
+            script.AppendJavascriptPropertyLine(_customGridSort, "customGridSort");
+            script.AppendJavascriptPropertyLine(_serverSortFunction, "serverSortFunction");
+            script.AppendJavascriptPropertyLine(_afterGridSorted, "afterGridSorted");
+            script.AppendJavascriptPropertyLine(_beforeGridSorted, "beforeGridSorted");
+
+            script.AppendLine("}");
+
+            return script.ToString();
+        }
     }
 }

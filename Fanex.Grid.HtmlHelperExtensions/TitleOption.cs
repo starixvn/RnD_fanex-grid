@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Fanex.Grid.HtmlHelperExtensions.Extensions;
 
     public class TitleOption
     {
@@ -19,27 +20,27 @@
         //    customButtons: '',
         //    showButtonsWhenNoData: false
 
-        private string _text = string.Empty;
+        private string _text;
 
-        private bool _hideWhenNoData = true;
+        private bool? _hideWhenNoData;
 
-        private bool _showExcelButton;
+        private bool? _showExcelButton;
 
-        private string _exportExcelFunction = string.Empty;
+        private string _exportExcelFunction;
 
-        private bool _showBackButton;
+        private bool? _showBackButton;
 
-        private string _backFunction = string.Empty;
+        private string _backFunction;
 
-        private bool _showSendMailButton;
+        private bool? _showSendMailButton;
 
-        private string _sendMailFunction = string.Empty;
+        private string _sendMailFunction;
 
-        private bool _showCollapseExpandButton;
+        private bool? _showCollapseExpandButton;
 
-        private string _customButtons = string.Empty;
+        private string _customButtons;
 
-        private bool _showButtonsWhenNoData;
+        private bool? _showButtonsWhenNoData;
 
         public TitleOption SetVisibleWhenNoData()
         {
@@ -73,5 +74,27 @@
             return this;
         }
 
+        public override string ToString()
+        {
+            var script = new StringBuilder();
+
+            script.AppendLine("{");
+
+            script.AppendJavascriptPropertyLine(_text, "text");
+            script.AppendJavascriptPropertyLine(_hideWhenNoData, "hideWhenNoData");
+            script.AppendJavascriptPropertyLine(_showExcelButton, "showExcelButton");
+            script.AppendJavascriptPropertyLine(_exportExcelFunction, "exportExcelFunction");
+            script.AppendJavascriptPropertyLine(_showBackButton, "showBackButton");
+            script.AppendJavascriptPropertyLine(_backFunction, "backFunction");
+            script.AppendJavascriptPropertyLine(_showSendMailButton, "showSendMailButton");
+            script.AppendJavascriptPropertyLine(_sendMailFunction, "sendMailFunction");
+            script.AppendJavascriptPropertyLine(_showCollapseExpandButton, "showCollapseExpandButton");
+            script.AppendJavascriptPropertyLine(_customButtons, "customButtons");
+            script.AppendJavascriptPropertyLine(_showButtonsWhenNoData, "showButtonsWhenNoData");
+
+            script.AppendLine("}");
+
+            return script.ToString();
+        }
     }
 }

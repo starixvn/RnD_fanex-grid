@@ -4,27 +4,28 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-using Fanex.Grid.HtmlHelperExtensions.Enumerations;
+    using Fanex.Grid.HtmlHelperExtensions.Enumerations;
+    using Fanex.Grid.HtmlHelperExtensions.Extensions;
 
     public class RowColumn
     {
-        private string _name = string.Empty;
+        private string _name;
 
         private object _value;
 
-        private int _mergeRowNumber;
+        private int? _mergeRowNumber;
 
-        private int _mergeColNumner;
+        private int? _mergeColNumner;
 
         private string _customCellRender;
 
-        private string _tdClass = string.Empty;
+        private string _tdClass;
 
-        private string _cssClass = string.Empty;
+        private string _cssClass;
 
-        private TextAlign _cellAlign = TextAlign.Left;
+        private TextAlign? _cellAlign;
 
-        private string _customAttributes = string.Empty;
+        private string _customAttributes;
 
         public RowColumn SetMergeRowNumber(int mergeRowNumber)
         {
@@ -68,6 +69,26 @@ using Fanex.Grid.HtmlHelperExtensions.Enumerations;
             _customAttributes = customAttributes;
 
             return this;
+        }
+
+        public override string ToString()
+        {
+            var script = new StringBuilder();
+
+            script.AppendLine("{");
+
+            script.AppendJavascriptPropertyLine(_name, "Name");
+            script.AppendJavascriptPropertyLine(_mergeRowNumber, "MergeRowNumber");
+            script.AppendJavascriptPropertyLine(_mergeColNumner, "MergeColNumber");
+            script.AppendJavascriptPropertyLine(_customCellRender, "CustomCellRender");
+            script.AppendJavascriptPropertyLine(_tdClass, "TdClass");
+            script.AppendJavascriptPropertyLine(_cssClass, "CssClass");
+            script.AppendJavascriptPropertyLine(_cellAlign, "CellAlign");
+            script.AppendJavascriptPropertyLine(_customAttributes, "CustomAttr");
+
+            script.AppendLine("}");
+
+            return script.ToString();
         }
     }
 }

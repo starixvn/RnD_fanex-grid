@@ -7,6 +7,7 @@ namespace Fanex.Grid.HtmlHelperExtensions
     using System.Linq;
     using System.Text;
     using Fanex.Grid.HtmlHelperExtensions.Enumerations;
+    using Fanex.Grid.HtmlHelperExtensions.Extensions;
 
     public class Column
     {
@@ -29,11 +30,11 @@ namespace Fanex.Grid.HtmlHelperExtensions
 
         private string _cellCssClass = string.Empty;
 
-        private TextAlign _headerAlign = TextAlign.Center;
+        private TextAlign? _headerAlign;
 
-        private TextAlign _cellAlign = TextAlign.Left;
+        private TextAlign? _cellAlign;
 
-        private bool _isSortable = false;
+        private bool? _isSortable;
 
         private string _formatNumber = string.Empty;
 
@@ -41,9 +42,9 @@ namespace Fanex.Grid.HtmlHelperExtensions
 
         private string _formatPositive = string.Empty;
 
-        private bool _showCollapseExpandIcon = false;
+        private bool? _showCollapseExpandIcon;
 
-        private bool _allowTruncate = false;
+        private bool? _allowTruncate;
 
         private string _customHeaderRender = string.Empty;
 
@@ -131,7 +132,27 @@ namespace Fanex.Grid.HtmlHelperExtensions
 
         public override string ToString()
         {
-            return base.ToString();
+            var script = new StringBuilder();
+
+            script.AppendLine("{");
+            script.AppendLine(_headerText.ToJavascriptProperty("HeaderText"));
+            script.AppendLine(_name.ToJavascriptProperty("Name"));
+            script.AppendLine(_width.ToJavascriptProperty("Width"));
+
+
+            //script
+            script.AppendJavascriptPropertyLine(_cssClass, "CssClass");
+            script.AppendJavascriptPropertyLine(_tdClass, "TdClass");
+            script.AppendJavascriptPropertyLine(_cellCssClass, "CellCssClass");
+            script.AppendJavascriptPropertyLine(_headerAlign, "HeaderAlign");
+            script.AppendJavascriptPropertyLine(_cellAlign, "CellAlign");
+            script.AppendJavascriptPropertyLine(_isSortable, "Sort");
+            script.AppendJavascriptPropertyLine(_showCollapseExpandIcon, "ShowCollapseExpand");
+            script.AppendJavascriptPropertyLine(_allowTruncate, "AllowTruncate");
+            script.AppendJavascriptPropertyLine(_formatNumber, "FormatNumber");
+
+            script.AppendLine("}");
+            return script.ToString();
         }
     }
 }

@@ -15,7 +15,14 @@
             _value = value;
         }
 
-        private string _name;
+        public RowColumn(string name)
+        {
+            _name = name;
+        }
+
+        protected string _name;
+
+        protected string _headerText;
 
         private object _value;
 
@@ -36,6 +43,13 @@
         public RowColumn SetMergeRowNumber(int mergeRowNumber)
         {
             _mergeRowNumber = mergeRowNumber;
+            return this;
+        }
+
+        public RowColumn SetHeaderText(string headerText)
+        {
+            _headerText = headerText;
+
             return this;
         }
 
@@ -85,6 +99,7 @@
             script.Append("{");
 
             script.AppendJavascriptProperty(_name, "Name", isBreakNewLine);
+            script.AppendJavascriptProperty(_headerText, "HeaderText", isBreakNewLine);
             script.AppendJavascriptProperty(_mergeRowNumber, "MergeRowNumber", isBreakNewLine);
             script.AppendJavascriptProperty(_mergeColNumner, "MergeColNumber", isBreakNewLine);
             script.AppendJavascriptProperty(_customCellRender, "CustomCellRender", isBreakNewLine);

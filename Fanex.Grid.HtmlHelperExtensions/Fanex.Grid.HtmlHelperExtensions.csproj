@@ -70,19 +70,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Column.cs" />
+    <Compile Include="GridComponents\Column.cs" />
     <Compile Include="Enumerations\TextAlign.cs" />
     <Compile Include="Extensions\JavascriptStringExtensions.cs" />
     <Compile Include="Extensions\JSONExtensions.cs" />
     <Compile Include="FanexGridExtensions.cs" />
     <Compile Include="Grid.cs" />
-    <Compile Include="IGridBuilder.cs" />
-    <Compile Include="PagerOption.cs" />
+    <Compile Include="GridComponents\HeaderColumn.cs" />
+    <Compile Include="GridComponents\PagerOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Row.cs" />
-    <Compile Include="RowColumn.cs" />
-    <Compile Include="SortOption.cs" />
-    <Compile Include="TitleOption.cs" />
+    <Compile Include="GridComponents\Row.cs" />
+    <Compile Include="GridComponents\RowColumn.cs" />
+    <Compile Include="GridComponents\SortOption.cs" />
+    <Compile Include="GridComponents\TitleOption.cs" />
     <Compile Include="Utilities\NullPropertiesConverter.cs" />
   </ItemGroup>
   <ItemGroup />

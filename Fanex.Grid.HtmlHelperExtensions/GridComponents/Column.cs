@@ -151,6 +151,9 @@ namespace Fanex.Grid.HtmlHelperExtensions
             script.AppendJavascriptProperty(_allowTruncate, "AllowTruncate");
             script.AppendJavascriptProperty(_formatNumber, "FormatNumber");
 
+            script.AppendJavascriptFunction(_customCellRender, "CustomCellRender");
+            script.AppendJavascriptFunction(_customHeaderRender, "CustomHeaderRender");
+
             script.AppendLine("},");
             return script.ToString();
         }

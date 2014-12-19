@@ -2,17 +2,27 @@
 @{
     ViewBag.Title = "HtmlHelper";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
+    var firstColumnName = "firstColumn";
+    var secondColumnName = "secondColumn";
+    var thirdColumnName = "thirdColumn";
+    var fourthColumnName = "fourthColumn";
+    var fifthColumnName = "fifthColumn";
+    
     var bodyRows = new List<Row>();
     var footerRows = new List<Row>();
+    var headerRows = new List<Row>();
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 5000; i++)
     {
         bodyRows.Add(
             new Row()
-                .AddColumn(new RowColumn("firstColumn", i))
-                .AddColumn(new RowColumn("secondColumn", i))
-                .AddColumn(new RowColumn("thirdColumn", i))
-                .AddColumn(new RowColumn("fourthColumn", i))
+                .AddColumn(new RowColumn(firstColumnName, i))
+                .AddColumn(new RowColumn(secondColumnName, i))
+                .AddColumn(new RowColumn(thirdColumnName, i))
+                .AddColumn(new RowColumn(fourthColumnName, i))
+                .AddColumn(new RowColumn(fifthColumnName, new SampleColumn { 
+                    IntValue = i
+                }))
                 );
     }
 
@@ -20,20 +30,30 @@
     {
         footerRows.Add(
             new Row()
-                .AddColumn(new RowColumn("firstColumn", i))
-                .AddColumn(new RowColumn("secondColumn", i))
-                .AddColumn(new RowColumn("thirdColumn", i))
-                .AddColumn(new RowColumn("fourthColumn", i))
+                .AddColumn(new RowColumn(firstColumnName, i))
+                .AddColumn(new RowColumn(secondColumnName, i))
+                .AddColumn(new RowColumn(thirdColumnName, i))
+                .AddColumn(new RowColumn(fourthColumnName, i))
+                .AddColumn(new RowColumn(fifthColumnName, i))
                 );
     }
+
+    headerRows.Add(
+        new Row()
+            .AddColumn(new RowColumn(firstColumnName).SetHeaderText("Group 1").SetMergeColumnNumber(2).SetTextAlign(TextAlign.Center))
+            .AddColumn(new RowColumn(thirdColumnName).SetHeaderText("Third Column").SetMergeRowNumber(2))
+            .AddColumn(new RowColumn(fourthColumnName).SetHeaderText("Fourth Column").SetMergeRowNumber(2))
+            .AddColumn(new RowColumn(fifthColumnName).SetHeaderText("Fifth Column").SetMergeRowNumber(2))
+            );
 }
 
 
 @(Html.FanexGrid("grid-id")
-        .AddColumn(new Column("firstColumn", "First Column", 300).SetHeaderTextAlign(TextAlign.Left).SetSortable())
-        .AddColumn(new Column("secondColumn", "Second Column", 300))
-        .AddColumn(new Column("thirdColumn", "Third Column", 300).SetCellTextAlign(TextAlign.Center))
-        .AddColumn(new Column("fourthColumn", "Fourth Column", 300))
+        .AddColumn(new Column(firstColumnName, "First Column", 300))
+        .AddColumn(new Column(secondColumnName, "Second Column", 300))
+        .AddColumn(new Column(thirdColumnName, "Third Column", 300).SetCellTextAlign(TextAlign.Center).SetSortable())
+        .AddColumn(new Column(fourthColumnName, "Fourth Column", 300))
+                .AddColumn(new Column(fifthColumnName, "Fifth Column", 300).SetCustomCellRender("customFunctions.customCellRender"))
         .SetTitle(new TitleOption("Grid Title")
                         .SetExcelButtonVisible().SetExportExcelFunction("function () { alert(\"Export Excel Button Clicked\"); }")
                         .SetBackButtonVisible().SetBackFunction("customFunctions.backFunction"))
@@ -43,9 +63,10 @@
                     .SetCurrentPage(0)
                     .SetStartItemPerPage(100)
                     .SetPageStep(100))
-        .AddFooterRows(footerRows)
-        .SetNumberOfFrozenColumns(1)
+        .SetNumberOfFrozenColumns(2)
+        .AddHeaderRows(headerRows)
         .AddBodyRows(bodyRows)
+        .AddFooterRows(footerRows)
     )
 
 
@@ -53,6 +74,9 @@
     var customFunctions = {
         backFunction: function () {
             alert("Back Button Clicked");
+        },
+        customCellRender: function (cell, cellFormated) {
+            return "<div style='text-align:left;'>" + cell.Value.IntValue + "a</div>";
         }
     };
 </script>

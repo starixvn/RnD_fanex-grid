@@ -167,7 +167,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
     $.fn.fanexGrid.defaults =
     {
         customizeHeader: false,
-        headerRows: [],
+        groupHeaderRows: [],
         columns: [],
         bodyRows: [],
         numberOfFrozenColumn: 0,

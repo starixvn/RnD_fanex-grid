@@ -156,6 +156,7 @@
 
         public Grid AddHeaderRows(List<Row> headerRows)
         {
+            _isHeaderCustomized = true;
             _headerRows = headerRows;
             return this;
         }
@@ -428,7 +429,7 @@
 
             script.AppendLine("jQuery('#" + _id + "').fanexGrid({");
 
-            script.AppendJavascriptProperty(_isHeaderCustomized, "customizeHeader");
+            
             script.AppendJavascriptProperty(_numberOfFrozenColumn, "numberOfFrozenColumn");
             script.AppendJavascriptProperty(_headerColumnHeight, "headerColumnHeight");
             script.AppendJavascriptProperty(_bodyRowHeight, "bodyRowHeight");
@@ -466,9 +467,11 @@
 
             script.AppendJavascriptProperty(_sortOption, "sortOption");
 
+            script.AppendJavascriptProperty(_isHeaderCustomized, "customizeHeader");
+            script.AppendJavascriptPropertyLine<Row>(_headerRows, "groupHeaderRows");
+
             script.AppendJavascriptPropertyLine<Row>(_bodyRows, "bodyRows");
             script.AppendJavascriptPropertyLine<Column>(_columns, "columns");
-            script.AppendJavascriptPropertyLine<Row>(_headerRows, "headerRows");
 
             script.AppendJavascriptProperty(_showFooter, "showFooter");
             script.AppendJavascriptPropertyLine<Row>(_footerRows, "footerRows");

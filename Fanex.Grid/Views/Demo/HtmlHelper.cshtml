@@ -1,5 +1,25 @@
 ﻿@{
     ViewBag.Title = "HtmlHelper";
+    Layout = "~/Views/Shared/_DemoLayout.cshtml";
+    var bodyRows = new List<Row> { 
+        new Row()
+        .AddColumn(new RowColumn("firstColumn", "1"))
+        .AddColumn(new RowColumn("secondColumn", "1"))
+        .AddColumn(new RowColumn("thirdColumn", "1"))
+    };
 }
 
-<h2>HtmlHelper</h2>
+
+@(Html.FanexGrid("GridID")
+    .AddColumn(new Column("firstColumn", "First Column", 400))
+    .AddColumn(new Column("secondColumn", "Second Column", 300))
+    .AddColumn(new Column("thirdColumn", "Third Column", 300))
+        .SetTitle(new TitleOption("Grid Title").SetExcelButtonVisible().SetButtonsVisibleWhenNoData())
+        .AddBodyRows(bodyRows)
+    )
+
+
+<script type="text/javascript">
+
+</script>
+

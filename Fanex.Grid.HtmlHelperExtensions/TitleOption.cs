@@ -20,9 +20,12 @@
         //    customButtons: '',
         //    showButtonsWhenNoData: false
 
-        private string _text;
+        public TitleOption(string text)
+        {
+            _text = text;
+        }
 
-        private bool? _hideWhenNoData;
+        private string _text;
 
         private bool? _showExcelButton;
 
@@ -42,9 +45,9 @@
 
         private bool? _showButtonsWhenNoData;
 
-        public TitleOption SetVisibleWhenNoData()
+        public TitleOption SetButtonsVisibleWhenNoData()
         {
-            _hideWhenNoData = false;
+            _showButtonsWhenNoData = true;
             return this;
         }
 
@@ -81,7 +84,6 @@
             script.AppendLine("{");
 
             script.AppendJavascriptPropertyLine(_text, "text");
-            script.AppendJavascriptPropertyLine(_hideWhenNoData, "hideWhenNoData");
             script.AppendJavascriptPropertyLine(_showExcelButton, "showExcelButton");
             script.AppendJavascriptPropertyLine(_exportExcelFunction, "exportExcelFunction");
             script.AppendJavascriptPropertyLine(_showBackButton, "showBackButton");

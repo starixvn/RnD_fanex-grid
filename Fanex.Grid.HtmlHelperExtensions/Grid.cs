@@ -20,7 +20,7 @@
         //headerRows: [],
         private List<Row> _headerRows;
         //columns: [],
-        private List<Column> _columns;
+        private List<Column> _columns = new List<Column>();
         //bodyRows: [],
         private List<Row> _bodyRows;
 
@@ -207,6 +207,7 @@
 
         public Grid SetTitle(TitleOption titleOption)
         {
+            _showTitle = true;
             _titleOption = titleOption;
 
             return this;
@@ -420,7 +421,8 @@
             // Create javascript
             var script = new StringBuilder();
 
-            script.AppendLine("<script type=\"text/javascript\">jQuery(function () {");
+            script.AppendLine("<script type=\"text/javascript\">");
+            script.AppendLine("jQuery(function () {");
 
             script.AppendLine("jQuery('#" + _id + "').fanexGrid({");
 
@@ -454,7 +456,17 @@
             script.AppendJavascriptPropertyLine(_scrollWidth, "scrollWidth");
             script.AppendJavascriptPropertyLine(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
 
+            script.AppendJavascriptPropertyLine(_showTitle, "showTitle");
+            script.AppendJavascriptPropertyLine(_titleOption, "titleInfo");
+            script.AppendJavascriptPropertyLine(_pagerOption, "pagerOption");
+            script.AppendJavascriptPropertyLine(_sortOption, "sortOption");
 
+            script.AppendJavascriptPropertyLine<Row>(_bodyRows, "bodyRows");
+            script.AppendJavascriptPropertyLine<Column>(_columns, "columns");
+            script.AppendJavascriptPropertyLine<Row>(_headerRows, "headerRows");
+            script.AppendJavascriptPropertyLine<Row>(_footerRows, "footerRows");
+            //script.AppendJavascriptPropertyLine(_titleOption, "titleInfo");
+            //script.AppendJavascriptPropertyLine(_titleOption, "titleInfo");
 
             //if (_pagerOption != null)
             //{
@@ -463,7 +475,8 @@
 
             script.AppendLine("});");
 
-            script.AppendLine("});</script>");
+            script.AppendLine("});");
+            script.AppendLine("</script>");
 
             return script.ToString();
         }

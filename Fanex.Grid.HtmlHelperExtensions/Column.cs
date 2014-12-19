@@ -151,7 +151,7 @@ namespace Fanex.Grid.HtmlHelperExtensions
             script.AppendJavascriptPropertyLine(_allowTruncate, "AllowTruncate");
             script.AppendJavascriptPropertyLine(_formatNumber, "FormatNumber");
 
-            script.AppendLine("}");
+            script.AppendLine("},");
             return script.ToString();
         }
     }

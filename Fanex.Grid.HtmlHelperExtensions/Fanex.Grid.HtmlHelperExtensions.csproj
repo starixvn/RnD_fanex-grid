@@ -39,6 +39,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Extensions" />
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -72,6 +73,7 @@
     <Compile Include="Column.cs" />
     <Compile Include="Enumerations\TextAlign.cs" />
     <Compile Include="Extensions\JavascriptStringExtensions.cs" />
+    <Compile Include="Extensions\JSONExtensions.cs" />
     <Compile Include="FanexGridExtensions.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="IGridBuilder.cs" />
@@ -81,13 +83,12 @@
     <Compile Include="RowColumn.cs" />
     <Compile Include="SortOption.cs" />
     <Compile Include="TitleOption.cs" />
+    <Compile Include="Utilities\NullPropertiesConverter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\" />
+  <ItemGroup />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

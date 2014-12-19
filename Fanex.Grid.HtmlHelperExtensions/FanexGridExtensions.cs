@@ -8,7 +8,7 @@
 
     public static class FanexGridExtensions 
     {
-        public static Grid Tag(this HtmlHelper helper, string id)
+        public static Grid FanexGrid(this HtmlHelper helper, string id)
         {
             return new Grid(id);
         }

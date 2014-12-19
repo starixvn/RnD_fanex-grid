@@ -9,6 +9,12 @@
 
     public class RowColumn
     {
+        public RowColumn(string name, object value)
+        {
+            _name = name;
+            _value = value;
+        }
+
         private string _name;
 
         private object _value;
@@ -86,7 +92,9 @@
             script.AppendJavascriptPropertyLine(_cellAlign, "CellAlign");
             script.AppendJavascriptPropertyLine(_customAttributes, "CustomAttr");
 
-            script.AppendLine("}");
+            script.AppendLine("Value:" + _value.ToJSON());
+
+            script.AppendLine("},");
 
             return script.ToString();
         }

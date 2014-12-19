@@ -132,6 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\HtmlHelperDemoController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -387,6 +388,34 @@
     <Content Include="Views\Demo\MultipleGrids.cshtml" />
     <Content Include="Views\Demo\VirtualRendering.cshtml" />
     <Content Include="Views\Demo\HtmlHelper.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\AppendBodyRows.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\AutoResizeColumns.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\AutoResizeToFullScreen.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\AutoTruncate.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\CustomCell.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\CustomFooterPager.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\CustomOption.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\CustomPager.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\CustomSorting.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\DefaultFunctionality.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Demo1000Rows100Cols.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Demo5000Rows.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Footer.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\FormatNumber.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\FrozenColumns.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\GridTitle.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\HeaderGrouping.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\HtmlHelper.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Merging.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\MultipleGrids.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\MultipleLanguage.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Others.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\PagePerformance.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Pager.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Popup.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\ShowHideColumns.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\Sorting.cshtml" />
+    <Content Include="Views\HtmlHelperDemo\TreeGrid.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

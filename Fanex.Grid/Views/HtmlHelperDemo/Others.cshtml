@@ -1,0 +1,313 @@
+﻿@{
+    ViewBag.Title = "Frozen Columns";
+    Layout = "~/Views/Shared/_DemoLayout.cshtml";
+}
+<div id="sourcecontainer">
+    <div id="gridId" class="freegrid  content-grid">
+    </div>
+</div>
+<div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
+    <pre name="code" class="groovy">
+       
+    </pre>
+</div>
+<script type="text/javascript">
+    var footerRows = [{
+        Columns: [{
+            Name: "Member_1",
+            Value: 1
+        }, {
+            Name: "Turnover_2",
+            Value: 2
+        }, {
+            Name: "BetCount_3",
+            Value: 3
+        }, {
+            Name: "MemberWin_4",
+            Value: 4
+        }, {
+            Name: "MemberLose_5",
+            Value: 5
+        }, {
+            Name: "MemberTotal_6",
+            Value: 6
+        }, {
+            Name: "FoobetLoseTax_7",
+            Value: 7,
+            trClass: "foobet"
+        }, {
+            Name: "FoobetWin03_8",
+            Value: 8
+        }, {
+            Name: "FoobetLose03_9",
+            Value: 9
+        }, {
+            Name: "FoobetTotal03_10",
+            Value: 10
+        }, {
+            Name: "FoobetWin05_11",
+            Value: 11
+        }, {
+            Name: "FoobetLose05_12",
+            Value: 12
+        }, {
+            Name: "FoobetTotal05_13",
+            Value: 13
+        },
+                 {
+                     Name: "FoobetAfterRebate03_15",
+                     Value: 14
+                 }, {
+                     Name: "FoobetAfterRebate05_16",
+                     Value: 15
+                 }]
+
+    }];
+    var gridOptions =
+        {
+            customizeHeader: true,
+            groupHeaderRows: [{
+                Columns: [{
+                    HeaderText: "Member",
+                    Name: "Member_1",
+                    MergeRowNumber: 3
+                }, {
+                    HeaderText: "Turnover",
+                    Name: "Turnover_2",
+                    MergeRowNumber: 3
+                }, {
+                    HeaderText: "BetCount",
+                    Name: "BetCount_3",
+                    MergeRowNumber: 3
+                }, {
+                    HeaderText: "Member",
+                    Name: "MemberWin_4",
+                    MergeColNumber: 3
+                }, {
+                    HeaderText: "Foobet",
+                    Name: "FoobetLoseTax_7",
+                    MergeColNumber: 7,
+                    ThClass: "foobet"
+                }, {
+                    HeaderText: "Company",
+                    Name: "FoobetAfterRebate03_15",
+                    MergeColNumber: 2
+                }
+            ]
+            }, {
+                Columns: [{
+                    HeaderText: "Win",
+                    Name: "MemberWin_4",
+                    MergeRowNumber: 2
+                }, {
+                    HeaderText: "Lose",
+                    Name: "MemberLose_5",
+                    MergeRowNumber: 2
+                }, {
+                    HeaderText: "Total",
+                    Name: "MemberTotal_6",
+                    MergeRowNumber: 2
+                }, {
+                    HeaderText: "LosingTax",
+                    Name: "FoobetLoseTax_7",
+                    MergeRowNumber: 2
+                }, {
+                    HeaderText: "Rebate",
+                    Name: "FoobetWin03_8",
+                    MergeColNumber: 3,
+                    ThClass: "foobet"
+                }, {
+                    HeaderText: "Rebate",
+                    Name: "FoobetWin05_11",
+                    MergeColNumber: 3,
+                    ThClass: "foobet"
+                },
+             {
+                 HeaderText: "After",
+                 Name: "FoobetAfterRebate03_15",
+                 MergeRowNumber: 2
+             }, {
+                 HeaderText: "Rebate",
+                 Name: "FoobetAfterRebate05_16",
+                 MergeRowNumber: 2
+             }]
+            }],
+            columns: [{
+                HeaderText: "Member",
+                Width: 70,
+                Name: "Member_1",
+                HeaderAlign: "center",
+                CellAlign: "left",
+                CanResize: true,
+                CalResizeFunction: function (value) {
+                    return value.toString().length * 15;
+                }
+            }, {
+                HeaderText: "Turnover",
+                Width: 80,
+                Name: "Turnover_2",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "BetCount",
+                Width: 60,
+                Name: "BetCount_3",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0"
+
+            }, {
+                HeaderText: "Win",
+                Width: 90,
+                Name: "MemberWin_4",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "Lose",
+                Width: 80,
+                Name: "MemberLose_5",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "Total",
+                Width: 80,
+                Name: "MemberTotal_6",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                CellCssClass: "bold",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "LosingTax",
+                Width: 80,
+                Name: "FoobetLoseTax_7",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "Winning",
+                Width: 80,
+                Name: "FoobetWin03_8",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "Losing",
+                Width: 80,
+                Name: "FoobetLose03_9",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "Total",
+                Width: 80,
+                Name: "FoobetTotal03_10",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00",
+                CellCssClass: "bold"
+            }, {
+                HeaderText: "Winning",
+                Width: 80,
+                Name: "FoobetWin05_11",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "Losing",
+                Width: 80,
+                Name: "FoobetLose05_12",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                FormatNumber: "0,0.00"
+            }, {
+                HeaderText: "Total",
+                Width: 80,
+                Name: "FoobetTotal05_13",
+                HeaderAlign: "center",
+                CellAlign: "right",
+                CellCssClass: "bold",
+                FormatNumber: "0,0.00"
+            },
+         {
+             HeaderText: "Rebate",
+             Width: 80,
+             Name: "FoobetAfterRebate03_15",
+             HeaderAlign: "center",
+             CellAlign: "right",
+             FormatNumber: "0,0.00",
+             CellCssClass: "bold"
+         }, {
+             HeaderText: "percentSecond",
+             Width: 80,
+             Name: "FoobetAfterRebate05_16",
+             HeaderAlign: "center",
+             CellAlign: "right",
+             CellCssClass: "bold",
+             FormatNumber: "0,0.00"
+         }],
+            bodyRows: [{
+                Columns: [{
+                    Name: "Member_1",
+                    Value: 1001122221110
+                }, {
+                    Name: "Turnover_2",
+                    Value: 2
+                }, {
+                    Name: "BetCount_3",
+                    Value: 3
+                }, {
+                    Name: "MemberWin_4",
+                    Value: 4
+                }, {
+                    Name: "MemberLose_5",
+                    Value: 5
+                }, {
+                    Name: "MemberTotal_6",
+                    Value: 6
+                }, {
+                    Name: "FoobetLoseTax_7",
+                    Value: 7,
+                    trClass: "foobet"
+                }, {
+                    Name: "FoobetWin03_8",
+                    Value: 8
+                }, {
+                    Name: "FoobetLose03_9",
+                    Value: 9
+                }, {
+                    Name: "FoobetTotal03_10",
+                    Value: 10
+                }, {
+                    Name: "FoobetWin05_11",
+                    Value: 11
+                }, {
+                    Name: "FoobetLose05_12",
+                    Value: 12
+                }, {
+                    Name: "FoobetTotal05_13",
+                    Value: 13
+                },
+                 {
+                     Name: "FoobetAfterRebate03_15",
+                     Value: 14
+                 }, {
+                     Name: "FoobetAfterRebate05_16",
+                     Value: 15
+                 }]
+
+            }],
+            gridExpandHeight: 150,
+            numberOfFrozenColumn: 3,
+            autoFixFrozenRowHeight: true,
+            showFooter: true,
+            footerRows: footerRows,
+            autoResizeColumn: true
+        };
+    $(function () {
+        var currentGrid = $("#gridId").fanexGrid(gridOptions);
+    });
+</script>
+ 

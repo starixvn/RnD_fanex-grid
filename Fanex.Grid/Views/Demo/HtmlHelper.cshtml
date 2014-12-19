@@ -26,17 +26,19 @@
                 );
     }
 
-    for (int i = 5000; i < 5001; i++)
-    {
-        footerRows.Add(
+    footerRows.Add(
             new Row()
-                .AddColumn(new RowColumn(firstColumnName, i))
-                .AddColumn(new RowColumn(secondColumnName, i))
-                .AddColumn(new RowColumn(thirdColumnName, i))
-                .AddColumn(new RowColumn(fourthColumnName, i))
-                .AddColumn(new RowColumn(fifthColumnName, i))
+                .AddColumn(new RowColumn(firstColumnName, 1).SetMergeRowNumber(2))
+                .AddColumn(new RowColumn(secondColumnName, 2))
+                .AddColumn(new RowColumn(thirdColumnName, 3).SetMergeColumnNumber(2))
+                .AddColumn(new RowColumn(fifthColumnName, 5).SetMergeRowNumber(2).SetTextAlign(TextAlign.Center))
                 );
-    }
+    footerRows.Add(
+            new Row()
+                .AddColumn(new RowColumn(secondColumnName, 2))
+                .AddColumn(new RowColumn(thirdColumnName, 3))
+                .AddColumn(new RowColumn(fourthColumnName, 4))
+                );  
 
     headerRows.Add(
         new Row()
@@ -52,8 +54,8 @@
         .AddColumn(new Column(firstColumnName, "First Column", 300))
         .AddColumn(new Column(secondColumnName, "Second Column", 300))
         .AddColumn(new Column(thirdColumnName, "Third Column", 300).SetCellTextAlign(TextAlign.Center).SetSortable())
-        .AddColumn(new Column(fourthColumnName, "Fourth Column", 300))
-                .AddColumn(new Column(fifthColumnName, "Fifth Column", 300).SetCustomCellRender("customFunctions.customCellRender"))
+        .AddColumn(new Column(fourthColumnName, "Fourth Column", 300).SetSortable("desc"))
+        .AddColumn(new Column(fifthColumnName, "Fifth Column", 300).SetCustomCellRender("customFunctions.customCellRender"))
         .SetTitle(new TitleOption("Grid Title")
                         .SetExcelButtonVisible().SetExportExcelFunction("function () { alert(\"Export Excel Button Clicked\"); }")
                         .SetBackButtonVisible().SetBackFunction("customFunctions.backFunction"))
@@ -76,7 +78,7 @@
             alert("Back Button Clicked");
         },
         customCellRender: function (cell, cellFormated) {
-            return "<div style='text-align:left;'>" + cell.Value.IntValue + "a</div>";
+            return "<div style='text-align:right;'>" + cell.Value.IntValue + "a</div>";
         }
     };
 </script>

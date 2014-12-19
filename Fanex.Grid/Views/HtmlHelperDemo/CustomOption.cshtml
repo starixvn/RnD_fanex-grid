@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Custom Option";
+    Layout = "~/Views/Shared/_DemoLayout.cshtml";
+}
+<div id="sourcecontainer">
+     <div id="filter-bar">
+        <input type="button" value="Resize Grid" id="resizeGrid" />
+    </div>
+    <div id="gridId" class="freegrid  content-grid">
+    </div>
+</div>
+<div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
+    <pre name="code" class="groovy">
+    var gridOptions =
+        {
+            showFooter: true,
+            footerRows:  [
+                  {
+                      Columns: [
+                        { Value: "Total", Name: "No", },
+                        { Value: "Footer 2", Name: "Text1" },
+                        { Value: "Footer 3", Name: "Number1" },
+                        { Value: "Footer 4", Name: "Number2" },
+                        { Value: "Footer 5", Name: "Number3" },
+                        { Value: "Footer 6", Name: "Text2"},
+                        { Value: "Footer 7", Name: "Text3"},
+                        { Value: "Footer 8", Name: "Text4"},
+                        { Value: "Footer 9", Name: "Number4" },
+                        { Value: "Footer 10", Name: "Number5" }
+                    ]
+                  }],
+            columns: [
+                { HeaderText: "Header 1", Width: 160, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 2", Width: 170, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 3", Width: 100, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 4", Width: 100, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 6", Width: 210, Name: "Text2" },
+                { HeaderText: "Header 7", Width: 220, Name: "Text3" },
+                { HeaderText: "Header 8", Width: 150, Name: "Text4" },
+                { HeaderText: "Header 9", Width: 190, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 10", Width: 220, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
+            ],
+            bodyRows: generateData(100),
+            gridExpandHeight: 500,
+            //// Custom Option
+            headerColumnHeight: 35,
+            bodyRowHeight: 30,
+            showNoDataOnFrozen: false,
+            showDistinctRow: false,
+            showHighlightRow: false,
+            numberOfFrozenColumn: 3,
+            highlightFrozenWidth: 3,
+            showNumberColumn: false,
+            marginRight : 30,
+            allowTruncate: false,
+            columnsNeedHide: [9],
+            showColumnsShowHide: false,
+            hideYBackGroundScroller: false,
+            bottomBorderWidth: 6,
+            treeParentPaddingLeft: 20,
+            fullHeight: false,
+            gridHeight: 200
+        };
+    $(function () {
+        var currentGrid = $("#gridId").fanexGrid(gridOptions);
+
+        $('#resizeGrid').click(function()
+        {
+            $('#sourcecontainer').width(800);
+            $("#gridId").fanexGrid('resizeGrid');
+            }
+        );
+    });
+    </pre>
+</div>
+<script type="text/javascript">
+    var gridOptions =
+        {
+            showFooter: true,
+            footerRows:  [
+                  {
+                      Columns: [
+                        { Value: "Total", Name: "No", },
+                        { Value: "Footer 2", Name: "Text1" },
+                        { Value: "Footer 3", Name: "Number1" },
+                        { Value: "Footer 4", Name: "Number2" },
+                        { Value: "Footer 5", Name: "Number3" },
+                        { Value: "Footer 6", Name: "Text2"},
+                        { Value: "Footer 7", Name: "Text3"},
+                        { Value: "Footer 8", Name: "Text4"},
+                        { Value: "Footer 9", Name: "Number4" },
+                        { Value: "Footer 10", Name: "Number5" }
+                    ]
+                  }],
+            columns: [
+                { HeaderText: "Header 1", Width: 160, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 2", Width: 170, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 3", Width: 100, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 4", Width: 100, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 6", Width: 210, Name: "Text2" },
+                { HeaderText: "Header 7", Width: 220, Name: "Text3" },
+                { HeaderText: "Header 8", Width: 150, Name: "Text4" },
+                { HeaderText: "Header 9", Width: 190, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 10", Width: 220, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
+            ],
+            bodyRows: generateData(1),
+            //// Custom Option
+            headerColumnHeight: 35,
+            bodyRowHeight: 30,
+            showNoDataOnFrozen: false,
+            showDistinctRow: false,
+            showHighlightRow: false,
+            numberOfFrozenColumn: 3,
+            highlightFrozenWidth: 3,
+            showNumberColumn: false,
+            marginRight : 30,
+            allowTruncate: false,
+            columnsNeedHide: [9],
+            showColumnsShowHide: false,
+            hideYBackGroundScroller: false,
+            bottomBorderWidth: 6,
+            treeParentPaddingLeft: 20,
+            fullHeight: false,
+            gridHeight: 500
+        };
+    $(function () {
+        var currentGrid = $("#gridId").fanexGrid(gridOptions);
+
+        $('#resizeGrid').click(function()
+        {
+            $('#sourcecontainer').width(800);
+            $("#gridId").fanexGrid('resizeGrid');
+            }
+        );
+    });
+</script>

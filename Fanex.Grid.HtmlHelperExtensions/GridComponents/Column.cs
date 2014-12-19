@@ -18,17 +18,17 @@ namespace Fanex.Grid.HtmlHelperExtensions
             _width = width;
         }
 
-        private string _headerText = string.Empty;
+        private string _headerText;
 
-        private string _name = string.Empty;
+        private string _name;
 
         private int _width;
 
-        private string _cssClass = string.Empty;
+        private string _cssClass;
 
-        private string _tdClass = string.Empty;
+        private string _tdClass;
 
-        private string _cellCssClass = string.Empty;
+        private string _cellCssClass;
 
         private TextAlign? _headerAlign;
 
@@ -36,19 +36,21 @@ namespace Fanex.Grid.HtmlHelperExtensions
 
         private bool? _isSortable;
 
-        private string _formatNumber = string.Empty;
+        private string _formatNumber;
 
-        private string _formatNegative = string.Empty;
+        private string _formatNegative;
 
-        private string _formatPositive = string.Empty;
+        private string _formatPositive;
 
         private bool? _showCollapseExpandIcon;
 
         private bool? _allowTruncate;
 
-        private string _customHeaderRender = string.Empty;
+        private string _customHeaderRender;
 
-        private string _customCellRender = string.Empty;
+        private string _customCellRender;
+
+        private string _sortDirection;
 
         public Column SetCssClass(string cssClass)
         {
@@ -82,11 +84,18 @@ namespace Fanex.Grid.HtmlHelperExtensions
             return this;
         }
 
-        public Column SetSortable()
+        public Column SetSortable(string sortDirection = "")
         {
+            if(!string.IsNullOrEmpty(sortDirection))
+            {
+                _sortDirection = sortDirection;
+            }
+
             _isSortable = true;
             return this;
         }
+
+        
 
         public Column SetFormatNumber(string formatNumber)
         {
@@ -147,6 +156,7 @@ namespace Fanex.Grid.HtmlHelperExtensions
             script.AppendJavascriptProperty(_headerAlign, "HeaderAlign");
             script.AppendJavascriptProperty(_cellAlign, "CellAlign");
             script.AppendJavascriptProperty(_isSortable, "Sort");
+            script.AppendJavascriptProperty(_sortDirection, "SortDirection");
             script.AppendJavascriptProperty(_showCollapseExpandIcon, "ShowCollapseExpand");
             script.AppendJavascriptProperty(_allowTruncate, "AllowTruncate");
             script.AppendJavascriptProperty(_formatNumber, "FormatNumber");

@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Footer";
+    Layout = "~/Views/Shared/_DemoLayout.cshtml";
+}
+<link href="~/Scripts/jquery/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-ui-1.9.1.js" type="text/javascript"></script>
+<button id="opener">
+    Open Dialog</button>
+<div id="dialog" title="Basic dialog">
+    <div id="gridId" class="freegrid  content-grid">
+    </div>
+</div>
+<script type="text/javascript">
+    var footerRows = [
+                  {
+                      Columns: [
+                        { Value: "Total", Name: "No", MergeColNumber: 2 },
+                        { Value: "Footer 3", Name: "Number1" },
+                        { Value: "Footer 4", Name: "Number2", MergeRowNumber: 2 },
+                        { Value: "Footer 5", Name: "Number3", MergeRowNumber: 2 },
+                        { Value: "Footer Merge 6", Name: "Text2", MergeColNumber: 3, CellAlign: 'center' },
+                        { Value: "Footer 9", Name: "Number4" },
+                        { Value: "Footer 10", Name: "Number5" }
+                    ]
+                  },
+                {
+                    Columns: [
+                    { Value: "Total 2", Name: "No", MergeColNumber: 3 },
+                    { Value: "Footer 6", Name: "Text2" },
+                    { Value: "Footer 7", Name: "Text3" },
+                    { Value: "Footer 8", Name: "Text4" },
+                    { Value: "Footer Merge 9", Name: "Number4", MergeColNumber: 2 }
+                ]
+                }
+            ];
+
+    var gridOptions =
+        {
+            customizeHeader: true,
+            groupHeaderRows: [
+                     {
+                         Columns: [
+                                { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 2 },
+                                { HeaderText: "Header 3", Name: "Number1", MergeRowNumber: 2 },
+                                { HeaderText: "Header 4", Name: "Number2", MergeRowNumber: 2 },
+                                { HeaderText: "Group Header 2", Name: "Number3", MergeColNumber: 5 },
+                                { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 }
+                            ]
+                     }
+            ],
+            columns: [
+                { HeaderText: "Header 1", Width: 90, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 2", Width: 80, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 3", Width: 120, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 4", Width: 120, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 6", Width: 110, Name: "Text2" },
+                { HeaderText: "Header 7", Width: 120, Name: "Text3" },
+                { HeaderText: "Header 8", Width: 150, Name: "Text4" },
+                { HeaderText: "Header 9", Width: 130, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
+            ],
+            bodyRows: generateData(100),
+            //gridExpandHeight: 150,
+            fullHeight: false,
+            gridHeight: 500,
+            gridWidth: 1000,
+            numberOfFrozenColumn: 3,
+            showFooter: true,
+            footerRows: footerRows
+        };
+    $(function () {
+        $("#dialog").dialog({
+            autoOpen: false,
+            width: 900,
+            height: 'auto'
+        });
+        $("#opener").click(function () {
+            $("#gridId").fanexGrid(gridOptions);
+//            $("#dialog").dialog("destroy").dialog({
+//                autoOpen: false,
+//                width: 900,
+//                height: 'auto',
+//                position: { top: 200 }
+//            });
+            $("#dialog").dialog("open");
+            
+            
+        });
+        //var currentGrid = $("#gridId").fanexGrid(gridOptions);
+    });
+</script>

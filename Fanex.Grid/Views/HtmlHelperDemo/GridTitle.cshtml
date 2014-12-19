@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Grid Title";
+    Layout = "~/Views/Shared/_DemoLayout.cshtml";
+
+    var firstColumnName = "firstColumn";
+    var secondColumnName = "secondColumn";
+    var thirdColumnName = "thirdColumn";
+    var fourthColumnName = "fourthColumn";
+    var fifthColumnName = "fifthColumn";
+
+    var bodyRows = new List<Row>();
+
+    for (int i = 0; i < 100; i++)
+    {
+        bodyRows.Add(
+            new Row()
+                .AddColumn(new RowColumn(firstColumnName, i))
+                .AddColumn(new RowColumn(secondColumnName, i))
+                .AddColumn(new RowColumn(thirdColumnName, i))
+                .AddColumn(new RowColumn(fourthColumnName, i))
+                .AddColumn(new RowColumn(fifthColumnName, i))
+                );
+    }
+}
+    <link href="~/Styles/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+
+<div id="sourcecontainer">
+    @(Html.FanexGrid("grid-id")
+        .AddColumn(new Column(firstColumnName, "First Column", 300))
+        .AddColumn(new Column(secondColumnName, "Second Column", 300))
+        .AddColumn(new Column(thirdColumnName, "Third Column", 300).SetCellTextAlign(TextAlign.Center).SetSortable())
+        .AddColumn(new Column(fourthColumnName, "Fourth Column", 300).SetSortable("desc"))
+        .AddColumn(new Column(fifthColumnName, "Fifth Column", 300).SetCustomCellRender("customFunctions.customCellRender"))
+        .SetTitle(new TitleOption("Grid Title")
+                        .SetExcelButtonVisible().SetExportExcelFunction("function () { alert(\"Export Excel Button Clicked\"); }")
+                        .SetBackButtonVisible().SetBackFunction("customFunctions.backFunction"))
+        .SetNumberOfFrozenColumns(2)
+        .AddBodyRows(bodyRows)
+    )
+</div>
+<div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
+    <pre name="code" class="groovy">
+  
+    </pre>
+</div>
+<script type="text/javascript">
+    var customFunctions = {
+        backFunction: function () {
+            alert("Back Button Clicked");
+        }
+    };
+</script>

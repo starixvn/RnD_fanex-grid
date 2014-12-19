@@ -55,10 +55,10 @@
 
             script.AppendLine("{");
 
-            script.AppendJavascriptPropertyLine(_customGridSort, "customGridSort");
-            script.AppendJavascriptPropertyLine(_serverSortFunction, "serverSortFunction");
-            script.AppendJavascriptPropertyLine(_afterGridSorted, "afterGridSorted");
-            script.AppendJavascriptPropertyLine(_beforeGridSorted, "beforeGridSorted");
+            script.AppendJavascriptProperty(_customGridSort, "customGridSort");
+            script.AppendJavascriptProperty(_serverSortFunction, "serverSortFunction");
+            script.AppendJavascriptProperty(_afterGridSorted, "afterGridSorted");
+            script.AppendJavascriptProperty(_beforeGridSorted, "beforeGridSorted");
 
             script.AppendLine("}");
 

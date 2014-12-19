@@ -103,15 +103,15 @@
 
             script.AppendLine("{");
 
-            script.AppendJavascriptPropertyLine(_afterPagedFunction, "afterPagedFunction");
-            script.AppendJavascriptPropertyLine(_currentPage, "currentPage");
-            script.AppendJavascriptPropertyLine(_itemsPerPage, "itemsPerPage");
-            script.AppendJavascriptPropertyLine(_maxItemsPerPage, "maxItemsPerPage");
-            script.AppendJavascriptPropertyLine(_currentPage, "currentPage");
-            script.AppendJavascriptPropertyLine(_totalItem, "totalItem");
-            script.AppendJavascriptPropertyLine(_startPerPage, "startPerPage");
-            script.AppendJavascriptPropertyLine(_pageStep, "pageStep");
-            script.AppendJavascriptPropertyLine(_showDetail, "showDetail");
+            script.AppendJavascriptProperty(_afterPagedFunction, "afterPagedFunction");
+            script.AppendJavascriptProperty(_currentPage, "currentPage");
+            script.AppendJavascriptProperty(_itemsPerPage, "itemsPerPage");
+            script.AppendJavascriptProperty(_maxItemsPerPage, "maxItemsPerPage");
+            script.AppendJavascriptProperty(_currentPage, "currentPage");
+            script.AppendJavascriptProperty(_totalItem, "totalItem");
+            script.AppendJavascriptProperty(_startPerPage, "startPerPage");
+            script.AppendJavascriptProperty(_pageStep, "pageStep");
+            script.AppendJavascriptProperty(_showDetail, "showDetail");
 
             script.AppendLine("}");
 

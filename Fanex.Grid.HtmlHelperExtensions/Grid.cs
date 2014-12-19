@@ -174,6 +174,7 @@
 
         public Grid AddFooterRows(List<Row> footerRows)
         {
+            _showFooter = true;
             _footerRows = footerRows;
             return this;
         }
@@ -215,6 +216,7 @@
 
         public Grid SetPager(PagerOption pagerOption)
         {
+            _showPager = true;
             _pagerOption = pagerOption;
 
             return this;
@@ -426,47 +428,52 @@
 
             script.AppendLine("jQuery('#" + _id + "').fanexGrid({");
 
-            script.AppendJavascriptPropertyLine(_isHeaderCustomized, "customizeHeader");
-            script.AppendJavascriptPropertyLine(_numberOfFrozenColumn, "numberOfFrozenColumn");
-            script.AppendJavascriptPropertyLine(_headerColumnHeight, "headerColumnHeight");
-            script.AppendJavascriptPropertyLine(_bodyRowHeight, "bodyRowHeight");
-            script.AppendJavascriptPropertyLine(_footerRowHeight, "footerRowHeight");
-            script.AppendJavascriptPropertyLine(_showTree, "showTree");
-            script.AppendJavascriptPropertyLine(_gridExpandHeight, "gridExpandHeight");
-            script.AppendJavascriptPropertyLine(_showNoDataOnFrozen, "showNoDataOnFrozen");
-            script.AppendJavascriptPropertyLine(_enableHiddenColumns, "enableHiddenColumns");
-            script.AppendJavascriptPropertyLine(_showDistinctRow, "showDistinctRow");
-            script.AppendJavascriptPropertyLine(_showHighlightRow, "showHighlightRow");
-            script.AppendJavascriptPropertyLine(_highlightFrozenWidth, "highlightFrozenWidth");
-            script.AppendJavascriptPropertyLine(_showNumberColumn, "showNumberColumn");
-            script.AppendJavascriptPropertyLine(_marginRight, "marginRight");
-            script.AppendJavascriptPropertyLine(_allowTruncate, "allowTruncate");
-            script.AppendJavascriptPropertyLine(_hideYBackGroundScroller, "hideYBackGroundScroller");
-            script.AppendJavascriptPropertyLine(_bottomBorderWidth, "bottomBorderWidth");
-            script.AppendJavascriptPropertyLine(_treeParentPaddingLeft, "treeParentPaddingLeft");
-            script.AppendJavascriptPropertyLine(_isResetScroller, "isResetScroller");
-            script.AppendJavascriptPropertyLine(_isFullHeight, "fullHeight");
-            script.AppendJavascriptPropertyLine(_gridHeight, "gridHeight");
-            script.AppendJavascriptPropertyLine(_language, "language");
-            script.AppendJavascriptPropertyLine(_autoFixFrozenRowHeight, "autoFixFrozenRowHeight");
-            script.AppendJavascriptPropertyLine(_autoResizeColumn, "autoResizeColumn");
-            script.AppendJavascriptPropertyLine(_pixelsPerCharacter, "pixelsPerCharacter");
-            script.AppendJavascriptPropertyLine(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
-            script.AppendJavascriptPropertyLine(_timeZone, "timeZone");
-            script.AppendJavascriptPropertyLine(_scrollWidth, "scrollWidth");
-            script.AppendJavascriptPropertyLine(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
+            script.AppendJavascriptProperty(_isHeaderCustomized, "customizeHeader");
+            script.AppendJavascriptProperty(_numberOfFrozenColumn, "numberOfFrozenColumn");
+            script.AppendJavascriptProperty(_headerColumnHeight, "headerColumnHeight");
+            script.AppendJavascriptProperty(_bodyRowHeight, "bodyRowHeight");
+            script.AppendJavascriptProperty(_footerRowHeight, "footerRowHeight");
+            script.AppendJavascriptProperty(_showTree, "showTree");
+            script.AppendJavascriptProperty(_gridExpandHeight, "gridExpandHeight");
+            script.AppendJavascriptProperty(_showNoDataOnFrozen, "showNoDataOnFrozen");
+            script.AppendJavascriptProperty(_enableHiddenColumns, "enableHiddenColumns");
+            script.AppendJavascriptProperty(_showDistinctRow, "showDistinctRow");
+            script.AppendJavascriptProperty(_showHighlightRow, "showHighlightRow");
+            script.AppendJavascriptProperty(_highlightFrozenWidth, "highlightFrozenWidth");
+            script.AppendJavascriptProperty(_showNumberColumn, "showNumberColumn");
+            script.AppendJavascriptProperty(_marginRight, "marginRight");
+            script.AppendJavascriptProperty(_allowTruncate, "allowTruncate");
+            script.AppendJavascriptProperty(_hideYBackGroundScroller, "hideYBackGroundScroller");
+            script.AppendJavascriptProperty(_bottomBorderWidth, "bottomBorderWidth");
+            script.AppendJavascriptProperty(_treeParentPaddingLeft, "treeParentPaddingLeft");
+            script.AppendJavascriptProperty(_isResetScroller, "isResetScroller");
+            script.AppendJavascriptProperty(_isFullHeight, "fullHeight");
+            script.AppendJavascriptProperty(_gridHeight, "gridHeight");
+            script.AppendJavascriptProperty(_language, "language");
+            script.AppendJavascriptProperty(_autoFixFrozenRowHeight, "autoFixFrozenRowHeight");
+            script.AppendJavascriptProperty(_autoResizeColumn, "autoResizeColumn");
+            script.AppendJavascriptProperty(_pixelsPerCharacter, "pixelsPerCharacter");
+            script.AppendJavascriptProperty(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
+            script.AppendJavascriptProperty(_timeZone, "timeZone");
+            script.AppendJavascriptProperty(_scrollWidth, "scrollWidth");
+            script.AppendJavascriptProperty(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
 
-            script.AppendJavascriptPropertyLine(_showTitle, "showTitle");
-            script.AppendJavascriptPropertyLine(_titleOption, "titleInfo");
-            script.AppendJavascriptPropertyLine(_pagerOption, "pagerOption");
-            script.AppendJavascriptPropertyLine(_sortOption, "sortOption");
+            script.AppendJavascriptProperty(_showTitle, "showTitle");
+            script.AppendJavascriptProperty(_titleOption, "titleInfo");
+
+            script.AppendJavascriptProperty(_showPager, "showPager");
+            script.AppendJavascriptProperty(_pagerOption, "pagerOption");
+
+            script.AppendJavascriptProperty(_sortOption, "sortOption");
 
             script.AppendJavascriptPropertyLine<Row>(_bodyRows, "bodyRows");
             script.AppendJavascriptPropertyLine<Column>(_columns, "columns");
             script.AppendJavascriptPropertyLine<Row>(_headerRows, "headerRows");
+
+            script.AppendJavascriptProperty(_showFooter, "showFooter");
             script.AppendJavascriptPropertyLine<Row>(_footerRows, "footerRows");
-            //script.AppendJavascriptPropertyLine(_titleOption, "titleInfo");
-            //script.AppendJavascriptPropertyLine(_titleOption, "titleInfo");
+            //script.AppendJavascriptProperty(_titleOption, "titleInfo");
+            //script.AppendJavascriptProperty(_titleOption, "titleInfo");
 
             //if (_pagerOption != null)
             //{

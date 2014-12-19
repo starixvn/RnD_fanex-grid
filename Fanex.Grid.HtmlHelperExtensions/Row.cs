@@ -57,12 +57,12 @@
 
             script.AppendLine("{");
 
-            script.AppendJavascriptPropertyLine(_cssClass, "CssClass");
-            script.AppendJavascriptPropertyLine(_customAttributes, "CustomAttr");
+            script.AppendJavascriptProperty(_cssClass, "CssClass");
+            script.AppendJavascriptProperty(_customAttributes, "CustomAttr");
             script.AppendJavascriptPropertyLine<Row>(_subRows, "SubRows");
             script.AppendJavascriptPropertyLine<RowColumn>(_columns, "Columns");
 
-            script.AppendLine("}");
+            script.AppendLine("},");
 
             return script.ToString();
         }

@@ -23,6 +23,11 @@
             return propertyName + ":'" + stringValue + "'";
         }
 
+        public static string ToJavascriptFunctionWithoutComma(this string functionName, string propertyName)
+        {
+            return propertyName + ":" + functionName;
+        }
+
         public static string ToJavascriptPropertyWithoutComma(this TextAlign textAlign, string propertyName)
         {
             string textAlignValue = "left";
@@ -36,7 +41,7 @@
                     break;
             }
 
-            return propertyName + ":" + textAlignValue;
+            return propertyName + ":'" + textAlignValue + "'";
         }
 
         public static string ToJavascriptProperty(this bool boolValue, string propertyName)
@@ -59,47 +64,72 @@
             return textAlign.ToJavascriptPropertyWithoutComma(propertyName) + ",";
         }
 
-        public static void AppendJavascriptPropertyLine(this StringBuilder script, string stringValue, string propertyName)
+        public static string ToJavascriptFunction(this string functionName, string propertyName)
+        {
+            return functionName.ToJavascriptFunctionWithoutComma(propertyName) + ",";
+        }
+
+        public static void AppendJavascriptProperty(this StringBuilder script, string stringValue, string propertyName, bool isBreakNewLine = true)
         {
             if (!string.IsNullOrEmpty(stringValue))
             {
-                script.AppendLine(stringValue.ToJavascriptProperty(propertyName));
+                script.AppendString(stringValue.ToJavascriptProperty(propertyName), isBreakNewLine);
             }
         }
 
-        public static void AppendJavascriptPropertyLine(this StringBuilder script, int? intValue, string propertyName)
+        public static void AppendJavascriptFunction(this StringBuilder script, string functionName, string propertyName, bool isBreakNewLine = true)
+        {
+            if (!string.IsNullOrEmpty(functionName))
+            {
+                script.AppendString(functionName.ToJavascriptFunction(propertyName), isBreakNewLine);
+            }
+        }
+
+        public static void AppendJavascriptProperty(this StringBuilder script, int? intValue, string propertyName, bool isBreakNewLine = true)
         {
             if (intValue.HasValue)
             {
-                script.AppendLine(intValue.Value.ToJavascriptProperty(propertyName));
+                script.AppendString(intValue.Value.ToJavascriptProperty(propertyName), isBreakNewLine);
             }
         }
 
-        public static void AppendJavascriptPropertyLine(this StringBuilder script, bool? boolValue, string propertyName)
+        public static void AppendJavascriptProperty(this StringBuilder script, bool? boolValue, string propertyName, bool isBreakNewLine = true)
         {
             if (boolValue.HasValue)
             {
-                script.AppendLine(boolValue.Value.ToJavascriptProperty(propertyName));
+                script.AppendString(boolValue.Value.ToJavascriptProperty(propertyName), isBreakNewLine);
             }
         }
 
-        public static void AppendJavascriptPropertyLine(this StringBuilder script, TextAlign? textAlign, string propertyName)
+        public static void AppendJavascriptProperty(this StringBuilder script, TextAlign? textAlign, string propertyName, bool isBreakNewLine = true)
         {
             if (textAlign.HasValue)
             {
-                script.AppendLine(textAlign.Value.ToJavascriptProperty(propertyName));
+                script.AppendString(textAlign.Value.ToJavascriptProperty(propertyName), isBreakNewLine);
             }
         }
 
-        public static void AppendJavascriptPropertyLine(this StringBuilder script, object objectValue, string propertyName)
+        public static void AppendJavascriptProperty(this StringBuilder script, object objectValue, string propertyName, bool isBreakNewLine = true)
         {
             if (objectValue != null)
             {
-                script.AppendLine(propertyName + ":" + objectValue.ToString() + ",");
+                script.AppendString(propertyName + ":" + objectValue.ToString() + ",", isBreakNewLine);
             }
         }
 
-        public static void AppendJavascriptPropertyLine<T>(this StringBuilder script, List<T> listValue, string propertyName) where T : class
+        public static void AppendString(this StringBuilder script, string propertyScript, bool isBreakNewLine = true)
+        {
+            if (isBreakNewLine)
+            {
+                script.AppendLine(propertyScript);
+            }
+            else
+            {
+                script.Append(propertyScript);
+            }
+        }
+
+        public static void AppendJavascriptPropertyLine<T>(this StringBuilder script, List<T> listValue, string propertyName)
         {
             if(listValue != null && listValue.Any())
             {

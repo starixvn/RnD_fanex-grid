@@ -83,16 +83,16 @@
 
             script.AppendLine("{");
 
-            script.AppendJavascriptPropertyLine(_text, "text");
-            script.AppendJavascriptPropertyLine(_showExcelButton, "showExcelButton");
-            script.AppendJavascriptPropertyLine(_exportExcelFunction, "exportExcelFunction");
-            script.AppendJavascriptPropertyLine(_showBackButton, "showBackButton");
-            script.AppendJavascriptPropertyLine(_backFunction, "backFunction");
-            script.AppendJavascriptPropertyLine(_showSendMailButton, "showSendMailButton");
-            script.AppendJavascriptPropertyLine(_sendMailFunction, "sendMailFunction");
-            script.AppendJavascriptPropertyLine(_showCollapseExpandButton, "showCollapseExpandButton");
-            script.AppendJavascriptPropertyLine(_customButtons, "customButtons");
-            script.AppendJavascriptPropertyLine(_showButtonsWhenNoData, "showButtonsWhenNoData");
+            script.AppendJavascriptProperty(_text, "text");
+            script.AppendJavascriptProperty(_showExcelButton, "showExcelButton");
+            script.AppendJavascriptFunction(_exportExcelFunction, "exportExcelFunction");
+            script.AppendJavascriptProperty(_showBackButton, "showBackButton");
+            script.AppendJavascriptFunction(_backFunction, "backFunction");
+            script.AppendJavascriptProperty(_showSendMailButton, "showSendMailButton");
+            script.AppendJavascriptFunction(_sendMailFunction, "sendMailFunction");
+            script.AppendJavascriptProperty(_showCollapseExpandButton, "showCollapseExpandButton");
+            script.AppendJavascriptProperty(_customButtons, "customButtons");
+            script.AppendJavascriptProperty(_showButtonsWhenNoData, "showButtonsWhenNoData");
 
             script.AppendLine("}");
 

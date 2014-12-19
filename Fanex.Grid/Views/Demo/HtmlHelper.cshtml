@@ -1,25 +1,59 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "HtmlHelper";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
-    var bodyRows = new List<Row> { 
-        new Row()
-        .AddColumn(new RowColumn("firstColumn", "1"))
-        .AddColumn(new RowColumn("secondColumn", "1"))
-        .AddColumn(new RowColumn("thirdColumn", "1"))
-    };
+    var bodyRows = new List<Row>();
+    var footerRows = new List<Row>();
+
+    for (int i = 0; i < 1000; i++)
+    {
+        bodyRows.Add(
+            new Row()
+                .AddColumn(new RowColumn("firstColumn", i))
+                .AddColumn(new RowColumn("secondColumn", i))
+                .AddColumn(new RowColumn("thirdColumn", i))
+                .AddColumn(new RowColumn("fourthColumn", i))
+                );
+    }
+
+    for (int i = 5000; i < 5001; i++)
+    {
+        footerRows.Add(
+            new Row()
+                .AddColumn(new RowColumn("firstColumn", i))
+                .AddColumn(new RowColumn("secondColumn", i))
+                .AddColumn(new RowColumn("thirdColumn", i))
+                .AddColumn(new RowColumn("fourthColumn", i))
+                );
+    }
 }
 
 
-@(Html.FanexGrid("GridID")
-    .AddColumn(new Column("firstColumn", "First Column", 400))
-    .AddColumn(new Column("secondColumn", "Second Column", 300))
-    .AddColumn(new Column("thirdColumn", "Third Column", 300))
-        .SetTitle(new TitleOption("Grid Title").SetExcelButtonVisible().SetButtonsVisibleWhenNoData())
+@(Html.FanexGrid("grid-id")
+        .AddColumn(new Column("firstColumn", "First Column", 300).SetHeaderTextAlign(TextAlign.Left).SetSortable())
+        .AddColumn(new Column("secondColumn", "Second Column", 300))
+        .AddColumn(new Column("thirdColumn", "Third Column", 300).SetCellTextAlign(TextAlign.Center))
+        .AddColumn(new Column("fourthColumn", "Fourth Column", 300))
+        .SetTitle(new TitleOption("Grid Title")
+                        .SetExcelButtonVisible().SetExportExcelFunction("function () { alert(\"Export Excel Button Clicked\"); }")
+                        .SetBackButtonVisible().SetBackFunction("customFunctions.backFunction"))
+        .SetPager(new PagerOption()
+                    .SetItemsPerPage(100)
+                    .SetMaxItemsPerPage(1000)
+                    .SetCurrentPage(0)
+                    .SetStartItemPerPage(100)
+                    .SetPageStep(100))
+        .AddFooterRows(footerRows)
+        .SetNumberOfFrozenColumns(1)
         .AddBodyRows(bodyRows)
     )
 
 
 <script type="text/javascript">
-
+    var customFunctions = {
+        backFunction: function () {
+            alert("Back Button Clicked");
+        }
+    };
 </script>
 

@@ -141,15 +141,15 @@ namespace Fanex.Grid.HtmlHelperExtensions
 
 
             //script
-            script.AppendJavascriptPropertyLine(_cssClass, "CssClass");
-            script.AppendJavascriptPropertyLine(_tdClass, "TdClass");
-            script.AppendJavascriptPropertyLine(_cellCssClass, "CellCssClass");
-            script.AppendJavascriptPropertyLine(_headerAlign, "HeaderAlign");
-            script.AppendJavascriptPropertyLine(_cellAlign, "CellAlign");
-            script.AppendJavascriptPropertyLine(_isSortable, "Sort");
-            script.AppendJavascriptPropertyLine(_showCollapseExpandIcon, "ShowCollapseExpand");
-            script.AppendJavascriptPropertyLine(_allowTruncate, "AllowTruncate");
-            script.AppendJavascriptPropertyLine(_formatNumber, "FormatNumber");
+            script.AppendJavascriptProperty(_cssClass, "CssClass");
+            script.AppendJavascriptProperty(_tdClass, "TdClass");
+            script.AppendJavascriptProperty(_cellCssClass, "CellCssClass");
+            script.AppendJavascriptProperty(_headerAlign, "HeaderAlign");
+            script.AppendJavascriptProperty(_cellAlign, "CellAlign");
+            script.AppendJavascriptProperty(_isSortable, "Sort");
+            script.AppendJavascriptProperty(_showCollapseExpandIcon, "ShowCollapseExpand");
+            script.AppendJavascriptProperty(_allowTruncate, "AllowTruncate");
+            script.AppendJavascriptProperty(_formatNumber, "FormatNumber");
 
             script.AppendLine("},");
             return script.ToString();

@@ -7,7 +7,7 @@
     using System.Web.Script.Serialization;
     using Fanex.Grid.HtmlHelperExtensions.Utilities;
 
-    public static class JSONExtensions
+    internal static class JSONExtensions
     {
         public static string ToJSON(this object obj)
         {

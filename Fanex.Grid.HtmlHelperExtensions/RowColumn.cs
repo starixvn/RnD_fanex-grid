@@ -79,20 +79,21 @@
 
         public override string ToString()
         {
+            var isBreakNewLine = false;
             var script = new StringBuilder();
 
-            script.AppendLine("{");
+            script.Append("{");
 
-            script.AppendJavascriptPropertyLine(_name, "Name");
-            script.AppendJavascriptPropertyLine(_mergeRowNumber, "MergeRowNumber");
-            script.AppendJavascriptPropertyLine(_mergeColNumner, "MergeColNumber");
-            script.AppendJavascriptPropertyLine(_customCellRender, "CustomCellRender");
-            script.AppendJavascriptPropertyLine(_tdClass, "TdClass");
-            script.AppendJavascriptPropertyLine(_cssClass, "CssClass");
-            script.AppendJavascriptPropertyLine(_cellAlign, "CellAlign");
-            script.AppendJavascriptPropertyLine(_customAttributes, "CustomAttr");
+            script.AppendJavascriptProperty(_name, "Name", isBreakNewLine);
+            script.AppendJavascriptProperty(_mergeRowNumber, "MergeRowNumber", isBreakNewLine);
+            script.AppendJavascriptProperty(_mergeColNumner, "MergeColNumber", isBreakNewLine);
+            script.AppendJavascriptProperty(_customCellRender, "CustomCellRender", isBreakNewLine);
+            script.AppendJavascriptProperty(_tdClass, "TdClass", isBreakNewLine);
+            script.AppendJavascriptProperty(_cssClass, "CssClass", isBreakNewLine);
+            script.AppendJavascriptProperty(_cellAlign, "CellAlign", isBreakNewLine);
+            script.AppendJavascriptProperty(_customAttributes, "CustomAttr", isBreakNewLine);
 
-            script.AppendLine("Value:" + _value.ToJSON());
+            script.Append("Value:" + _value.ToJSON());
 
             script.AppendLine("},");
 

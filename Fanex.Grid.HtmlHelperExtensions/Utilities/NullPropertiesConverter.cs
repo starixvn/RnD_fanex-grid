@@ -7,7 +7,7 @@
     using System.Text;
     using System.Web.Script.Serialization;
 
-    public class NullPropertiesConverter : JavaScriptConverter
+    internal class NullPropertiesConverter : JavaScriptConverter
     {
         public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
         {

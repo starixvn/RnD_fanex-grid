@@ -2,41 +2,36 @@
     ViewBag.Title = "Grid Title";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
 
-    var firstColumnName = "firstColumn";
-    var secondColumnName = "secondColumn";
-    var thirdColumnName = "thirdColumn";
-    var fourthColumnName = "fourthColumn";
-    var fifthColumnName = "fifthColumn";
-
-    var bodyRows = new List<Row>();
-
-    for (int i = 0; i < 100; i++)
-    {
-        bodyRows.Add(
-            new Row()
-                .AddColumn(new RowColumn(firstColumnName, i))
-                .AddColumn(new RowColumn(secondColumnName, i))
-                .AddColumn(new RowColumn(thirdColumnName, i))
-                .AddColumn(new RowColumn(fourthColumnName, i))
-                .AddColumn(new RowColumn(fifthColumnName, i))
-                );
-    }
+    var gridViewModel = new GridViewModel();
 }
-    <link href="~/Styles/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
-
+<style type="text/css">
+    #custom-button-id {
+        cursor: pointer;
+        font-size: 11px;
+        height: 17px;
+        margin: 0 2px;
+        overflow: visible;
+        padding-left: 6px;
+        padding-right: 6px;
+        width: 18px;
+        border: 0 solid red;
+        background: url("/Scripts/Fanex.Grid/images/icn_add.png") 0px 0px no-repeat;
+    }
+</style>
 <div id="sourcecontainer">
     @(Html.FanexGrid("grid-id")
-        .AddColumn(new Column(firstColumnName, "First Column", 300))
-        .AddColumn(new Column(secondColumnName, "Second Column", 300))
-        .AddColumn(new Column(thirdColumnName, "Third Column", 300).SetCellTextAlign(TextAlign.Center).SetSortable())
-        .AddColumn(new Column(fourthColumnName, "Fourth Column", 300).SetSortable("desc"))
-        .AddColumn(new Column(fifthColumnName, "Fifth Column", 300).SetCustomCellRender("customFunctions.customCellRender"))
+        .AddColumn(new Column(gridViewModel.FirstColumnName, "First Column", 300))
+        .AddColumn(new Column(gridViewModel.SecondColumnName, "Second Column", 300))
+        .AddColumn(new Column(gridViewModel.ThirdColumnName, "Third Column", 300).SetCellTextAlign(TextAlign.Center).SetSortable())
+        .AddColumn(new Column(gridViewModel.FourthColumnName, "Fourth Column", 300).SetSortable("desc"))
+        .AddColumn(new Column(gridViewModel.FifthColumnName, "Fifth Column", 300).SetCustomCellRender("customFunctions.customCellRender"))
         .SetTitle(new TitleOption("Grid Title")
-                        .SetExcelButtonVisible().SetExportExcelFunction("function () { alert(\"Export Excel Button Clicked\"); }")
-                        .SetBackButtonVisible().SetBackFunction("customFunctions.backFunction"))
+                        .SetExportExcelButton("function () { alert(\"Export Excel Button Clicked\"); }")
+                        .SetBackButton("customFunctions.backFunction")
+                        .SetSendMailButton("customFunctions.backFunction")
+                        .SetCustomButtons("<input type=\"button\" id=\"custom-button-id\" title=\"Custom Button\">"))
         .SetNumberOfFrozenColumns(2)
-        .AddBodyRows(bodyRows)
+        .AddBodyRows(gridViewModel.BodyRows)
     )
 </div>
 <div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
@@ -48,6 +43,15 @@
     var customFunctions = {
         backFunction: function () {
             alert("Back Button Clicked");
+        },
+        sendMailFunction: function () {
+            alert("Send Mail Function Clicked")
         }
     };
+
+    $(function () {
+        $('#custom-button-id').on('click', function () {
+            alert("Custom Button Clicked");
+        });
+    })
 </script>

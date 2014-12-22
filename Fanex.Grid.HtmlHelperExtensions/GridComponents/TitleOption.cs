@@ -41,7 +41,7 @@
 
         private bool? _showCollapseExpandButton;
 
-        private string _customButtons;
+        private string _customButtonsHtml;
 
         private bool? _showButtonsWhenNoData;
 
@@ -51,28 +51,37 @@
             return this;
         }
 
-        public TitleOption SetExcelButtonVisible()
+        public TitleOption SetExportExcelButton(string exportExcelFunction)
         {
             _showExcelButton = true;
-            return this;
-        }
-
-        public TitleOption SetExportExcelFunction(string exportExcelFunction)
-        {
             _exportExcelFunction = exportExcelFunction;
             return this;
         }
 
-        public TitleOption SetBackButtonVisible()
+        public TitleOption SetBackButton(string backFunction)
         {
             _showBackButton = true;
+            _backFunction = backFunction;
 
             return this;
         }
 
-        public TitleOption SetBackFunction(string backFunction)
+        public TitleOption SetSendMailButton(string sendMailFunction)
         {
-            _backFunction = backFunction;
+            _showSendMailButton = true;
+            _sendMailFunction = sendMailFunction;
+            return this;
+        }
+
+        public TitleOption SetCollapseExpandButtonVisible()
+        {
+            _showCollapseExpandButton = true;
+            return this;
+        }
+
+        public TitleOption SetCustomButtons(string customButtonsHtml)
+        {
+            _customButtonsHtml = customButtonsHtml;
 
             return this;
         }
@@ -91,7 +100,7 @@
             script.AppendJavascriptProperty(_showSendMailButton, "showSendMailButton");
             script.AppendJavascriptFunction(_sendMailFunction, "sendMailFunction");
             script.AppendJavascriptProperty(_showCollapseExpandButton, "showCollapseExpandButton");
-            script.AppendJavascriptProperty(_customButtons, "customButtons");
+            script.AppendJavascriptProperty(_customButtonsHtml, "customButtons");
             script.AppendJavascriptProperty(_showButtonsWhenNoData, "showButtonsWhenNoData");
 
             script.AppendLine("}");

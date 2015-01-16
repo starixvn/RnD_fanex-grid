@@ -2,34 +2,7 @@
     ViewBag.Title = "Header Grouping";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
 
-    var firstColumnName = "firstColumn";
-    var secondColumnName = "secondColumn";
-    var thirdColumnName = "thirdColumn";
-    var fourthColumnName = "fourthColumn";
-    var fifthColumnName = "fifthColumn";
-
-    var bodyRows = new List<Row>();
-    var headerRows = new List<Row>();
-
-    for (int i = 0; i < 200; i++)
-    {
-        bodyRows.Add(
-            new Row()
-                .AddColumn(new RowColumn(firstColumnName, i))
-                .AddColumn(new RowColumn(secondColumnName, i))
-                .AddColumn(new RowColumn(thirdColumnName, i))
-                .AddColumn(new RowColumn(fourthColumnName, i))
-                .AddColumn(new RowColumn(fifthColumnName, i))
-                );
-    }
-
-    headerRows.Add(
-        new Row()
-            .AddColumn(new RowColumn(firstColumnName).SetHeaderText("Group 1").SetMergeColumnNumber(2).SetTextAlign(TextAlign.Center))
-            .AddColumn(new RowColumn(thirdColumnName).SetHeaderText("Third Column").SetMergeRowNumber(2))
-            .AddColumn(new RowColumn(fourthColumnName).SetHeaderText("Fourth Column").SetMergeRowNumber(2))
-            .AddColumn(new RowColumn(fifthColumnName).SetHeaderText("Fifth Column").SetMergeRowNumber(2))
-            );
+    var gridViewModel = new GridViewModel(100, false, true);
 }
 
 <style type="text/css">
@@ -42,14 +15,14 @@
 
 <div id="sourcecontainer">
     @(Html.FanexGrid("grid-id")
-        .AddColumn(new Column(firstColumnName, "First Column", 300))
-        .AddColumn(new Column(secondColumnName, "Second Column", 300))
-        .AddColumn(new Column(thirdColumnName, "Third Column", 300).SetCellTextAlign(TextAlign.Center))
-        .AddColumn(new Column(fourthColumnName, "Fourth Column", 300))
-        .AddColumn(new Column(fifthColumnName, "Fifth Column", 300))
-        .SetNumberOfFrozenColumns(2)
-        .AddHeaderRows(headerRows)
-        .AddBodyRows(bodyRows)
+                .AddColumn(new Column(gridViewModel.FirstColumnName, "First Column", 300))
+                .AddColumn(new Column(gridViewModel.SecondColumnName, "Second Column", 300))
+                .AddColumn(new Column(gridViewModel.ThirdColumnName, "Third Column", 300))
+                .AddColumn(new Column(gridViewModel.FourthColumnName, "Fourth Column", 300))
+                .AddColumn(new Column(gridViewModel.FifthColumnName, "Fifth Column", 300))
+                .SetNumberOfFrozenColumns(2)
+                .AddHeaderRows(gridViewModel.HeaderRows)
+                .AddBodyRows(gridViewModel.BodyRows)
     )
 </div>
 <div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">

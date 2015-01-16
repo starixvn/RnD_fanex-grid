@@ -14,9 +14,12 @@
     var gridOptions =
         {
             columns: [
-                { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center" , CustomCellRender: function (cell, cellFormated) {
+                return "<div style='font-weight:bold;'>" + cell.Value + "</div>";
+                },
                 {
                     HeaderText: "Header 2", Width: 70, Name: "Text1", HeaderAlign: "center", CellAlign: "right", CustomCellRender: function (cell, cellFormated) {
+  
                         return "<div style='text-align:left;'>" + cell.Value + "</div>"; // can pass complex object here
                 }
                 },
@@ -51,7 +54,9 @@
     var gridOptions =
         {
             columns: [
-                { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (cell, cellFormated) {
+                    return "<div style='font-weight:bold;'>" + cell.Value + "</div>";
+                },
                 {
                     HeaderText: "Header 2", Width: 70, Name: "Text1", HeaderAlign: "center", CellAlign: "right", CustomCellRender: function (cell, cellFormated) {
                         return "<div style='text-align:left;'>" + cell.Value + "</div>"; // can pass complex object here

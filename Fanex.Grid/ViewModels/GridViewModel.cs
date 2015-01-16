@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using Fanex.Grid.HtmlHelperExtensions;
 using Fanex.Grid.HtmlHelperExtensions.Enumerations;
@@ -82,13 +83,10 @@ namespace Fanex.Grid.ViewModels
                 BodyRows.Add(
                     new Row()
                         .AddColumn(new RowColumn(FirstColumnName, i))
-                        .AddColumn(new RowColumn(SecondColumnName, i))
-                        .AddColumn(new RowColumn(ThirdColumnName, i))
-                        .AddColumn(new RowColumn(FourthColumnName, i))
-                        .AddColumn(new RowColumn(FifthColumnName, new SampleColumn
-                        {
-                            IntValue = i
-                        }))
+                        .AddColumn(new RowColumn(SecondColumnName, RandomString(6)))
+                        .AddColumn(new RowColumn(ThirdColumnName, random.Next()))
+                        .AddColumn(new RowColumn(FourthColumnName, RandomString(3)))
+                        .AddColumn(new RowColumn(FifthColumnName, i * 2))
                         );
             }
         }
@@ -101,10 +99,10 @@ namespace Fanex.Grid.ViewModels
                 BodyRows.Add(
                     new Row()
                         .AddColumn(new RowColumn(FirstColumnName, i))
-                        .AddColumn(new RowColumn(SecondColumnName, i))
-                        .AddColumn(new RowColumn(ThirdColumnName, i))
-                        .AddColumn(new RowColumn(FourthColumnName, i))
-                        .AddColumn(new RowColumn(FifthColumnName, new SampleColumn
+                        .AddColumn(new RowColumn(SecondColumnName, RandomString(6)))
+                        .AddColumn(new RowColumn(ThirdColumnName, random.Next()))
+                        .AddColumn(new RowColumn(FourthColumnName, RandomString(3)))
+                        .AddColumn(new RowColumn(FifthColumnName, new ComplexColumnViewModel
                         {
                             IntValue = i
                         }))
@@ -141,5 +139,20 @@ namespace Fanex.Grid.ViewModels
                         .AddColumn(new RowColumn(FourthColumnName, 4))
                         );  
         }
+
+        private static Random random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
+        private string RandomString(int size)
+        {
+            StringBuilder builder = new StringBuilder();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+
+            return builder.ToString();
+        }
+
     }
 }

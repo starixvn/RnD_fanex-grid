@@ -53,6 +53,30 @@
     </pre>
 </div>
 <script type="text/javascript">
+    var footerRows = [
+                  {
+                      Columns: [
+                        { Value: "Total", Name: "No", MergeColNumber: 2 },
+                        { Value: 10, Name: "Number1" },
+                        { Value: 10, Name: "Number2", MergeRowNumber: 2 },
+                        { Value: 10, Name: "Number3", MergeRowNumber: 2 },
+                        { Value: "Footer Merge 6", Name: "Text2", MergeColNumber: 3, CellAlign: 'center' },
+                        { Value: 10, Name: "Number4" },
+                        { Value: -10, Name: "Number5" }
+                    ]
+                  },
+                {
+                    Columns: [
+                    { Value: "Total 2", Name: "No", MergeColNumber: 3 },
+                    { Value: "Footer 6a sdas dasdasd asdas dasd as asd asd asdas dasdasd asdasd", Name: "Text2" },
+                    { Value: "Footer 7", Name: "Text3" },
+                    { Value: "Footer 8", Name: "Text4" },
+                    //                    { Value: -10, Name: "Number4", MergeColNumber: 2 }
+{Value: 10, Name: "Number4" },
+                        { Value: -10, Name: "Number5" }
+                ]
+                }
+            ];
     var gridOptions =
         {
             columns: [
@@ -69,7 +93,9 @@
             ],
             bodyRows: generateDataTime(100),
             gridExpandHeight: 150,
-            timeZone: '-04:00'
+            timeZone: '-04:00',
+            showFooter: true,
+            footerRows: footerRows
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

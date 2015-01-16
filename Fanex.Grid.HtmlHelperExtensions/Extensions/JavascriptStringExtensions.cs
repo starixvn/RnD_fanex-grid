@@ -18,6 +18,17 @@
             return propertyName + ":" + intValue.ToString();
         }
 
+        public static string ToJavascriptPropertyWithoutComma(this int[] intValues, string propertyName)
+        {
+            var stringValure = "[";
+
+            stringValure += string.Join<int>(",", intValues);
+
+            stringValure += "]";
+
+            return propertyName + ":" + stringValure;
+        }
+
         public static string ToJavascriptPropertyWithoutComma(this string stringValue, string propertyName)
         {
             return propertyName + ":'" + stringValue + "'";
@@ -52,6 +63,11 @@
         public static string ToJavascriptProperty(this int intValue, string propertyName)
         {
             return intValue.ToJavascriptPropertyWithoutComma(propertyName) + ",";
+        }
+
+        public static string ToJavascriptProperty(this int[] intValues, string propertyName)
+        {
+            return intValues.ToJavascriptPropertyWithoutComma(propertyName) + ",";
         }
 
         public static string ToJavascriptProperty(this string stringValue, string propertyName)
@@ -90,6 +106,14 @@
             if (intValue.HasValue)
             {
                 script.AppendString(intValue.Value.ToJavascriptProperty(propertyName), isBreakNewLine);
+            }
+        }
+
+        public static void AppendJavascriptProperty(this StringBuilder script, int[] intValues, string propertyName, bool isBreakNewLine = true)
+        {
+            if(intValues != null)
+            {
+                script.AppendString(intValues.ToJavascriptProperty(propertyName), isBreakNewLine);
             }
         }
 

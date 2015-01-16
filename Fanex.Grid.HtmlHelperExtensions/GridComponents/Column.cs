@@ -52,6 +52,10 @@ namespace Fanex.Grid.HtmlHelperExtensions
 
         private string _sortDirection;
 
+        private string _customSortFunction;
+
+        private string _sortType;
+
         public Column SetCssClass(string cssClass)
         {
             _cssClass = cssClass;
@@ -84,11 +88,21 @@ namespace Fanex.Grid.HtmlHelperExtensions
             return this;
         }
 
-        public Column SetSortable(string sortDirection = "")
+        public Column SetSortable(string sortDirection = "", string customSortFunction = "", string sortType = "")
         {
             if(!string.IsNullOrEmpty(sortDirection))
             {
                 _sortDirection = sortDirection;
+            }
+
+            if(!string.IsNullOrEmpty(customSortFunction))
+            {
+                _customSortFunction = customSortFunction;
+            }
+
+            if(!string.IsNullOrEmpty(sortType))
+            {
+                _sortType = sortType;
             }
 
             _isSortable = true;
@@ -157,6 +171,8 @@ namespace Fanex.Grid.HtmlHelperExtensions
             script.AppendJavascriptProperty(_cellAlign, "CellAlign");
             script.AppendJavascriptProperty(_isSortable, "Sort");
             script.AppendJavascriptProperty(_sortDirection, "SortDirection");
+            script.AppendJavascriptProperty(_customSortFunction, "CustomSortFunction");
+            script.AppendJavascriptProperty(_sortType, "SortType");
             script.AppendJavascriptProperty(_showCollapseExpandIcon, "ShowCollapseExpand");
             script.AppendJavascriptProperty(_allowTruncate, "AllowTruncate");
             script.AppendJavascriptProperty(_formatNumber, "FormatNumber");

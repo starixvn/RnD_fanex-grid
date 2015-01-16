@@ -1,107 +1,34 @@
 ﻿@{
     ViewBag.Title = "Pager";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
+    var gridViewModel = new GridViewModel(100, false, true);
 }
 
 <div id="sourcecontainer">
-    <div id="gridId" class="freegrid  content-grid">
-    </div>
+    @(Html.FanexGrid("grid-id")
+        .AddColumn(new Column(gridViewModel.FirstColumnName, "First Column", 300))
+        .AddColumn(new Column(gridViewModel.SecondColumnName, "Second Column", 300))
+        .AddColumn(new Column(gridViewModel.ThirdColumnName, "Third Column", 300))
+        .AddColumn(new Column(gridViewModel.FourthColumnName, "Fourth Column", 300))
+        .AddColumn(new Column(gridViewModel.FifthColumnName, "Fifth Column", 300))
+        .AddBodyRows(gridViewModel.BodyRows)
+        .SetPager(new PagerOption()
+                .SetCurrentPage(0)
+                .SetItemsPerPageArray( new int[] { 10, 50, 100 })
+                .SetItemsPerPage(50)
+                .OnPageSelect("pager.pagerSelectCallBack"))
+    )
 </div>
 <div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
     <pre name="code" class="groovy">
-    var gridOptions =
-        {
-            customizeHeader: true,
-            groupHeaderRows: [
-                     {
-                         Columns: [
-                                { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 2 },
-                                { HeaderText: "Header 3", Name: "Number1", MergeRowNumber: 2 },
-                                { HeaderText: "Header 4", Name: "Number2", MergeRowNumber: 2 },
-                                { HeaderText: "Group Header 2", Name: "Number3", MergeColNumber: 5 },
-                                { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 }
-                            ]
-                     }
-            ],
-            columns: [
-                { HeaderText: "Header 1", Width: 80, Name: "No", HeaderAlign: "center", CellAlign: "center", Sort: true },
-                { HeaderText: "Header 2", Width: 80, Name: "Text1", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 3", Width: 100, Name: "Number1", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 4", Width: 100, Name: "Number2", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 6", Width: 110, Name: "Text2", Sort: true },
-                { HeaderText: "Header 7", Width: 120, Name: "Text3", Sort: true },
-                { HeaderText: "Header 8", Width: 150, Name: "Text4", Sort: true },
-                { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right", Sort: true }
-            ],
-            bodyRows: generateData(15000),
-           gridExpandHeight: 150,
-            numberOfFrozenColumn: 2,
-            showPager: true,
-            pagerOption: {
-//                itemsPerPage: 100,
-//                maxItemsPerPage: 1000,
-//                currentPage: 0,
-//                totalItem: 100,
-//                startPerPage: 100,
-                //                pageStep:         
-                itemsPerPage: 100,
-                currentPage: 0,
-                itemsPerPageArray: [50, 100, 500],
-                showDetail: true
-            }
-        };
-    $(function () {
-        var currentGrid = $("#gridId").fanexGrid(gridOptions);
-    });
+    
     </pre>
 </div>
 <script type="text/javascript">
-    var gridOptions =
-        {
-            customizeHeader: true,
-            groupHeaderRows: [
-                     {
-                         Columns: [
-                                { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 2 },
-                                { HeaderText: "Header 3", Name: "Number1", MergeRowNumber: 2 },
-                                { HeaderText: "Header 4", Name: "Number2", MergeRowNumber: 2 },
-                                { HeaderText: "Group Header 2", Name: "Number3", MergeColNumber: 5 },
-                                { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 }
-                            ]
-                     }
-            ],
-            columns: [
-                { HeaderText: "Header 1", Width: 80, Name: "No", HeaderAlign: "center", CellAlign: "center", Sort: true },
-                { HeaderText: "Header 2", Width: 80, Name: "Text1", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 3", Width: 100, Name: "Number1", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 4", Width: 100, Name: "Number2", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 6", Width: 110, Name: "Text2", Sort: true },
-                { HeaderText: "Header 7", Width: 120, Name: "Text3", Sort: true },
-                { HeaderText: "Header 8", Width: 150, Name: "Text4", Sort: true },
-                { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right", Sort: true }
-            ],
-            bodyRows: generateData(15000),
-           gridExpandHeight: 150,
-            numberOfFrozenColumn: 2,
-            showPager: true,
-            pagerOption: {
-//                itemsPerPage: 100,
-//                maxItemsPerPage: 1000,
-//                currentPage: 0,
-//                totalItem: 100,
-//                startPerPage: 100,
-                //                pageStep:         
-                itemsPerPage: 100,
-                currentPage: 0,
-                itemsPerPageArray: [50, 100, 500],
-                showDetail: true
-            }
-        };
-    $(function () {
-        var currentGrid = $("#gridId").fanexGrid(gridOptions);
-    });
+    var pager =
+    {
+        pagerSelectCallBack: function (pageIndex, itemsPerpage) {
+            alert('pageIndex:' + pageIndex + ' ,itemsPerPage:' + itemsPerpage);
+        }
+    };
 </script>

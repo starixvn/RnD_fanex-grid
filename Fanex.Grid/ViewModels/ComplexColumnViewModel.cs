@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Fanex.Grid.ViewModels
 {
-    public class SampleColumn
+    public class ComplexColumnViewModel
     {
         public int IntValue { get; set; }
 
@@ -13,6 +13,6 @@ namespace Fanex.Grid.ViewModels
 
         public bool BoolValue { get; set; }
 
-        public SampleColumn SampleValue { get; set; }
+        public ComplexColumnViewModel SampleValue { get; set; }
     }
 }

@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations\SortType.cs" />
     <Compile Include="GridComponents\Column.cs" />
     <Compile Include="Enumerations\TextAlign.cs" />
     <Compile Include="Extensions\JavascriptStringExtensions.cs" />

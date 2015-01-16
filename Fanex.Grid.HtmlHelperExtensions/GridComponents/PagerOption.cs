@@ -33,9 +33,11 @@
 
         private bool? _showDetail = true;
 
-        private string[] _itemsPerPageArray;
+        private int[] _itemsPerPageArray;
 
         private string _customRenderFooterFunction;
+
+        private string _pagerSelectCallBack;
 
         public PagerOption SetItemsPerPage(int itemsPerPage)
         {
@@ -85,7 +87,7 @@
             return this;
         }
 
-        public PagerOption SetItemsPerPageArray(string[] itemsPerPageArray)
+        public PagerOption SetItemsPerPageArray(int[] itemsPerPageArray)
         {
             _itemsPerPageArray = itemsPerPageArray;
             return this;
@@ -97,17 +99,25 @@
             return this;
         }
 
+        public PagerOption OnPageSelect(string pageSelectCallBackFunction)
+        {
+            _pagerSelectCallBack = pageSelectCallBackFunction;
+            return this;
+        }
+
         public override string ToString()
         {
             var script = new StringBuilder();
 
             script.AppendLine("{");
 
-            script.AppendJavascriptProperty(_afterPagedFunction, "afterPagedFunction");
+            script.AppendJavascriptProperty(_itemsPerPageArray, "itemsPerPageArray");
+            script.AppendJavascriptFunction(_afterPagedFunction, "afterPagedFunction");
+            script.AppendJavascriptFunction(_pagerSelectCallBack, "pagerSelectCallBack");
+            script.AppendJavascriptFunction(_customRenderFooterFunction, "customRenderFooter");
             script.AppendJavascriptProperty(_currentPage, "currentPage");
             script.AppendJavascriptProperty(_itemsPerPage, "itemsPerPage");
             script.AppendJavascriptProperty(_maxItemsPerPage, "maxItemsPerPage");
-            script.AppendJavascriptProperty(_currentPage, "currentPage");
             script.AppendJavascriptProperty(_totalItem, "totalItem");
             script.AppendJavascriptProperty(_startPerPage, "startPerPage");
             script.AppendJavascriptProperty(_pageStep, "pageStep");

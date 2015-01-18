@@ -93,7 +93,7 @@
             return this;
         }
 
-        public PagerOption SetCustomRenderFooterFunction(string customRenderFooterFunction)
+        public PagerOption OnRenderFooter(string customRenderFooterFunction)
         {
             _customRenderFooterFunction = customRenderFooterFunction;
             return this;

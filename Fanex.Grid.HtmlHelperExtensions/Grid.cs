@@ -13,6 +13,8 @@
 
         private string _class = "freegrid";
 
+        private string _gridOptionsName;
+
         private string _customClasses;
         //customizeHeader: false,
         private bool? _isHeaderCustomized;
@@ -71,6 +73,7 @@
         //    showDetail: true
         //},
         private PagerOption _pagerOption;
+        private bool? _customPager;
 
         //showTree: false,
         private bool? _showTree;
@@ -139,6 +142,7 @@
         public Grid(string id)
         {
             _id = id;
+            _gridOptionsName = id.Replace("-", string.Empty) + "Options";
         }
 
         public Grid SetCustomClasses(string customClasses)
@@ -215,9 +219,10 @@
             return this;
         }
 
-        public Grid SetPager(PagerOption pagerOption)
+        public Grid SetPager(PagerOption pagerOption, bool customPager = false)
         {
             _showPager = true;
+            _customPager = customPager;
             _pagerOption = pagerOption;
 
             return this;
@@ -243,9 +248,10 @@
             return this;
         }
 
-        public Grid SetHiddenColumnsStatus(bool enable)
+        public Grid SetHiddenColumnsStatus(bool enable, int[] defaultHiddenColumns = null)
         {
             _enableHiddenColumns = enable;
+            _hiddenColumns = defaultHiddenColumns;
             return this;
         }
 
@@ -285,13 +291,6 @@
         public Grid SetAllowedTruncate()
         {
             _allowTruncate = true;
-
-            return this;
-        }
-
-        public Grid SetHiddenColumns(int[] hiddenColumns)
-        {
-            _hiddenColumns = hiddenColumns;
 
             return this;
         }
@@ -394,6 +393,13 @@
             return this;
         }
 
+        public Grid SetGridOptionsName(string gridOptionsName)
+        {
+            _gridOptionsName = gridOptionsName;
+
+            return this;
+        }
+
         public string RenderHtml()
         {
             var html = new StringBuilder();
@@ -425,11 +431,13 @@
             var script = new StringBuilder();
 
             script.AppendLine("<script type=\"text/javascript\">");
+
+            script.AppendLine(string.Format("var {0} = null;", _gridOptionsName));
+
             script.AppendLine("jQuery(function () {");
 
-            script.AppendLine("jQuery('#" + _id + "').fanexGrid({");
+            script.AppendLine(string.Format("{0} = {{", _gridOptionsName));
 
-            
             script.AppendJavascriptProperty(_numberOfFrozenColumn, "numberOfFrozenColumn");
             script.AppendJavascriptProperty(_headerColumnHeight, "headerColumnHeight");
             script.AppendJavascriptProperty(_bodyRowHeight, "bodyRowHeight");
@@ -437,7 +445,6 @@
             script.AppendJavascriptProperty(_showTree, "showTree");
             script.AppendJavascriptProperty(_gridExpandHeight, "gridExpandHeight");
             script.AppendJavascriptProperty(_showNoDataOnFrozen, "showNoDataOnFrozen");
-            script.AppendJavascriptProperty(_enableHiddenColumns, "enableHiddenColumns");
             script.AppendJavascriptProperty(_showDistinctRow, "showDistinctRow");
             script.AppendJavascriptProperty(_showHighlightRow, "showHighlightRow");
             script.AppendJavascriptProperty(_highlightFrozenWidth, "highlightFrozenWidth");
@@ -459,19 +466,24 @@
             script.AppendJavascriptProperty(_scrollWidth, "scrollWidth");
             script.AppendJavascriptProperty(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
 
+            script.AppendJavascriptProperty(_enableHiddenColumns, "enableHiddenColumns");
+            script.AppendJavascriptProperty(_hiddenColumns, "hiddenColumns");
+
             script.AppendJavascriptProperty(_showTitle, "showTitle");
             script.AppendJavascriptProperty(_titleOption, "titleInfo");
 
             script.AppendJavascriptProperty(_showPager, "showPager");
             script.AppendJavascriptProperty(_pagerOption, "pagerOption");
+            script.AppendJavascriptProperty(_customPager, "customPager");
 
             script.AppendJavascriptProperty(_sortOption, "sortOption");
 
             script.AppendJavascriptProperty(_isHeaderCustomized, "customizeHeader");
             script.AppendJavascriptPropertyLine<Row>(_headerRows, "groupHeaderRows");
 
-            script.AppendJavascriptPropertyLine<Row>(_bodyRows, "bodyRows");
             script.AppendJavascriptPropertyLine<Column>(_columns, "columns");
+            script.AppendJavascriptPropertyLine<Row>(_bodyRows, "bodyRows");
+
 
             script.AppendJavascriptProperty(_showFooter, "showFooter");
             script.AppendJavascriptPropertyLine<Row>(_footerRows, "footerRows");
@@ -483,7 +495,9 @@
             //    script.AppendLine("showFooter:true,");
             //}
 
-            script.AppendLine("});");
+            script.AppendLine("};");
+
+            script.AppendLine(string.Format("jQuery('#{0}').fanexGrid({1});", _id, _gridOptionsName));
 
             script.AppendLine("});");
             script.AppendLine("</script>");

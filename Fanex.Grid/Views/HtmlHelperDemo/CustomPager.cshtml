@@ -1,21 +1,26 @@
 ﻿@{
     ViewBag.Title = "Custom Pager";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
-    var gridViewModel = new GridViewModel(1200, false, true);
+    var gridViewModel = new GridViewModel(100, false, true);
 }
 <div id="sourcecontainer">
     @(Html.FanexGrid("grid-id")
-        .AddColumn(new Column(gridViewModel.FirstColumnName, "First Column", 300))
-        .AddColumn(new Column(gridViewModel.SecondColumnName, "Second Column", 300))
-        .AddColumn(new Column(gridViewModel.ThirdColumnName, "Third Column", 300))
-        .AddColumn(new Column(gridViewModel.FourthColumnName, "Fourth Column", 300))
-        .AddColumn(new Column(gridViewModel.FifthColumnName, "Fifth Column", 300))
+        .AddColumn(new Column(gridViewModel.FirstColumnName, gridViewModel.FirstColumnText, 300))
+        .AddColumn(new Column(gridViewModel.SecondColumnName, gridViewModel.SecondColumnText, 300))
+        .AddColumn(new Column(gridViewModel.ThirdColumnName, gridViewModel.ThirdColumnText, 300))
+        .AddColumn(new Column(gridViewModel.FourthColumnName, gridViewModel.FourthColumnText, 300))
+        .AddColumn(new Column(gridViewModel.FifthColumnName, gridViewModel.FifthColumnText, 300))
+        .AddColumn(new Column(gridViewModel.SixthColumnName, gridViewModel.SixthColumnText, 150))
+        .AddColumn(new Column(gridViewModel.SeventhColumnName, gridViewModel.SeventhColumnText, 120))
+        .AddColumn(new Column(gridViewModel.EighthColumnName, gridViewModel.EighthColumnText, 140))
+        .AddColumn(new Column(gridViewModel.NinthColumnName, gridViewModel.NinthColumnText, 180))
         .AddBodyRows(gridViewModel.BodyRows)
         .SetPager(new PagerOption()
-        .SetCurrentPage(0)
+        .SetCurrentPage(3)
         .SetItemsPerPageArray(new int[] { 10, 50, 100 })
         .SetItemsPerPage(50)
-                .OnPageSelect("pager.reRender"))
+        .SetTotalItem(2000)
+                .OnPageSelect("pager.reRender"), true)
     )
 </div>
 <div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
@@ -27,12 +32,8 @@
         {
             reRender: function (page_index, itemsPerPage, jq) {
                 alert("pageIndex:" + page_index + ", itemPerPage:" + itemsPerPage + ", jq:" + jq);
-                gridOptions.pagerOption.itemsPerPage = itemsPerPage;
-                gridOptions.pagerOption.currentPage = page_index;
-                $("#gridId").fanexGrid(gridOptions);
-                return false;
             },
-            afterPagedFunction: 
+            afterPagedFunction: function () { }
         };
 
 </script>

@@ -1,16 +1,20 @@
 ﻿@{
     ViewBag.Title = "Footer";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
-    var gridViewModel = new GridViewModel(100, false, true);
+    var gridViewModel = new GridViewModel(100, false, false, true);
 }
 
 <div id="sourcecontainer">
     @(Html.FanexGrid("grid-id")
         .AddColumn(new Column(gridViewModel.FirstColumnName, "First Column", 300))
-        .AddColumn(new Column(gridViewModel.SecondColumnName, "Second Column", 300))
-        .AddColumn(new Column(gridViewModel.ThirdColumnName, "Third Column", 300))
+        .AddColumn(new Column(gridViewModel.SecondColumnName, "Second Column", 170))
+        .AddColumn(new Column(gridViewModel.ThirdColumnName, "Third Column", 160))
         .AddColumn(new Column(gridViewModel.FourthColumnName, "Fourth Column", 300))
-        .AddColumn(new Column(gridViewModel.FifthColumnName, "Fifth Column", 300))
+        .AddColumn(new Column(gridViewModel.FifthColumnName, "Fifth Column", 200))
+        .AddColumn(new Column(gridViewModel.SixthColumnName, gridViewModel.SixthColumnText, 150))
+        .AddColumn(new Column(gridViewModel.SeventhColumnName, gridViewModel.SeventhColumnText, 120))
+        .AddColumn(new Column(gridViewModel.EighthColumnName, gridViewModel.EighthColumnText, 140))
+        .AddColumn(new Column(gridViewModel.NinthColumnName, gridViewModel.NinthColumnText, 180))
         .AddBodyRows(gridViewModel.BodyRows)
         .AddFooterRows(gridViewModel.FooterRows)
     )

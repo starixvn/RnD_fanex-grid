@@ -1680,6 +1680,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         $(currentFrozenFooter[index]).css('height', currentHeight + 'px');
                     });
                 }
+
+                $(me.$grid).gridScroller(me.gridOptions);
             }
         }
     };

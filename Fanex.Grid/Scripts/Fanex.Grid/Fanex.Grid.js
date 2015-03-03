@@ -17,6 +17,8 @@
 //          + 10/08/2014: Fix dont resize grid hidden.
 //          + 10/09/2014: Update default page index for pager
 //          + 10/14/2014: Remove use strict
+//          + 01/23/2015: Check pager undefined before add in show/hide columns
+//          + 03/03/2015: Update fix height for both table when auto fix height
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false, strict:false*/
@@ -75,7 +77,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             opts = $.extend({}, $.fn.fanexGrid.defaults, opts);
             return this.each(function () {
                 var fanexGrid = new Fanex.Grid(this, opts);
-                opts.pagerOption = Fanex.Grid.List[fanexGrid.tableContentId].pagerOption;
+                if (Fanex.Grid.List[fanexGrid.tableContentId].pagerOption) {
+                    opts.pagerOption = Fanex.Grid.List[fanexGrid.tableContentId].pagerOption;
+                }
                 Fanex.Grid.Helper.UpdateSortInforAfterShowHideColumns(opts, Fanex.Grid.List[fanexGrid.tableContentId].sortOption);
                 fanexGrid.RenderGrid();
                 return fanexGrid.GetjQueryInstance();
@@ -88,7 +92,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             opts = $.extend({}, $.fn.fanexGrid.defaults, opts);
             return this.each(function () {
                 var fanexGrid = new Fanex.Grid(this, opts);
-                opts.pagerOption = Fanex.Grid.List[fanexGrid.tableContentId].pagerOption;
+                if (Fanex.Grid.List[fanexGrid.tableContentId].pagerOption) {
+                    opts.pagerOption = Fanex.Grid.List[fanexGrid.tableContentId].pagerOption;
+                }
                 Fanex.Grid.Helper.UpdateSortInforAfterShowHideColumns(opts, Fanex.Grid.List[fanexGrid.tableContentId].sortOption);
                 //fanexGrid.RenderGrid();
                 fanexGrid.RenderShowHideColumns(false);
@@ -1637,13 +1643,21 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             if (options.autoFixFrozenRowHeight) {
                 me.$grid.find('.content-container .auto-fix-row').each(function () {
                     var $this = $(this),
-                        currentHeight = $this.height(),
+                        currentHeight = $this.height() + 3,
                         atfattr = $this.attr('autofixatt');
 
                     if (isValid(atfattr)) {
-                        me.$grid.find('.row_header tr[autofixatt="' + atfattr.replace('main', 'frozen') + '"]').css('height', currentHeight + 'px');
+                        me.$grid.find('.row_header tr[autofixatt="' + atfattr.replace('main', 'frozen') + '"]')
+                            .attr('frozen-row-computed-height', currentHeight + 'px');
+                        $this.attr('frozen-row-computed-height', currentHeight + 'px');
                     }
                 });
+
+                me.$grid.hide().find('tr.auto-fix-row').each(function () {
+                    var $this = $(this);
+                    $this.css('height', $this.attr('frozen-row-computed-height'));
+                });
+                me.$grid.show();
                 // Header
                 var currentFrozenHeader = me.$grid.find('.grid-fixed-table.free-cell-top-left thead tr'),
                     currentFrozenBody = me.$grid.find('.grid-fixed-table.row_header_content thead tr');

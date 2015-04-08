@@ -39,6 +39,7 @@
             gridExpandHeight: 170,
             showTree: true,
             showTitle: true,
+            defaultCollapseAllGroups: true,
             titleInfo:
                 {
                     text: "Demo Title",
@@ -88,7 +89,8 @@
                     showCollapseExpandButton: true
                 },
             showDistinctRow: false,
-            numberOfFrozenColumn: 3
+            //numberOfFrozenColumn: 3,
+            defaultCollapseAllGroups: true,
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

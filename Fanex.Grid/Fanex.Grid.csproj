@@ -18,6 +18,10 @@
     <UseIISExpress>false</UseIISExpress>
     <JSLintSkip>
     </JSLintSkip>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -364,7 +368,6 @@
     <Content Include="Views\Demo\AppendBodyRows.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="Views\Demo\Popup.cshtml" />
     <Content Include="Views\Demo\MultipleLanguage.cshtml" />
     <Content Include="Views\Demo\AutoResizeColumns.cshtml" />

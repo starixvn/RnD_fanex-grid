@@ -1279,7 +1279,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                     if (options.virtualScroller) {
                         options.allBodyRowsHtml.push(bodyRowHtml);
-                        options.allFrozenRowsHtml.push(bodyRowHtml);
+                        options.allFrozenRowsHtml.push(frozenRowHtml);
                     }
 
                 }
@@ -1950,6 +1950,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             o.find(".content-container").css("width", tblWidth + "px");
             o.find(".col_header_content").css("width", tblWidth + "px");
             container.css("width", gridWidth - 100 + "px");
+            //container.css("width", gridWidth + "px");
             xscrollbar.css("width", (gridWidth - freezeWidth - bar - (options.padding) * 2 - 1) + "px");
             colHeaderContainer.css("width", gridWidth + "px");
             colHeaderContainer.find(".header-container").css("width", tblWidth + "px");
@@ -1957,8 +1958,11 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             o.find(".scrollbar-x-content").css("width", (tblWidth - freezeWidth - (isOnChromeBrowser ? 5 : 0)) + "px");
             o.find(".free-cell-bottom-left").css("width", freezeWidth + "px");
             pager.css("width", gridWidth + "px");
+            //rowHeaderContainer.css({
+            //    "width": (freezeWidth + 5 + 17 + options.highlightFrozenWidth) + "px"
+            //});
             rowHeaderContainer.css({
-                "width": (freezeWidth + 5 + 17 + options.highlightFrozenWidth) + "px"
+                "width": (freezeWidth + 5 + 17 + options.highlightFrozenWidth - 70) + "px"
             });
             rowHeaderWarpper.css({
                 "width": (freezeWidth + 5 + options.highlightFrozenWidth) + "px"
@@ -2086,8 +2090,11 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var containerHalfHeight = parseInt(container.height() / 2);
             var bodyRowHeight = fanexGridOption.bodyRowHeight + 5;
             var maxLength = fanexGridOption.bodyRows ? fanexGridOption.bodyRows.length : 0;
+            var isShowFrozenCol = fanexGridOption.numberOfFrozenColumn > 0;
             var tbodyContainer = container.find('tbody');
+            var tbodyRowHeader = rowheader.find('tbody');
             me.containerPreTop = 0;
+            me.rowHeaderPreTop = 0;
             me.yScrollPreTop = 0;
 
 
@@ -2104,13 +2111,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         me.renderVirtualTimeoutId = setTimeout(function () {
 
                             var currentScrollIndex = parseInt((top + yscrollbarHalfHeight) / bodyRowHeight);
-
                             var rowNeedRenderStartIndex = Math.max(0, currentScrollIndex - fanexGridOption.virtualThresholdNumber);
                             var rowNeedRenderEndIndex = Math.min(maxLength, currentScrollIndex + fanexGridOption.virtualThresholdNumber);
                             var addRowsLength = fanexGridOption.virtualThresholdNumber;
                             var numOfVirtualRows = fanexGridOption.numOfVirtualRows;
 
                             var addRowsHtml = '';
+                            var addFrozenRowsHtml = '';
                             var fromIndex = 0;
                             var toIndex = 0;
                             var isRemoveAllRows = false;
@@ -2135,8 +2142,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                         newStartIndex = currentScrollIndex - parseInt(numOfVirtualRows / 2);
                                         Math.max(newStartIndex, 0);
                                         fanexGridOption.rowEndIndex = toIndex = newStartIndex + numOfVirtualRows;
-
-
                                     }
                                 }
 
@@ -2144,13 +2149,22 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                                 for (var i = newStartIndex; i < toIndex; i++) {
                                     addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
+                                    if (isShowFrozenCol) {
+                                        addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
+                                    }
                                 }
 
                                 if (isRemoveAllRows) {
                                     tbodyContainer.empty();
+                                    if (isShowFrozenCol) {
+                                        tbodyRowHeader.empty();
+                                    }
                                 }
 
                                 tbodyContainer.prepend(addRowsHtml);
+                                if (isShowFrozenCol) {
+                                    tbodyRowHeader.prepend(addFrozenRowsHtml);
+                                }
                                 fanexGridOption.rowStartIndex = newStartIndex;
 
                                 currentTop = container.scrollTop();
@@ -2159,6 +2173,10 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     var removeAllContainerScrollTop = parseInt((toIndex - newStartIndex) * bodyRowHeight / 2) - yscrollbarHalfHeight;
                                     container.prop("scrollTop", removeAllContainerScrollTop);
                                     me.cPreTop = removeAllContainerScrollTop;
+                                    if (isShowFrozenCol) {
+                                        rowheader.prop("scrollTop", removeAllContainerScrollTop);
+                                        me.rPreTop = removeAllContainerScrollTop;
+                                    }
                                 }
                                 else {
                                     var removeRowsLength = toIndex - newStartIndex;
@@ -2173,6 +2191,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     newContainerScrollTop = currentTop + removeHeight;
                                     me.containerPreTop = newContainerScrollTop;
                                     container.prop("scrollTop", newContainerScrollTop);
+                                    if (isShowFrozenCol) {
+                                        var removeFrozenRows = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0) + ')');
+                                        removeFrozenRows.remove();
+                                        me.rowHeaderPreTop = newContainerScrollTop;
+                                        rowheader.prop("scrollTop", newContainerScrollTop)
+                                    }
+                                    
 
                                     var containerContentHeight = container.find('.col_body_content').height();
                                     var containerHeight = container.height()
@@ -2209,12 +2234,21 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                                 for (var i = fromIndex; i < newEndIndex; i++) {
                                     addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
+                                    if (isShowFrozenCol) {
+                                        addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
+                                    }
                                 }
 
                                 if (isRemoveAllRows) {
                                     tbodyContainer.empty();
+                                    if (isShowFrozenCol) {
+                                        tbodyRowHeader.empty();
+                                    }
                                 }
                                 tbodyContainer.append(addRowsHtml);
+                                if (isShowFrozenCol) {
+                                    tbodyRowHeader.append(addFrozenRowsHtml);
+                                }
                                 fanexGridOption.rowEndIndex = newEndIndex;
 
                                 currentTop = container.scrollTop();
@@ -2223,6 +2257,10 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     var removeAllContainerScrollTop = parseInt((newEndIndex - fromIndex + 1) * bodyRowHeight / 2) - yscrollbarHalfHeight;
                                     container.prop("scrollTop", removeAllContainerScrollTop);
                                     me.cPreTop = removeAllContainerScrollTop;
+                                    if (isShowFrozenCol) {
+                                        rowheader.prop("scrollTop", removeAllContainerScrollTop);
+                                        me.rPreTop = removeAllContainerScrollTop;
+                                    }
                                 }
                                 else {
                                     var removeRowsLength = newEndIndex - fromIndex;
@@ -2235,10 +2273,17 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     var removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
                                     var removeHeight = removeRows.length * bodyRowHeight;
                                     removeRows.remove();
-
                                     newContainerScrollTop = currentTop - removeHeight;
                                     me.containerPreTop = newContainerScrollTop;
                                     container.prop("scrollTop", newContainerScrollTop);
+
+                                    if (isShowFrozenCol) {
+                                        var removeRowsHeader = tbodyRowHeader.find('tr:lt(' + removeRowsLength + ')');
+                                        removeRowsHeader.remove();
+                                        me.rowHeaderPreTop = newContainerScrollTop;
+                                        rowheader.prop("scrollTop", newContainerScrollTop);
+                                    }
+
                                     if (newContainerScrollTop <= 0) {
                                         scrollBackWhenTopZero = Math.abs(newContainerScrollTop);
                                     }
@@ -2261,12 +2306,17 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 }
 
                                 me.containerPreTop = containerNewTop;
+                                if (isShowFrozenCol) {
+                                    me.rowHeaderPreTop = containerNewTop;
+                                }
                                 if (yscrollbarHeight + top + 50 >= fanexGridOption.totalHeight) {
                                     window.console.log('containerNewTop += 100');
                                     containerNewTop += bodyRowHeight * 4;
                                 }
                                 container.prop("scrollTop", containerNewTop);
-                                me.rowHeaderContainer.prop("scrollTop", top);
+                                if (isShowFrozenCol) {
+                                    me.rowHeaderContainer.prop("scrollTop", containerNewTop);
+                                }
 
                             }
                             //me.preTop = top;
@@ -2286,7 +2336,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             container.scroll(function () {
                 var top = container.scrollTop();
-
                 var yScrollTop = yscrollbar.prop("scrollTop") + (top - (me.cPreTop || 0));
                 var isAddTop = false, isSubTop = false;
                 if (fanexGridOption.virtualScroller) {
@@ -2294,9 +2343,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         var currentScrollIndex = parseInt((yScrollTop + containerHalfHeight) / bodyRowHeight);
                         var rowNeedRenderStartIndex = Math.max(0, currentScrollIndex - fanexGridOption.virtualThresholdNumber);
                         var rowNeedRenderEndIndex = Math.min(maxLength, currentScrollIndex + fanexGridOption.virtualThresholdNumber);
-
                         var addRowsLength = fanexGridOption.virtualThresholdNumber;
                         var addRowsHtml = '';
+                        var addFrozenRowsHtml = '';
                         var fromIndex = 0;
                         var toIndex = 0;
                         var newContainerScrollTop = 0;
@@ -2313,9 +2362,15 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             for (var i = newStartIndex; i < toIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
+                                if (isShowFrozenCol) {
+                                    addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
+                                }
                             }
 
                             tbodyContainer.prepend(addRowsHtml);
+                            if (isShowFrozenCol) {
+                                tbodyRowHeader.prepend(addFrozenRowsHtml);
+                            }
                             fanexGridOption.rowStartIndex = newStartIndex;
 
                             currentTop = container.scrollTop();
@@ -2328,11 +2383,20 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             var removeHeight = removeRowsLength * bodyRowHeight;
                             removeRows.remove();
                             newContainerScrollTop = currentTop + removeHeight;
+
                             me.cPreTop += removeHeight;
                             top += removeHeight;
                             me.containerPreTop = newContainerScrollTop;
                             container.prop("scrollTop", newContainerScrollTop);
                             isAddTop = true;
+
+                            if (isShowFrozenCol) {
+                                var removeRowsHeader = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0) + ')');
+                                removeRowsHeader.remove();
+                                me.rowHeaderPreTop = newContainerScrollTop;
+                                rowheader.prop("scrollTop", newContainerScrollTop);
+                                me.rPreTop = me.cPreTop;
+                            }
                         }
                         console.log('%cSub: top: ' + (yScrollTop + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
                         var scrollBackWhenTopZero = 0;
@@ -2347,9 +2411,15 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             }
                             for (var i = fromIndex; i < newEndIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
+                                if (isShowFrozenCol) {
+                                    addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
+                                }
                             }
 
                             tbodyContainer.append(addRowsHtml);
+                            if (isShowFrozenCol) {
+                                tbodyRowHeader.append(addFrozenRowsHtml);
+                            }
                             fanexGridOption.rowEndIndex = newEndIndex;
 
                             currentTop = container.scrollTop();
@@ -2368,6 +2438,14 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             me.containerPreTop = newContainerScrollTop;
                             container.prop("scrollTop", newContainerScrollTop);
                             isSubTop = true;
+
+                            if (isShowFrozenCol) {
+                                var removeRowsHeader = tbodyRowHeader.find('tr:lt(' + removeRowsLength + ')');
+                                removeRowsHeader.remove();
+                                me.rowHeaderPreTop = newContainerScrollTop;
+                                rowheader.prop("scrollTop", newContainerScrollTop);
+                                me.rPreTop = me.cPreTop;
+                            }
                         }
 
                         if (me.cPreTop !== top) {
@@ -2378,8 +2456,19 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             var yscrollbarNewTop = yscrollbarOldTop + (top - me.cPreTop);
                             me.yScrollPreTop = yscrollbarNewTop;
+                           
                             yscrollbar.prop("scrollTop", yscrollbarNewTop);
+                            //rowheader.prop("scrollTop", top);
+                            //
+                            if (!isSubTop && !isAddTop) {
+                                me.rowHeaderPreTop = top;
+                                rowheader.prop("scrollTop", top);
+                            }
                         }
+
+                        //if (!isAddTop && !isSubTop) {
+                            
+                        //}
 
                         me.containerPreTop = top;
                     }
@@ -2407,11 +2496,129 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             rowheader.scroll(function () {
                 var top = rowheader.scrollTop();
+                var yScrollTop = yscrollbar.prop("scrollTop") + (top - (me.rPreTop || 0));
+                var isAddTop = false, isSubTop = false;
                 if (fanexGridOption.virtualScroller) {
+                    if (me.rowHeaderPreTop != top) {
+                        var currentScrollIndex = parseInt((yScrollTop + containerHalfHeight) / bodyRowHeight);
+                        var rowNeedRenderStartIndex = Math.max(0, currentScrollIndex - fanexGridOption.virtualThresholdNumber);
+                        var rowNeedRenderEndIndex = Math.min(maxLength, currentScrollIndex + fanexGridOption.virtualThresholdNumber);
+                        var addRowsLength = fanexGridOption.virtualThresholdNumber;
+                        var addRowsHtml = '';
+                        var addFrozenRowsHtml = '';
+                        var fromIndex = 0;
+                        var toIndex = 0;
+                        var newContainerScrollTop = 0;
+                        var currentTop = 0;
+                        //console.log('%cSub: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
+                        if (fanexGridOption.rowStartIndex > 0
+                            && rowNeedRenderStartIndex < fanexGridOption.rowStartIndex) {
+                            toIndex = fanexGridOption.rowStartIndex;
+                            var newStartIndex = Math.max(fanexGridOption.rowStartIndex - addRowsLength, 0);
+
+                            if (rowNeedRenderStartIndex < newStartIndex) {
+                                newStartIndex = rowNeedRenderStartIndex;
+                            }
+
+                            for (var i = newStartIndex; i < toIndex; i++) {
+                                addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
+                                addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
+                            }
+
+                            tbodyContainer.prepend(addRowsHtml);
+                            tbodyRowHeader.prepend(addFrozenRowsHtml);
+                            fanexGridOption.rowStartIndex = newStartIndex;
+
+                            currentTop = rowheader.scrollTop();
+
+                            var removeRowsLength = toIndex - newStartIndex;
+                            fanexGridOption.rowEndIndex = Math.max(fanexGridOption.rowEndIndex - removeRowsLength, 0);
+
+
+                            var removeFrozenRows = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0) + ')');
+                            var removeHeight = removeRowsLength * bodyRowHeight;
+                            removeFrozenRows.remove();
+                            newContainerScrollTop = currentTop + removeHeight;
+                            me.rPreTop += removeHeight;
+                            top += removeHeight;
+                            me.rowHeaderPreTop = newContainerScrollTop;
+                            rowheader.prop("scrollTop", newContainerScrollTop);
+                            isAddTop = true;
+
+                            var removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
+                            removeRows.remove();
+                            me.containerPreTop = newContainerScrollTop;
+                            container.prop("scrollTop", newContainerScrollTop);
+                            me.cPreTop += removeHeight;
+                        }
+                        //console.log('%cSub: top: ' + (yScrollTop + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
+                        var scrollBackWhenTopZero = 0;
+                        if (rowNeedRenderEndIndex > fanexGridOption.rowEndIndex) {
+                            //// Add more end rows
+                            fromIndex = fanexGridOption.rowEndIndex;
+                            var newEndIndex = Math.min(fanexGridOption.rowEndIndex + addRowsLength, maxLength);
+                            isRemoveAllRows = false;
+
+                            if (rowNeedRenderEndIndex > newEndIndex) {
+                                newEndIndex = rowNeedRenderEndIndex;
+                            }
+                            for (var i = fromIndex; i < newEndIndex; i++) {
+                                addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
+                                addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
+                            }
+
+                            tbodyContainer.append(addRowsHtml);
+                            tbodyRowHeader.append(addFrozenRowsHtml);
+                            fanexGridOption.rowEndIndex = newEndIndex;
+
+                            currentTop = rowheader.scrollTop();
+
+                            var removeRowsLength = newEndIndex - fromIndex;
+
+                            fanexGridOption.rowStartIndex += removeRowsLength;
+
+                            var removeRows = tbodyRowHeader.find('tr:lt(' + removeRowsLength + ')');
+                            var removeHeight = removeRows.length * bodyRowHeight;
+                            removeRows.remove();
+
+                            newContainerScrollTop = currentTop - removeHeight;
+                            me.rPreTop -= removeHeight;
+                            top -= removeHeight;
+                            me.rowHeaderPreTop = newContainerScrollTop;
+                            rowheader.prop("scrollTop", newContainerScrollTop);
+                            isSubTop = true;
+
+                            var removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
+                            removeRows.remove();
+                            me.containerPreTop = newContainerScrollTop;
+                            container.prop("scrollTop", newContainerScrollTop);
+                            me.cPreTop += removeHeight;
+                        }
+
+                        if (me.rPreTop !== top) {
+                            var yscrollbarOldTop = yscrollbar.scrollTop();
+                            if (typeof (me.rPreTop) == 'undefined') {
+                                me.rPreTop = 0;
+                            }
+
+                            var yscrollbarNewTop = yscrollbarOldTop + (top - me.rPreTop);
+                            me.yScrollPreTop = yscrollbarNewTop;
+                            
+                            yscrollbar.prop("scrollTop", yscrollbarNewTop);
+
+                            if (!isSubTop && !isAddTop) {
+                                me.containerPreTop = top;
+                                container.prop("scrollTop", top);
+                            }
+                            //container.prop("scrollTop", yscrollbarNewTop);
+                        }
+
+                        me.rowHeaderPreTop = top;
+                    }
+                    me.rPreTop = top;
+
                 }
                 else {
-
-                    
                     if (me.preTop !== top) {
                         container.prop("scrollTop", top);
                         yscrollbar.prop("scrollTop", top);

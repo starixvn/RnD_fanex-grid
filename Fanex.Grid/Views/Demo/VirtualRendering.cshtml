@@ -76,7 +76,7 @@
     var gridOptions =
         {
             columns: [
-                { HeaderText: "Header 1", Width: 90, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 1", Width: 130, Name: "No", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Header 2", Width: 80, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 3", Width: 120, Name: "Number1", HeaderAlign: "center", CellAlign: "right" }
                 // { HeaderText: "Header 1", Width: 90, Name: "No", HeaderAlign: "center", CellAlign: "center" },
@@ -90,10 +90,11 @@
                 //{ HeaderText: "Header 9", Width: 130, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
                 //{ HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
-            bodyRows: generateData(1000),
+            bodyRows: generateData(100),
             gridExpandHeight: 150,
-            //numberOfFrozenColumn: 3,
-            virtualScroller: true
+            numberOfFrozenColumn: 1,
+            virtualScroller: true,
+            bodyRowHeight: 30
         };
     $(function () {
         $('#btn-row-number').click(function () {

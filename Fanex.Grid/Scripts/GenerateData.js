@@ -28,6 +28,41 @@ function generateData(numberRows, autoHeight) {
     return rows;
 }
 
+function generateDataMoreColums(numberRows, autoHeight) {
+    var rows = [];
+    for (var index = 0; index < numberRows; index++) {
+        var row = {
+            Columns: [
+                    { Name: "No", Value: index * 2 },
+                    { Name: "Text1", Value: parseFloat((Math.random() > 0.5 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) },
+                    { Name: "Number1", Value: parseFloat((Math.random() * 20000).toFixed(4)) },
+                    { Name: "Number2", Value: parseFloat((Math.random() * 100).toFixed(2)) },
+                    { Name: "Number3", Value: parseFloat((Math.random() * 500).toFixed(3)) },
+                    { Name: "Text2", Value: Math.random().toString(36).substring(7) },
+                    { Name: "Text3", Value: Math.random().toString(36).substring(8) },
+                    { Name: "Text4", Value: Math.random().toString(36).substring(9) },
+                    { Name: "Number4", Value: parseFloat((Math.random() * 1000).toFixed(3)) },
+                    { Name: "Number5", Value: parseFloat((index % 2 == 0 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) },
+                    { Name: "Text6", Value: Math.random().toString(36).substring(9) },
+                    { Name: "Text7", Value: Math.random().toString(36).substring(9) },
+                    { Name: "Text8", Value: Math.random().toString(36).substring(9) },
+                    { Name: "Text9", Value: Math.random().toString(36).substring(9) },
+                    { Name: "Text10", Value: Math.random().toString(36).substring(9) },
+                    { Name: "Text11", Value: Math.random().toString(36).substring(9) },
+                    { Name: "Text12", Value: Math.random().toString(36).substring(9) }
+            ],
+            CssClass: 'custom-css-class',
+            CustomAttr: '',
+            SubRows: ''
+        };
+        if (autoHeight) {
+            row.RowHeight = Math.random() * 100;
+        }
+        rows.push(row);
+    }
+    return rows;
+}
+
 
 function generateLongData(numberRows) {
     var rows = [];

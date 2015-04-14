@@ -234,6 +234,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         reCalculateGrid: false,
         virtualScroller: false,
         numOfVirtualRows: 50,
+        thresholdNeedToVirtualRendering: 100,
         virtualThresholdNumber: 15,
         renderVirtualTimeout: 50
     };
@@ -1235,6 +1236,15 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 currentBodyRows = options.bodyRows;
             }
 
+            if (options.virtualScroller
+                && currentBodyRows.length > options.thresholdNeedToVirtualRendering) {
+                options.shouldVirtualScroller = true;
+            }
+            else {
+                options.shouldVirtualScroller = false;
+            }
+
+
             var bodyLength = currentBodyRows.length;
             var currentFrozenRows = (options.numberOfFrozenColumn > 0) ?
                                     Fanex.Grid.Helper.CreateRowsForFrozenColumn(currentBodyRows, options.numberOfFrozenColumn, me.frozenColsName) :
@@ -1244,7 +1254,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             if (bodyLength > 0) {
                 var realLength = bodyLength;
                 var realFrozenLength = frozenBodyLength;
-                if (options.virtualScroller) {
+                if (options.shouldVirtualScroller) {
                     if (frozenBodyLength > 0
                         && frozenBodyLength > options.numOfVirtualRows) {
                         //virtualFrozenLength = 
@@ -1255,7 +1265,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         bodyLength = options.numOfVirtualRows;
                     }
 
-                    options.totalHeight = Fanex.Grid.Helper.ComputeBodyHeight(options);
+                    options.totalHeight = Fanex.Grid.Helper.ComputeBodyHeight(currentBodyRows, options.bodyRowHeight);
+                    options.realLength = realLength;
                     options.allBodyRowsHtml = [];
                     options.allFrozenRowsHtml = [];
                     options.rowStartIndex = 0;
@@ -1277,7 +1288,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         bodyFrozenHtml.push(frozenRowHtml);
                     }
 
-                    if (options.virtualScroller) {
+                    if (options.shouldVirtualScroller) {
                         options.allBodyRowsHtml.push(bodyRowHtml);
                         options.allFrozenRowsHtml.push(frozenRowHtml);
                     }
@@ -1285,7 +1296,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 }
 
                 //// If MainRow still has item, then continue render
-                for (rowIndex = frozenBodyLength; rowIndex < realLength; rowIndex++) {
+                for (rowIndex = realFrozenLength; rowIndex < realLength; rowIndex++) {
                     currentRow = currentBodyRows[rowIndex];
 
                     bodyRowHtml = me.RenderNormalRow(currentRow, 'td', true, rowIndex + currentPageStartIndex, '', false, rowIndex, 0);
@@ -1294,7 +1305,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         bodyRowsHtml.push(bodyRowHtml);
                     }
 
-                    if (options.virtualScroller) {
+                    if (options.shouldVirtualScroller) {
                         options.allBodyRowsHtml.push(bodyRowHtml);
                     }
                 }
@@ -1949,8 +1960,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             o.css("width", gridWidth + "px");
             o.find(".content-container").css("width", tblWidth + "px");
             o.find(".col_header_content").css("width", tblWidth + "px");
-            container.css("width", gridWidth - 100 + "px");
-            //container.css("width", gridWidth + "px");
+            //container.css("width", gridWidth - 100 + "px");
+            container.css("width", gridWidth + "px");
             xscrollbar.css("width", (gridWidth - freezeWidth - bar - (options.padding) * 2 - 1) + "px");
             colHeaderContainer.css("width", gridWidth + "px");
             colHeaderContainer.find(".header-container").css("width", tblWidth + "px");
@@ -1958,12 +1969,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             o.find(".scrollbar-x-content").css("width", (tblWidth - freezeWidth - (isOnChromeBrowser ? 5 : 0)) + "px");
             o.find(".free-cell-bottom-left").css("width", freezeWidth + "px");
             pager.css("width", gridWidth + "px");
-            //rowHeaderContainer.css({
-            //    "width": (freezeWidth + 5 + 17 + options.highlightFrozenWidth) + "px"
-            //});
             rowHeaderContainer.css({
-                "width": (freezeWidth + 5 + 17 + options.highlightFrozenWidth - 70) + "px"
+                "width": (freezeWidth + 5 + 17 + options.highlightFrozenWidth) + "px"
             });
+            //rowHeaderContainer.css({
+            //    "width": (freezeWidth + 5 + 17 + options.highlightFrozenWidth - 70) + "px"
+            //});
             rowHeaderWarpper.css({
                 "width": (freezeWidth + 5 + options.highlightFrozenWidth) + "px"
             });
@@ -1994,7 +2005,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 o.find(".free-cell-bottom-right").css("height", (freezeFooterHeight + (isScrollX ? bar : 0) + 1) + "px");
             }
             freeCellBottom.css("top", (gridHeight - pagerHeight - freezeFooterHeight - bar) + "px");
-            if (me.Options && me.Options.virtualScroller) {
+            if (me.Options && me.Options.shouldVirtualScroller) {
                 o.find(".scrollbar-y-content").css("height", me.Options.totalHeight + "px");
             }
             else {
@@ -2005,7 +2016,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var newTblHeight = tblContent.height();
             if (ub.msie && tblHeight !== newTblHeight) {
                 tblHeight = newTblHeight;
-                if (me.Options && me.Options.virtualScroller) {
+                if (me.Options && me.Options.shouldVirtualScroller) {
                     o.find(".scrollbar-y-content").css("height", me.Options.totalHeight + "px");
                 }
                 else {
@@ -2089,7 +2100,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var yscrollbarHalfHeight = parseInt(yscrollbarHeight / 2);
             var containerHalfHeight = parseInt(container.height() / 2);
             var bodyRowHeight = fanexGridOption.bodyRowHeight + 5;
-            var maxLength = fanexGridOption.bodyRows ? fanexGridOption.bodyRows.length : 0;
+            var maxLength = fanexGridOption.realLength;
             var isShowFrozenCol = fanexGridOption.numberOfFrozenColumn > 0;
             var tbodyContainer = container.find('tbody');
             var tbodyRowHeader = rowheader.find('tbody');
@@ -2098,11 +2109,11 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             me.yScrollPreTop = 0;
 
 
-            yscrollbar.scroll(function () {
+            yscrollbar.unbind('scroll.' + me.gridId).bind('scroll.'+ me.gridId, function () {
                 me.alreadyYScroll = true;
                 var top = yscrollbar.scrollTop();
 
-                if (fanexGridOption.virtualScroller) {
+                if (fanexGridOption.shouldVirtualScroller) {
                     if (top != me.yScrollPreTop) {
                         if (me.renderVirtualTimeoutId) {
                             clearTimeout(me.renderVirtualTimeoutId);
@@ -2121,8 +2132,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             var fromIndex = 0;
                             var toIndex = 0;
                             var isRemoveAllRows = false;
+                            var gapMaxLength = 0;
 
-                            console.log('%cMain: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
+                            //console.log('%cMain: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
                             //var virtualTop = 0;
                             var scrollForwardWhenScrollTopIsMax = 0;
                             var newContainerScrollTop = 0;
@@ -2140,12 +2152,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     if (newStartIndex + numOfVirtualRows < fanexGridOption.rowStartIndex) {
                                         isRemoveAllRows = true;
                                         newStartIndex = currentScrollIndex - parseInt(numOfVirtualRows / 2);
-                                        Math.max(newStartIndex, 0);
+                                        newStartIndex = Math.max(newStartIndex, 0);
                                         fanexGridOption.rowEndIndex = toIndex = newStartIndex + numOfVirtualRows;
                                     }
                                 }
 
-                                console.log('%cMain: newStartIndex: ' + newStartIndex + ',toIndex: ' + toIndex, 'background: #95BAC6');
+                                //console.log('%cMain: newStartIndex: ' + newStartIndex + ',toIndex: ' + toIndex, 'background: #95BAC6');
 
                                 for (var i = newStartIndex; i < toIndex; i++) {
                                     addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
@@ -2182,7 +2194,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     var removeRowsLength = toIndex - newStartIndex;
                                     fanexGridOption.rowEndIndex = Math.max(fanexGridOption.rowEndIndex - removeRowsLength, 0);
 
-                                    console.log('%cMain: fanexGridOption.rowEndIndex: ' + fanexGridOption.rowEndIndex, 'background: #95BAC6');
+                                    //console.log('%cMain: fanexGridOption.rowEndIndex: ' + fanexGridOption.rowEndIndex, 'background: #95BAC6');
                                     //// Remove end rows
 
                                     var removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
@@ -2207,7 +2219,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                                 }
                             }
-                            console.log('%cMain: top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
+                            //console.log('%cMain: top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
                             var scrollBackWhenTopZero = 0;
                             if (!isRemoveAllRows
                                 && rowNeedRenderEndIndex > fanexGridOption.rowEndIndex) {
@@ -2225,12 +2237,15 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     if (newEndIndex - numOfVirtualRows > fanexGridOption.rowEndIndex) {
                                         isRemoveAllRows = true;
                                         newEndIndex = currentScrollIndex + parseInt(numOfVirtualRows / 2);
+                                        if (maxLength < newEndIndex) {
+                                            gapMaxLength = newEndIndex - maxLength;
+                                        }
                                         newEndIndex = Math.min(newEndIndex, maxLength);
                                         fanexGridOption.rowStartIndex = fromIndex = newEndIndex - numOfVirtualRows;
                                     }
                                 }
 
-                                console.log('%cMain: fromIndex: ' + fromIndex + ',newEndIndex: ' + newEndIndex, 'background: #D9C5C1');
+                                //console.log('%cMain: fromIndex: ' + fromIndex + ',newEndIndex: ' + newEndIndex, 'background: #D9C5C1');
 
                                 for (var i = fromIndex; i < newEndIndex; i++) {
                                     addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
@@ -2254,20 +2269,30 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 currentTop = container.scrollTop();
                                 //// Remove start rows
                                 if (isRemoveAllRows) {
-                                    var removeAllContainerScrollTop = parseInt((newEndIndex - fromIndex + 1) * bodyRowHeight / 2) - yscrollbarHalfHeight;
+
+                                    var removeAllContainerScrollTop = parseInt((newEndIndex - fromIndex + 1) * bodyRowHeight / 2) - yscrollbarHalfHeight;;
+                                    if (gapMaxLength > 0) {
+                                        //newEndIndex === maxLength
+                                        //removeAllContainerScrollTop = parseInt((newEndIndex - fromIndex) * bodyRowHeight) - yscrollbarHeight;
+                                        //console.log(gapMaxLength);
+                                        removeAllContainerScrollTop += (gapMaxLength + 1) * bodyRowHeight;
+                                    }
+                                    
                                     container.prop("scrollTop", removeAllContainerScrollTop);
                                     me.cPreTop = removeAllContainerScrollTop;
                                     if (isShowFrozenCol) {
                                         rowheader.prop("scrollTop", removeAllContainerScrollTop);
                                         me.rPreTop = removeAllContainerScrollTop;
                                     }
+
+
                                 }
                                 else {
                                     var removeRowsLength = newEndIndex - fromIndex;
 
                                     fanexGridOption.rowStartIndex += removeRowsLength;
 
-                                    console.log('%cMain: fanexGridOption.rowStartIndex: ' + fanexGridOption.rowStartIndex, 'background: #D9C5C1');
+                                    //console.log('%cMain: fanexGridOption.rowStartIndex: ' + fanexGridOption.rowStartIndex, 'background: #D9C5C1');
 
 
                                     var removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
@@ -2289,7 +2314,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     }
 
                                 }
-                                console.log('%cMain: fanexGridOption.rowEndIndex: ' + newEndIndex, 'background: #D9C5C1');
+                                //console.log('%cMain: fanexGridOption.rowEndIndex: ' + newEndIndex, 'background: #D9C5C1');
                             }
 
 
@@ -2310,7 +2335,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     me.rowHeaderPreTop = containerNewTop;
                                 }
                                 if (yscrollbarHeight + top + 50 >= fanexGridOption.totalHeight) {
-                                    window.console.log('containerNewTop += 100');
+                                    //window.console.log('containerNewTop += 100');
                                     containerNewTop += bodyRowHeight * 4;
                                 }
                                 container.prop("scrollTop", containerNewTop);
@@ -2334,12 +2359,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 }
             });
 
-            container.scroll(function () {
+            container.unbind('scroll.' + me.gridId).bind('scroll.' + me.gridId, function () {
                 var top = container.scrollTop();
                 var yScrollTop = yscrollbar.prop("scrollTop") + (top - (me.cPreTop || 0));
                 var isAddTop = false, isSubTop = false;
-                if (fanexGridOption.virtualScroller) {
+                if (fanexGridOption.shouldVirtualScroller) {
                     if (me.containerPreTop != top) {
+                        var maxLength = fanexGridOption.realLength;
                         var currentScrollIndex = parseInt((yScrollTop + containerHalfHeight) / bodyRowHeight);
                         var rowNeedRenderStartIndex = Math.max(0, currentScrollIndex - fanexGridOption.virtualThresholdNumber);
                         var rowNeedRenderEndIndex = Math.min(maxLength, currentScrollIndex + fanexGridOption.virtualThresholdNumber);
@@ -2350,7 +2376,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         var toIndex = 0;
                         var newContainerScrollTop = 0;
                         var currentTop = 0;
-                        console.log('%cSub: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
+                        //console.log('%cSub: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
                         if (fanexGridOption.rowStartIndex > 0
                             && rowNeedRenderStartIndex < fanexGridOption.rowStartIndex) {
                             toIndex = fanexGridOption.rowStartIndex;
@@ -2398,7 +2424,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 me.rPreTop = me.cPreTop;
                             }
                         }
-                        console.log('%cSub: top: ' + (yScrollTop + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
+                        //console.log('%cSub: top: ' + (yScrollTop + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
                         var scrollBackWhenTopZero = 0;
                         if (rowNeedRenderEndIndex > fanexGridOption.rowEndIndex) {
                             //// Add more end rows
@@ -2494,12 +2520,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 }
             });
 
-            rowheader.scroll(function () {
+            rowheader.unbind('scroll.' + me.gridId).bind('scroll.' + me.gridId, function () {
                 var top = rowheader.scrollTop();
                 var yScrollTop = yscrollbar.prop("scrollTop") + (top - (me.rPreTop || 0));
                 var isAddTop = false, isSubTop = false;
-                if (fanexGridOption.virtualScroller) {
+                if (fanexGridOption.shouldVirtualScroller) {
                     if (me.rowHeaderPreTop != top) {
+                        var maxLength = fanexGridOption.realLength;
                         var currentScrollIndex = parseInt((yScrollTop + containerHalfHeight) / bodyRowHeight);
                         var rowNeedRenderStartIndex = Math.max(0, currentScrollIndex - fanexGridOption.virtualThresholdNumber);
                         var rowNeedRenderEndIndex = Math.min(maxLength, currentScrollIndex + fanexGridOption.virtualThresholdNumber);
@@ -3161,16 +3188,16 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             return textWidth;
         },
-        ComputeBodyHeight: function (options) {
+        ComputeBodyHeight: function (bodyRows, bodyRowHeight) {
             var totalHeight = 0;
-            var bodyLength = options.bodyRows.length;
+            var bodyLength = bodyRows.length;
             for (var i = 0; i < bodyLength; i++) {
-                var currentRow = options.bodyRows[i];
+                var currentRow = bodyRows[i];
                 if (currentRow.RowHeight) {
                     totalHeight += currentRow.RowHeight;
                 }
                 else {
-                    totalHeight += options.bodyRowHeight;
+                    totalHeight += bodyRowHeight;
                 }
 
                 totalHeight += 5;

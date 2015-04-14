@@ -94,7 +94,14 @@
             gridExpandHeight: 150,
             numberOfFrozenColumn: 1,
             virtualScroller: true,
-            bodyRowHeight: 30
+            bodyRowHeight: 30,
+            showPager: true,
+            pagerOption: {      
+                itemsPerPage: 50,
+                currentPage: 0,
+                itemsPerPageArray: [50, 100, 500],
+                showDetail: true
+            }
         };
     $(function () {
         $('#btn-row-number').click(function () {
@@ -104,3 +111,5 @@
         //var currentGrid =
     });
 </script>
+
+

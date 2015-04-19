@@ -2209,7 +2209,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                         me.rowHeaderPreTop = newContainerScrollTop;
                                         rowheader.prop("scrollTop", newContainerScrollTop)
                                     }
-                                    
+
 
                                     var containerContentHeight = container.find('.col_body_content').height();
                                     var containerHeight = container.height()
@@ -2330,13 +2330,14 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     containerNewTop = 0;
                                 }
 
-                                me.containerPreTop = containerNewTop;
-                                if (isShowFrozenCol) {
-                                    me.rowHeaderPreTop = containerNewTop;
-                                }
+
                                 if (yscrollbarHeight + top + 50 >= fanexGridOption.totalHeight) {
                                     //window.console.log('containerNewTop += 100');
                                     containerNewTop += bodyRowHeight * 4;
+                                }
+                                me.containerPreTop = containerNewTop;
+                                if (isShowFrozenCol) {
+                                    me.rowHeaderPreTop = containerNewTop;
                                 }
                                 container.prop("scrollTop", containerNewTop);
                                 if (isShowFrozenCol) {
@@ -2435,6 +2436,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             if (rowNeedRenderEndIndex > newEndIndex) {
                                 newEndIndex = rowNeedRenderEndIndex;
                             }
+                            if (newEndIndex > fanexGridOption.allBodyRowsHtml.length) {
+                                return;
+                            }
                             for (var i = fromIndex; i < newEndIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                 if (isShowFrozenCol) {
@@ -2482,7 +2486,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             var yscrollbarNewTop = yscrollbarOldTop + (top - me.cPreTop);
                             me.yScrollPreTop = yscrollbarNewTop;
-                           
+
                             yscrollbar.prop("scrollTop", yscrollbarNewTop);
                             //rowheader.prop("scrollTop", top);
                             //
@@ -2493,13 +2497,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         }
 
                         //if (!isAddTop && !isSubTop) {
-                            
+
                         //}
 
                         me.containerPreTop = top;
                     }
                     me.cPreTop = top;
-                    
+
                 }
                 else {
                     if (me.preTop !== top) {
@@ -2589,6 +2593,11 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             if (rowNeedRenderEndIndex > newEndIndex) {
                                 newEndIndex = rowNeedRenderEndIndex;
                             }
+
+                            if (newEndIndex > fanexGridOption.allBodyRowsHtml.length) {
+                                return;
+                            }
+
                             for (var i = fromIndex; i < newEndIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                 addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
@@ -2630,7 +2639,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             var yscrollbarNewTop = yscrollbarOldTop + (top - me.rPreTop);
                             me.yScrollPreTop = yscrollbarNewTop;
-                            
+
                             yscrollbar.prop("scrollTop", yscrollbarNewTop);
 
                             if (!isSubTop && !isAddTop) {

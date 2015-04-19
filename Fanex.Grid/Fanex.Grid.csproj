@@ -148,6 +148,7 @@
     <Content Include="ScriptsUnittest\jasmine-samples\PlayerSpec.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\Song.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid - Copy.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Grid.bk.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ko-KR.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ja-JP.js" />

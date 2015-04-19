@@ -5,7 +5,7 @@ function generateData(numberRows, autoHeight) {
     for (var index = 0; index < numberRows; index++) {
         var row = {
             Columns: [
-                    { Name: "No", Value: index * 2 },
+                    { Name: "No", Value: index },
                     { Name: "Text1", Value: parseFloat((Math.random() > 0.5 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) },
                     { Name: "Number1", Value: parseFloat((Math.random() * 20000).toFixed(4)) },
                     { Name: "Number2", Value: parseFloat((Math.random() * 100).toFixed(2)) },

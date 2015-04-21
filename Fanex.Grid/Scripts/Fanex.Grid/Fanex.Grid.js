@@ -236,7 +236,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         numOfVirtualRows: 50,
         thresholdNeedToVirtualRendering: 100,
         virtualThresholdNumber: 15,
-        renderVirtualTimeout: 50
+        renderVirtualTimeout: 50,
+        minHeight: 300
     };
 
     var Fanex = Fanex || {};
@@ -492,6 +493,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 column: me.columnsWidth,
                 gridHeight: options.fullHeight ? options.gridExpandHeight : options.gridHeight,
                 gridWidth: options.gridWidth,
+                minHeight: options.minHeight,
                 numberFreezeCol: numberOfFrozenColumnNew,
                 highlightFrozenWidth: options.highlightFrozenWidth,
                 heightScrollYAdd: 0,
@@ -1837,6 +1839,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 gridWidth: 0,
                 //=totalColumnWidth + totalColumn*4 +totalColumn
                 minWidth: 600,
+                minHeight: 400,
                 gridHeight: 300,
                 freezeWidth: 241,
                 //=totalColumnWidth + (totalColumn-1)*2 + (totalColumn-1)
@@ -1984,7 +1987,11 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             //var freezeFooterHeight = isShowFooter ? colFooterContainer.find("thead").height() + 3 : 0;
             var freezeFooterHeight = isShowFooter ? colFooterContainer.find("thead").height() + options.bottomBorderWidth : 0;
             var gridHeight = options.fullHeight ? ($(window).height() - options.gridHeight) : options.gridHeight;
+            
             var isScrollY = gridHeight - titleHeight - pagerHeight - bar - freezeFooterHeight < tblHeight;
+            if (isScrollY && gridHeight < options.minHeight) {
+                gridHeight = options.minHeight;
+            }
             gridHeight = isScrollY ? gridHeight : tblHeight + titleHeight + pagerHeight + bar + freezeFooterHeight;
 
             if (options.hideYBackGroundScroller) {

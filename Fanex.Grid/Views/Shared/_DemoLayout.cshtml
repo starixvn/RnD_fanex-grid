@@ -24,12 +24,11 @@
     @*HighlightSyntax*@
     <link href="~/Scripts/HighLightSyntax/styles/shCore.css" rel="stylesheet" type="text/css" />
     <link href="~/Scripts/HighLightSyntax/styles/shThemeDefault.css" rel="stylesheet"
-        type="text/css" />
+          type="text/css" />
     <script src="~/Scripts/HighLightSyntax/scripts/XRegExp.js" type="text/javascript"></script>
     <script src="~/Scripts/HighLightSyntax/scripts/shCore.js" type="text/javascript"></script>
     <script src="~/Scripts/HighLightSyntax/scripts/shLegacy.js" type="text/javascript"></script>
     <script src="~/Scripts/HighLightSyntax/scripts/shBrushGroovy.js" type="text/javascript"></script>
-
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -42,13 +41,25 @@
                 Documents and Examples
             </div>
             <ul>
-                <li class="demo-link"><span class="doc-icon"></span><a href="@Url.Action("Index", "Demo")">
-                    Overview</a></li>
-                <li class="demo-link"><span class="doc-icon"></span><a href="@Url.Action("Api", "Demo")">
-                    Api</a></li>
-                <li class="demo-link"><span class="doc-icon"></span><a href="@Url.Content("~/Fanex.Grid.zip")">
-                    Download Fanex.Grid</a></li>
+                <li class="demo-link">
+                    <span class="doc-icon"></span><a href="@Url.Action("Index", "Demo")">
+                        Overview
+                    </a>
+                </li>
+                <li class="demo-link">
+                    <span class="doc-icon"></span><a href="@Url.Action("Api", "Demo")">
+                        Api
+                    </a>
+                </li>
+                <li class="demo-link">
+                    <span class="doc-icon"></span><a href="@Url.Content("~/Fanex.Grid.zip")">
+                        Download Fanex.Grid
+                    </a>
+                </li>
                 <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("DefaultFunctionality", "Demo")">Default Option</a></li>
+                <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("CustomizeColumn", "Demo")">Customize Column</a></li>
+                <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("CustomizeRow", "Demo")">Customize Row</a></li>
+                <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("CustomizeCell", "Demo")">Customize Cell</a></li>
                 <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("HeaderGrouping", "Demo")">Header Grouping</a></li>
                 <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("GridTitle", "Demo")">Grid Title</a></li>
                 <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("Footer", "Demo")">Footer</a></li>
@@ -72,6 +83,7 @@
                 <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("AutoResizeToFullScreen", "Demo")">Auto Resize Full Width</a></li>
                 <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("Demo1000Rows100Cols", "Demo")">1000 Rows 100 Cols</a></li>
                 <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("MultipleGrids", "Demo")">Render Multiple</a></li>
+                <li class="demo-link"><span class="example-icon"></span><a href="@Url.Action("VirtualRendering", "Demo")">Virtual Rendering</a></li>
             </ul>
         </div>
         <div id="main-panel">
@@ -81,15 +93,17 @@
             @{
                 if (ViewBag.IsShowDemo == null || ViewBag.IsNotShowDemo == false)
                 {
-                <div class="menu">
-                    <ul>
-                        <li><a href="#" id="viewdemo">View Demo </a></li>
-                        <li><a href="#">|| </a></li>
-                        <li><a href="#" id="viewsource">View Source </a></li>
-                    </ul>
-                </div>
+                    <div class="menu">
+                        <ul>
+                            <li><a href="#" id="viewdemo">View Demo </a></li>
+                            <li><a href="#">|| </a></li>
+                            <li><a href="#" id="viewsource">View Source </a></li>
+                        </ul>
+                    </div>
                 }
             }
+            <link href="~/Styles/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+            <link href="~/Styles/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
             @RenderBody()
         </div>
     </div>

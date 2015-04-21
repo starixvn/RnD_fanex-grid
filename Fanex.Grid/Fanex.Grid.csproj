@@ -15,7 +15,7 @@
     <AssemblyName>Fanex.Grid</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <JSLintSkip>
     </JSLintSkip>
     <IISExpressSSLPort />
@@ -148,6 +148,8 @@
     <Content Include="ScriptsUnittest\jasmine-samples\PlayerSpec.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\Song.js" />
     <Content Include="ScriptsUnittest\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid - Copy.js" />
+    <Content Include="Scripts\Fanex.Grid\Fanex.Grid.bk.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ko-KR.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.ja-JP.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.vi-VN.js" />
@@ -382,6 +384,10 @@
     <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Demo\MultipleGrids.cshtml" />
+    <Content Include="Views\Demo\VirtualRendering.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -400,12 +406,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51756</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:51755/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -50,7 +50,9 @@
             bodyRows: generateData(5000),
             gridExpandHeight: 150,
             //numberOfFrozenColumn: 3,
-            showNumberColumn: true
+            virtualScroller: true,
+            showNumberColumn: true,
+            numOfVirtualRows: 50
         };
     $(function () {
         var currentGrid = $("#gridId").fanexGrid(gridOptions);

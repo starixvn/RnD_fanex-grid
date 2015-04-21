@@ -160,5 +160,10 @@ namespace Fanex.Grid.Controllers
         {
             return View();
         }
+
+        public ActionResult VirtualRendering()
+        {
+            return View();
+        }
     }
 }

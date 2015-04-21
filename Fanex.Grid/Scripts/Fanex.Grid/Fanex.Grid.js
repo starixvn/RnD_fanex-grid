@@ -239,7 +239,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         timeZone: '',
         scrollWidth: 24,
         reCalculateGrid: false,
-        defaultCollapseAllGroups: false
+        defaultCollapseAllGroups: false,
         virtualScroller: false,
         numOfVirtualRows: 50,
         thresholdNeedToVirtualRendering: 100,

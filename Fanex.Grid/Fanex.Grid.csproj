@@ -370,7 +370,6 @@
     <Content Include="Views\Demo\AppendBodyRows.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="Views\Demo\Popup.cshtml" />
     <Content Include="Views\Demo\MultipleLanguage.cshtml" />
     <Content Include="Views\Demo\AutoResizeColumns.cshtml" />
@@ -386,6 +385,9 @@
     <None Include="Styles\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Demo\MultipleGrids.cshtml" />
     <Content Include="Views\Demo\VirtualRendering.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

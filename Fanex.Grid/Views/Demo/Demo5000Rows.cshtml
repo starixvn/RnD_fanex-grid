@@ -23,7 +23,7 @@
                 { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
-            bodyRows: generateData(8000),
+            bodyRows: generateData(5000),
             gridExpandHeight: 150,
             numberOfFrozenColumn: 3,
         };
@@ -36,7 +36,7 @@
     var gridOptions =
         {
             columns: [
-                { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center", FormatNumber: "0,0" },
                 { HeaderText: "Header 2", Width: 70, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 3", Width: 100, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 4", Width: 100, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
@@ -47,10 +47,11 @@
                 { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
             ],
-            bodyRows: generateData(8000),
+            bodyRows: generateData(5000),
             gridExpandHeight: 150,
             //numberOfFrozenColumn: 3,
             virtualScroller: true,
+            showNumberColumn: true,
             numOfVirtualRows: 50
         };
     $(function () {

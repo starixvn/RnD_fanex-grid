@@ -68,7 +68,14 @@
                                 { HeaderText: "Header 3", Name: "Number1", MergeRowNumber: 2 },
                                 { HeaderText: "Header 4", Name: "Number2", MergeRowNumber: 2 },
                                 { HeaderText: "Group Header 2", Name: "Number3", MergeColNumber: 5 },
-                                { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 }
+                                { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 },
+                                { HeaderText: "Header 6", Name: "Text6", MergeRowNumber: 2 },
+                                { HeaderText: "Header 6", Name: "Text7", MergeRowNumber: 2 },
+                                { HeaderText: "Header 6", Name: "Text8", MergeRowNumber: 2 },
+                                { HeaderText: "Header 6", Name: "Text9", MergeRowNumber: 2 },
+                                { HeaderText: "Header 6", Name: "Text10", MergeRowNumber: 2 },
+                                { HeaderText: "Header 6", Name: "Text11", MergeRowNumber: 2 },
+                                { HeaderText: "Header 6", Name: "Text12", MergeRowNumber: 2 }
                             ]
                      }
             ],
@@ -82,11 +89,18 @@
                 { HeaderText: "Header 7", Width: 120, Name: "Text3", Sort: true },
                 { HeaderText: "Header 8", Width: 150, Name: "Text4", Sort: true },
                 { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right", Sort: true },
-                { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right", Sort: true }
+                { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right", Sort: true },
+                { HeaderText: "Header 6", Width: 110, Name: "Text6", Sort: true },
+                { HeaderText: "Header 6", Width: 110, Name: "Text7", Sort: true },
+                { HeaderText: "Header 6", Width: 110, Name: "Text8", Sort: true },
+                { HeaderText: "Header 6", Width: 110, Name: "Text9", Sort: true },
+                { HeaderText: "Header 6", Width: 110, Name: "Text10", Sort: true },
+                { HeaderText: "Header 6", Width: 110, Name: "Text11", Sort: true },
+                { HeaderText: "Header 6", Width: 110, Name: "Text12", Sort: true }
             ],
-            bodyRows: generateData(15000),
+            bodyRows: generateDataMoreColums(15000),
            gridExpandHeight: 150,
-            numberOfFrozenColumn: 2,
+            numberOfFrozenColumn: 3,
             showPager: true,
             pagerOption: {
 //                itemsPerPage: 100,

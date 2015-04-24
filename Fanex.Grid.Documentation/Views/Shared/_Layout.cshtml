@@ -1,0 +1,88 @@
+﻿@{
+    List<MenuItem> menuList = ViewBag.MenuList as List<MenuItem>;
+    bool isShowMenuLeft = menuList != null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Font-End Guidelines</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/materialdesign")
+    @Styles.Render("~/Content/style")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/highlightcss")
+    @RenderSection("css", required: false)
+</head>
+<body>
+    @Html.Partial("_TopMenu")
+    <div class="content" id="mainContent">
+        @if (isShowMenuLeft)
+        {
+            <div class="left-panel">
+                <ul class="list-unstyled">
+                    @foreach (var menu in menuList)
+                    {
+                        <li>
+                            @if (menu.SubMenus != null)
+                            {
+                                <a class="withripple withrippl list-menu-header" data-hide-child="true" href="javascript:void(0);">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    @menu.Name<div class="ripple-wrapper"></div>
+                                </a>
+                                <ul class="sub-menu list-unstyled" style="display:none;">
+                                    <li>
+                                        @foreach (var subMenu in menu.SubMenus)
+                                        {
+                                            <a class="withripple withripple" href="@(Url.Content(subMenu.Url))"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>@subMenu.Name<div class="ripple-wrapper"></div></a>
+                                        }
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <a class="withripple withripple" href="@(Url.Content(menu.Url))"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>@menu.Name<div class="ripple-wrapper"></div></a>
+                            }
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        }
+        <div class="right-panel @(isShowMenuLeft ? "show-left" : string.Empty)" id="right-panel">
+            <div class="container-fluid" id="right-container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="title">@ViewBag.Title</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    @RenderBody()
+                    <div class="scroll-top">
+                        <span class="mdi-editor-publish icon-scroll-top" id="back-top"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>Nexcel Solutions — For internal use only</p>
+    </footer>
+    @Html.Hidden("FrontEndGuidelinesRootUrl", Url.Content("~/"))
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/materialdesign")
+    @Scripts.Render("~/bundles/layoutjs")
+    @Scripts.Render("~/bundles/highlightjs")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(function () {
+            $.material.init();
+        });
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+</body>
+</html>

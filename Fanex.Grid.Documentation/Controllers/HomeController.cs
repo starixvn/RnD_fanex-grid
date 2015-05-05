@@ -13,5 +13,10 @@ namespace Fanex.Grid.Documentation.Controllers
         {
             return View();
         }
+
+        public ActionResult ApiReferences()
+        {
+            return View();
+        }
     }
 }

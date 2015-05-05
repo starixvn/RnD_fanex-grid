@@ -350,7 +350,7 @@ function generateLongColsData(numberRows) {
                 CssClass: '',
                 CustomAttr: '',
                 SubRows: '',
-                RowHeight: Math.random() * 100
+                //RowHeight: Math.random() * 100
             }
         );
     }

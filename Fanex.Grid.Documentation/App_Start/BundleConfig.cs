@@ -57,7 +57,9 @@
 
             bundles.Add(new ScriptBundle("~/bundles/layoutjs").Include(
                         "~/Scripts/Libraries/Namespace/namespace.js",
-                        "~/Scripts/Site.js"));
+                        "~/Scripts/Site.js",
+                        "~/Scripts/Fanex.Grid/Fanex.Pagination.js",
+                        "~/Scripts/Fanex.Grid/Fanex.Grid.js"));
 
             bundles.Add(new LessBundle("~/Content/bootstrap").Include(
                         "~/Content/Bootstrap/CSS/bootstrap.css"));
@@ -69,7 +71,9 @@
 
             bundles.Add(new LessBundle("~/Content/style").Include(
                         "~/Content/style.less",
-                        "~/Content/CustomizedControls/tab.less"));
+                        "~/Content/CustomizedControls/tab.less",
+                        "~/Scripts/Fanex.Grid/Fanex.Pagination.css",
+                        "~/Scripts/Fanex.Grid/Fanex.Grid.css"));
 
             bundles.Add(new LessBundle("~/Content/highlightcss").Include(
                         "~/Content/CodeHighlight/shCore.css",

@@ -1691,18 +1691,22 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var options = me.Options;
             //// For Mouse hover event
             if (options.showHighlightRow === true && options.numberOfFrozenColumn > 0) {
-                me.$grid.find('.highlight-row').unbind('mouseenter mouseleave').mouseenter(function () {
-                    var $this = $(this);
-                    var hlattr = $this.attr('highlightatt');
-                    if (isValid(hlattr)) {
-                        if (hlattr.indexOf('frozen') > 0) {
-                            me.$grid.find('tr[highlightatt="' + hlattr.replace('frozen', 'main') + '"]').addClass('mousehoverbeyond');
+                me.$grid
+                    .off('mouseenter.grid', '.highlight-row')
+                    .on('mouseenter.grid', '.highlight-row', function () {
+                        var $this = $(this);
+                        var hlattr = $this.attr('highlightatt');
+                        if (isValid(hlattr)) {
+                            if (hlattr.indexOf('frozen') > 0) {
+                                me.$grid.find('tr[highlightatt="' + hlattr.replace('frozen', 'main') + '"]').addClass('mousehoverbeyond');
+                            }
+                            else {
+                                me.$grid.find('tr[highlightatt="' + hlattr.replace('main', 'frozen') + '"]').addClass('mousehoverbeyond');
+                            }
                         }
-                        else {
-                            me.$grid.find('tr[highlightatt="' + hlattr.replace('main', 'frozen') + '"]').addClass('mousehoverbeyond');
-                        }
-                    }
-                }).mouseleave(function () {
+                    })
+                    .off('mouseleave.grid', '.highlight-row')
+                    .on('mouseleave.grid', '.highlight-row', function () {
                     var $this = $(this);
                     var hlattr = $this.attr('highlightatt');
                     if (isValid(hlattr)) {

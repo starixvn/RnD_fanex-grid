@@ -77,7 +77,7 @@
 
                 //Generate Items Per Page
                 $('<div class="itemperpage">' + fanexGridCurrentLanguage.pageSize + ' </div>').appendTo(panel);
-                var optPageSize = $('<select id="itemperpage"></select>').css("width", "50px");
+                var optPageSize = $('<select id="itemperpage"></select>').css("width", "53px");
                 var totalItemPerPage = opts.itemsPerPageArray.length;
 
                 if (totalItemPerPage > 0) {

@@ -1,12 +1,25 @@
 ﻿@{
+    Layout = "~/Views/Shared/_SampleLayout.cshtml";
     ViewBag.Title = "DefaultOption";
 }
-<div id="sourcecontainer" class="col-sm-12">
-    <div id="gridId" class="freegrid  content-grid">
-    </div>
-</div>
-<div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
-    <pre name="code" class="groovy">
+<div class="col-sm-12">
+    <ul id="myTab" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#demo" role="tab" data-toggle="tab">Demo</a>
+        </li>
+        <li role="presentation" class="">
+            <a href="#source" role="tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active" id="demo">
+            <div id="sourcecontainer">
+                <div id="gridId" class="freegrid  content-grid">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="source">
+            <pre class="brush: javascript">
     var gridOptions =
         {
             columns: [
@@ -31,8 +44,9 @@
             }, 5000);
         });
     </pre>
+        </div>
+    </div>
 </div>
-
 @section scripts
 {
     <script type="text/javascript">
@@ -79,14 +93,11 @@
                 ],
                 bodyRows: generateData(100),
                 showNumberColumn: true,
-                marginRight: 0
+                marginRight: 0,
+                gridExpandHeight: 50
             };
         $(function () {
             var currentGrid = $("#gridId").fanexGrid(gridOptions);
-
-            setTimeout(function () {
-                $("#gridId").fanexGrid('resizeHeight', 500);
-            }, 5000);
         });
     </script>
 }

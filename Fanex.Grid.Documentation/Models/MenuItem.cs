@@ -13,6 +13,8 @@ namespace Fanex.Grid.Documentation.Models
 
         public string Url { get; set; }
 
+        public string ViewName { get; set; }
+
         public List<MenuItem> SubMenus { get; set; }
     }
 }

@@ -2172,6 +2172,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             var toIndex = 0;
                             var isRemoveAllRows = false;
                             var gapMaxLength = 0;
+                            var negativeRows = 0;
 
                             //console.log('%cMain: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
                             //var virtualTop = 0;
@@ -2191,6 +2192,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     if (newStartIndex + numOfVirtualRows < fanexGridOption.rowStartIndex) {
                                         isRemoveAllRows = true;
                                         newStartIndex = currentScrollIndex - parseInt(numOfVirtualRows / 2);
+                                        if (newStartIndex < 0) {
+                                            negativeRows = newStartIndex;
+                                        }
                                         newStartIndex = Math.max(newStartIndex, 0);
                                         fanexGridOption.rowEndIndex = toIndex = newStartIndex + numOfVirtualRows;
                                     }
@@ -2222,6 +2226,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                                 if (isRemoveAllRows) {
                                     var removeAllContainerScrollTop = parseInt((toIndex - newStartIndex) * bodyRowHeight / 2) - yscrollbarHalfHeight;
+                                    if (negativeRows < 0) {
+                                        removeAllContainerScrollTop += negativeRows * bodyRowHeight;
+                                    }
                                     container.prop("scrollTop", removeAllContainerScrollTop);
                                     me.cPreTop = removeAllContainerScrollTop;
                                     if (isShowFrozenCol) {

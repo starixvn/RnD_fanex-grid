@@ -18,38 +18,39 @@
 <div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">
     <pre name="code" class="groovy">
     
-    var gridOptions =
-    {
-        columns: [
-                { HeaderText: "No.", Width: 90, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Header 2", Width: 80, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Header 3", Width: 120, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Header 4", Width: 120, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Header 6", Width: 110, Name: "Text2" },
-            { HeaderText: "Header 7", Width: 120, Name: "Text3" },
-            { HeaderText: "Header 8", Width: 150, Name: "Text4" },
-            { HeaderText: "Header 9", Width: 130, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
-        ],
-        bodyRows: generateData(10000),
-        gridExpandHeight: 150,
-        numberOfFrozenColumn: 3,
-        showPager: true,
-        pagerOption: {       
-            itemsPerPage: 500,
-            currentPage: 0,
-            itemsPerPageArray: [500, 2000, 5000],
-            showDetail: true
-        },
-        virtualScroller: true,
-        bodyRowHeight: 30
-    };
-
+            var gridOptions =
+        {
+            columns: [
+                 { HeaderText: "No.", Width: 90, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Header 2", Width: 80, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 3", Width: 120, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 4", Width: 120, Name: "Number2", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 6", Width: 110, Name: "Text2" },
+                { HeaderText: "Header 7", Width: 120, Name: "Text3" },
+                { HeaderText: "Header 8", Width: 150, Name: "Text4" },
+                { HeaderText: "Header 9", Width: 130, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
+            ],
+            bodyRows: generateData(10000),
+            gridExpandHeight: 150,
+            numberOfFrozenColumn: 3,
+            showPager: true,
+            pagerOption: {       
+                itemsPerPage: 500,
+                currentPage: 0,
+                itemsPerPageArray: [500, 2000, 5000],
+                showDetail: true
+            },
+            virtualScroller: true,
+            keepStateOnVirtualRow: true, --- Set this false incase your grid just need to show data and no manipulation on it
+            bodyRowHeight: 30
+        };
     $(function () {
         $('#btn-row-number').click(function () {
             gridOptions.pagerOption.currentPage = 0;
             gridOptions.bodyRows = generateData(parseInt($('#row-number').val()));
+            gridOptions.showPager = $('#show-pager').is(':checked');
             $("#gridId").fanexGrid(gridOptions);
         }).trigger('click');
     });
@@ -82,6 +83,7 @@
             },
             virtualScroller: true,
             keepStateOnVirtualRow: true,
+            renderVirtualTimeout: 15,
             bodyRowHeight: 30
         };
     $(function () {

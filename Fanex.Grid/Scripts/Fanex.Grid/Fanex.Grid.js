@@ -1770,7 +1770,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                     });
                 }
 
-                $(me.$grid).gridScroller(me.gridOptions);
+                //$(me.$grid).gridScroller(me.gridOptions);
+                me.RenderGridScroller(me.gridOptions);
             }
         },
         InitGridScroller: function (isShowPager) {
@@ -2260,7 +2261,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     container.prop("scrollTop", newContainerScrollTop);
                                     if (isShowFrozenCol) {
                                         var removeFrozenRows = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0) + ')');
-                                        Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allFrozenRowsHtml, removeRows);
+                                        Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allFrozenRowsHtml, removeFrozenRows);
                                         removeFrozenRows.remove();
                                         me.rowHeaderPreTop = newContainerScrollTop;
                                         rowheader.prop("scrollTop", newContainerScrollTop)

@@ -19,9 +19,9 @@
             <div class="collapse navbar-collapse" id="topmenu">
                 <ul class="nav navbar-nav">
                     <li class="@(tabName == "introduction" ? "active" : string.Empty)">@Html.ActionLink("Introduction", "Index", "Home")</li>
-                    <li class="@(tabName == "commoncontrols" ? "active" : string.Empty)" id="commonControls">@Html.ActionLink("Tutorials", "Index", "Tutorials")</li>
-                    <li class="@(tabName == "htmlrules" ? "active" : string.Empty)">@Html.ActionLink("Samples", "Index", "Samples")</li>
-                    <li class="@(tabName == "javascriptrules" ? "active" : string.Empty)">@Html.ActionLink("API References", "ApiReferences", "Home")</li>
+                    <li class="@(tabName == "tutorials" ? "active" : string.Empty)" id="commonControls">@Html.ActionLink("Tutorials", "Index", "Tutorials", new { @tutorialName = 1 }, null)</li>
+                    <li class="@(tabName == "samples" ? "active" : string.Empty)">@Html.ActionLink("Samples", "Index", "Samples")</li>
+                    <li class="@(tabName == "api" ? "active" : string.Empty)">@Html.ActionLink("API References", "ApiReferences", "Home")</li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

@@ -11,11 +11,15 @@ namespace Fanex.Grid.Documentation.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.TabName = "introduction";
+
             return View();
         }
 
         public ActionResult ApiReferences()
         {
+            ViewBag.TabName = "api";
+
             return View();
         }
     }

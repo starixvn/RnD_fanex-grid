@@ -9,35 +9,40 @@ namespace Fanex.Grid.Documentation.Controllers
 {
     public class TutorialsController : Controller
     {
-        private List<MenuItem> _tutorialsMenuList;
+        private const string TutorialsUrl = "~/Tutorials/Index?tutotialName=";
+        private static List<MenuItem> _tutorialsMenuList = new List<MenuItem>
+            {
+                new MenuItem { Name = "Part 1 - Fanex Grid in a nutshell", Url = TutorialsUrl, ViewName = "Part1" },
+                new MenuItem { Name = "Part 2 - Grid Title", Url = TutorialsUrl, ViewName = "Part2" },
+                new MenuItem { Name = "Part 3 - Header Grouping", Url = TutorialsUrl, ViewName = "Part3" },
+                new MenuItem { Name = "Part 4 - Grid Footer", Url = TutorialsUrl, ViewName = "Part4" },
+                new MenuItem { Name = "Part 5 - Frozen Columns", Url = TutorialsUrl, ViewName = "Part5" },
+                new MenuItem { Name = "Part 6 - Sorting", Url = TutorialsUrl, ViewName = "Part6" },
+                new MenuItem { Name = "Part 7 - Paging", Url = TutorialsUrl, ViewName = "Part7" },
+                new MenuItem { Name = "Part 8 - Grid, Column and Cell Options", Url = TutorialsUrl, ViewName = "Part8" },
+                new MenuItem { Name = "Part 9 - Tree View", Url = TutorialsUrl, ViewName = "Part9" },
+                new MenuItem { Name = "Part 10 - Multiple Languages – Globalization", Url = TutorialsUrl, ViewName = "Part10" },
+                new MenuItem { Name = "Part 11 - Auto resize column", Url = TutorialsUrl, ViewName = "Part11" },
+                new MenuItem { Name = "Part 12 - Understanding grid render mechanism", Url = TutorialsUrl, ViewName = "Part12" }
+            };
 
         public TutorialsController()
         {
-            _tutorialsMenuList = new List<MenuItem>
-            {
-                new MenuItem { Name = "Part 1", Url = "~/"},
-                new MenuItem { Name = "Part 2", Url = "~/"},
-                new MenuItem { Name = "Part 3", Url = "~/"},
-                new MenuItem { Name = "Part 4", Url = "~/"},
-                new MenuItem { Name = "Part 5", Url = "~/"},
-                new MenuItem { Name = "Part 6", Url = "~/"},
-                new MenuItem { Name = "Part 7", Url = "~/"},
-                new MenuItem { Name = "Part 8", Url = "~/"},
-                new MenuItem { Name = "Part 9", Url = "~/"},
-                new MenuItem { Name = "Part 10", Url = "~/"},
-                new MenuItem { Name = "Part 11", Url = "~/"}
-            };
+            ViewBag.TabName = "tutorials";
         }
 
         // GET: Tutorials
-        public ActionResult Index(string viewName = "")
+        public ActionResult Index(string tutotialName = "")
         {
-            if (string.IsNullOrEmpty(viewName))
+            if (string.IsNullOrEmpty(tutotialName))
             {
-                viewName = "Part1";
+                tutotialName = "Part1";
             }
+
             ViewBag.MenuList = _tutorialsMenuList;
-            return View(string.Format("~/Views/Tutorials/{0}.cshtml", viewName));
+            ViewBag.SelectedMenuName = tutotialName;
+
+            return View(string.Format("~/Views/Tutorials/{0}.cshtml", tutotialName));
         }
     }
 }

@@ -122,6 +122,28 @@
     <Content Include="Content\CodeHighlight\shCoreMDUltra.css" />
     <Content Include="Content\CodeHighlight\shCoreMidnight.css" />
     <Content Include="Content\CodeHighlight\shCoreRDark.css" />
+    <Content Include="Content\Images\Part10-Multiple-Language.png" />
+    <Content Include="Content\Images\Part10Example1.png" />
+    <Content Include="Content\Images\Part10Example2.png" />
+    <Content Include="Content\Images\Part12-GridExplain.png" />
+    <Content Include="Content\Images\Part12-GridExplain2.png" />
+    <Content Include="Content\Images\Part12-GridExplain3.png" />
+    <Content Include="Content\Images\Part2Example.png" />
+    <Content Include="Content\Images\Part2Example1.png" />
+    <Content Include="Content\Images\Part2Example2.png" />
+    <Content Include="Content\Images\Part2Example3.png" />
+    <Content Include="Content\Images\Part2Example4.png" />
+    <Content Include="Content\Images\Part3Example.png" />
+    <Content Include="Content\Images\Part4Example1.png" />
+    <Content Include="Content\Images\Part4Example1b.png" />
+    <Content Include="Content\Images\Part4Example2.png" />
+    <Content Include="Content\Images\Part5Example1.png" />
+    <Content Include="Content\Images\Part6Example1.png" />
+    <Content Include="Content\Images\Part7Example1.png" />
+    <Content Include="Content\Images\Part8Example1.png" />
+    <Content Include="Content\Images\Part9Example1.png" />
+    <Content Include="Content\Images\Part9Example2.png" />
+    <Content Include="Content\Images\Part9Example3.png" />
     <Content Include="Content\MaterialDesign\CSS\material-wfont.css" />
     <Content Include="Content\MaterialDesign\CSS\material-wfont.min.css" />
     <Content Include="Content\MaterialDesign\CSS\material.css" />
@@ -150,8 +172,6 @@
     </Content>
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\Libraries\jQuery\jquery-1.11.1.intellisense.js" />
-    <Content Include="Scripts\Fanex.Grid\Fanex.Grid - Copy.js" />
-    <Content Include="Scripts\Fanex.Grid\Fanex.Grid.bk.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Grid.css" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Grid.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Pagination.css" />
@@ -301,6 +321,17 @@
     <Content Include="Views\Samples\RenderMultipleGrids.cshtml" />
     <Content Include="Views\Samples\VirtualRendering\Default.cshtml" />
     <Content Include="Views\Samples\VirtualRendering\Customized.cshtml" />
+    <Content Include="Views\Tutorials\Part2.cshtml" />
+    <Content Include="Views\Tutorials\Part3.cshtml" />
+    <Content Include="Views\Tutorials\Part4.cshtml" />
+    <Content Include="Views\Tutorials\Part5.cshtml" />
+    <Content Include="Views\Tutorials\Part6.cshtml" />
+    <Content Include="Views\Tutorials\Part7.cshtml" />
+    <Content Include="Views\Tutorials\Part8.cshtml" />
+    <Content Include="Views\Tutorials\Part9.cshtml" />
+    <Content Include="Views\Tutorials\Part10.cshtml" />
+    <Content Include="Views\Tutorials\Part11.cshtml" />
+    <Content Include="Views\Tutorials\Part12.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

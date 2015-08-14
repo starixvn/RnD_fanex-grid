@@ -292,7 +292,7 @@
     <Content Include="Views\Samples\Header\Grouping.cshtml" />
     <Content Include="Views\Samples\Header\Customized.cshtml" />
     <Content Include="Views\Samples\Title\TitleText.cshtml" />
-    <Content Include="Views\Samples\Title\SuppottedButtons.cshtml" />
+    <Content Include="Views\Samples\Title\SuppotedButtons.cshtml" />
     <Content Include="Views\Samples\Title\CustomizedButtons.cshtml" />
     <Content Include="Views\Samples\Footer\Grouping.cshtml" />
     <Content Include="Views\Samples\Footer\Customized.cshtml" />
@@ -332,6 +332,7 @@
     <Content Include="Views\Tutorials\Part10.cshtml" />
     <Content Include="Views\Tutorials\Part11.cshtml" />
     <Content Include="Views\Tutorials\Part12.cshtml" />
+    <Content Include="Views\Samples\Footer\Show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

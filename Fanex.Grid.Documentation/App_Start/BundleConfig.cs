@@ -61,6 +61,8 @@
                         "~/Scripts/Fanex.Grid/Fanex.Pagination.js",
                         "~/Scripts/Fanex.Grid/Fanex.Grid.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fanexgridlanguage").IncludeDirectory("~/Scripts/Fanex.Grid/Language", "*.js"));
+
             bundles.Add(new LessBundle("~/Content/bootstrap").Include(
                         "~/Content/Bootstrap/CSS/bootstrap.css"));
 

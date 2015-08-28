@@ -76,6 +76,7 @@ namespace Fanex.Grid.Documentation.Controllers
                     {
                         new MenuItem { Name = "Default Client Side", Url = SamplePageUrl , ViewName = "DefaultClientSide"},
                         new MenuItem { Name = "Customized Client Side", Url = SamplePageUrl , ViewName = "CustomizedClientSide"},
+                        new MenuItem { Name = "Sort Events", Url = SamplePageUrl , ViewName = "SortEvents"},
                         new MenuItem { Name = "Server Side", Url = SamplePageUrl , ViewName = "ServerSide"},
                         new MenuItem { Name = "Initial Sort Icon", Url = SamplePageUrl , ViewName = "InitialSortIcon"}
                     }

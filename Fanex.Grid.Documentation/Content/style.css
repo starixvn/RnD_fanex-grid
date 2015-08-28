@@ -431,10 +431,10 @@ a:active,
 }
 .right-panel .body-content {
   position: absolute;
-  right: 16px;
+  right: 10px;
   left: 0px;
   bottom: 6px;
-  top: 50px;
+  top: 15px;
 }
 .right-panel .body-content .frame-container {
   height: 100%;
@@ -443,6 +443,15 @@ a:active,
   width: 100%;
   height: 100%;
   background-color: white;
+}
+.sample-container .title {
+  color: #0136ac;
+  font-size: 18px;
+  margin-top: 15px;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+.sample-container .filter {
+  margin: 0 0 10px 0;
 }
 /********************************************************/
 /*                        Footer                        */

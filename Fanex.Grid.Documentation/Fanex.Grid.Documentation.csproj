@@ -333,6 +333,7 @@
     <Content Include="Views\Tutorials\Part11.cshtml" />
     <Content Include="Views\Tutorials\Part12.cshtml" />
     <Content Include="Views\Samples\Footer\Show.cshtml" />
+    <Content Include="Views\Samples\Sort\SortEvents.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

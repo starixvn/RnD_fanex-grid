@@ -309,7 +309,7 @@
     <Content Include="Views\Samples\Merging\Columns.cshtml" />
     <Content Include="Views\Samples\Merging\Rows.cshtml" />
     <Content Include="Views\Samples\Merging\BothColumnsAndRows.cshtml" />
-    <Content Include="Views\Samples\Merging\HighlightFrozenWidth.cshtml" />
+    <Content Include="Views\Samples\CustomizedOptions\HighlightFrozenWidth.cshtml" />
     <Content Include="Views\Samples\Merging\CorrectRowsHeight.cshtml" />
     <Content Include="Views\Samples\Tree\Default.cshtml" />
     <Content Include="Views\Samples\Tree\Customized.cshtml" />

@@ -27,7 +27,8 @@ namespace Fanex.Grid.Documentation.Controllers
                         new MenuItem { Name = "Hide Background Scroller", Url = SamplePageUrl, ViewName = "HideBackgroundScroller"},
                         new MenuItem { Name = "Fixed Width/Height", Url = SamplePageUrl, ViewName = "FixedWidthHeight"},
                         new MenuItem { Name = "Min Width/Height", Url = SamplePageUrl, ViewName = "MinWidthHeight"},
-                        new MenuItem { Name = "Scroller Width", Url = SamplePageUrl, ViewName = "ScrollerWidth"}
+                        new MenuItem { Name = "Scroller Width", Url = SamplePageUrl, ViewName = "ScrollerWidth"},
+                        new MenuItem { Name = "Highlight Frozen Width", Url = SamplePageUrl , ViewName = "HighlightFrozenWidth"}
                     }
                 },
                 new MenuItem { Name = "Customized Content", ViewName = "CustomizedContent", 
@@ -94,7 +95,6 @@ namespace Fanex.Grid.Documentation.Controllers
                         new MenuItem { Name = "Columns", Url = SamplePageUrl , ViewName = "Columns"},
                         new MenuItem { Name = "Rows", Url = SamplePageUrl , ViewName = "Rows"},
                         new MenuItem { Name = "Both Columns and Rows", Url = SamplePageUrl , ViewName = "BothColumnsAndRows"},
-                        new MenuItem { Name = "Highlight Frozen Width", Url = SamplePageUrl , ViewName = "HighlightFrozenWidth"},
                         new MenuItem { Name = "Correct Rows Height", Url = SamplePageUrl , ViewName = "CorrectRowsHeight"},
                     }
                 },

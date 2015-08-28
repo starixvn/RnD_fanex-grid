@@ -1730,7 +1730,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                     });
                 }
 
-                $(me.$grid).gridScroller(me.gridOptions);
+                me.RenderGridScroller(me.gridOptions);
             }
         },
         InitGridScroller: function (isShowPager) {

@@ -101,7 +101,7 @@
         });
         SyntaxHighlighter.defaults['toolbar'] = false;
     </script>
-    @RenderSection("scripts", required: false)
+    
     <script type="text/javascript">
         $(function () {
             $('#javascript-destination').html($('#javascript-source').html());
@@ -109,6 +109,6 @@
             SyntaxHighlighter.all();
         });
     </script>
-
+    @RenderSection("scripts", required: false)
 </body>
 </html>

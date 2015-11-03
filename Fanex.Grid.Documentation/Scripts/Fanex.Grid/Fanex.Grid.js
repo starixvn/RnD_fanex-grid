@@ -175,8 +175,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         footerRows: [],
         showTitle: false,
         headerColumnHeight: 25,
-        bodyRowHeight: 21,
-        footerRowHeight: 21,
+        bodyRowHeight: 25,
+        footerRowHeight: 25,
         titleInfo:
         {
             text: "",
@@ -311,6 +311,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 options.highlightFrozenWidth--;
             }
         }
+
+        
     };
 
     Fanex.Grid.prototype =
@@ -2143,7 +2145,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var yscrollbarHeight = yscrollbar.height();
             var yscrollbarHalfHeight = parseInt(yscrollbarHeight / 2);
             var containerHalfHeight = parseInt(container.height() / 2);
-            var bodyRowHeight = fanexGridOption.bodyRowHeight + 5;
+            var bodyRowHeight = fanexGridOption.bodyRowHeight;
             var maxLength = fanexGridOption.realLength;
             var isShowFrozenCol = fanexGridOption.numberOfFrozenColumn > 0;
             var tbodyContainer = container.find('tbody');
@@ -2528,9 +2530,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allBodyRowsHtml, removeRows);
                             removeRows.remove();
 
-                            newContainerScrollTop = currentTop - removeHeight;
-                            me.cPreTop -= removeHeight;
-                            top -= removeHeight;
+                            newContainerScrollTop = Math.max(0, currentTop - removeHeight);
+                            me.cPreTop = Math.max(0, me.cPreTop - removeHeight);
+                            top = Math.max(0, top - removeHeight);
                             me.containerPreTop = newContainerScrollTop;
                             container.prop("scrollTop", newContainerScrollTop);
                             isSubTop = true;
@@ -2562,10 +2564,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 rowheader.prop("scrollTop", top);
                             }
                         }
-
-                        //if (!isAddTop && !isSubTop) {
-
-                        //}
 
                         me.containerPreTop = top;
                     }
@@ -2684,9 +2682,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             var removeHeight = removeRows.length * bodyRowHeight;
                             removeRows.remove();
 
-                            newContainerScrollTop = currentTop - removeHeight;
-                            me.rPreTop -= removeHeight;
-                            top -= removeHeight;
+                            newContainerScrollTop = Math.max(0, currentTop - removeHeight);
+                            me.rPreTop = Math.max(0, me.rPreTop - removeHeight);
+                            top = Math.max(0, top - removeHeight);
                             me.rowHeaderPreTop = newContainerScrollTop;
                             rowheader.prop("scrollTop", newContainerScrollTop);
                             isSubTop = true;
@@ -3276,7 +3274,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                     totalHeight += bodyRowHeight;
                 }
 
-                totalHeight += 5;
+                //totalHeight += 5;
             }
 
             return totalHeight;

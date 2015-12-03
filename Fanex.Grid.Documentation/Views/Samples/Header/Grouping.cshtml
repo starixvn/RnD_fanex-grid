@@ -19,14 +19,20 @@
            groupHeaderRows: [
                     {
                         Columns: [
-                               { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 2},
-                               { HeaderText: "Header 3", Name: "Number1", MergeRowNumber: 2 },
-                               { HeaderText: "Header 4", Name: "Number2", MergeColNumber: 2 },
-                               { HeaderText: "Group Header 2", Name: "Text2", MergeColNumber: 3 },
-                               { HeaderText: "Header 10", Name: "Number4", MergeRowNumber: 2 },
-                               { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 }
+                               { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 3},
+                               { HeaderText: "Header 4", Name: "Number2", MergeColNumber: 5, MergeRowNumber: 2 },
+                               { HeaderText: "Header 10", Name: "Number4", MergeColNumber: 2 }
                         ]
-                    }
+                    },
+                     {
+                         Columns: [
+                                { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 2 },
+                                { HeaderText: "Header 3", Name: "Number1", MergeRowNumber: 2 },
+                                //{ HeaderText: "Header 4", Name: "Number2", MergeColNumber: 5 },
+                                { HeaderText: "Header 10", Name: "Number4", MergeRowNumber: 2 },
+                                { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 }
+                         ]
+                     }
            ],
            columns: [
                { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center"},

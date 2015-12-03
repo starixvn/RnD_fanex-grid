@@ -37,6 +37,7 @@ namespace Fanex.Grid.Documentation.Controllers
                         new MenuItem { Name = "Customized Column", Url = SamplePageUrl , ViewName = "CustomizedColumn"},
                         new MenuItem { Name = "Customized Row", Url = SamplePageUrl , ViewName = "CustomizedRow"},
                         new MenuItem { Name = "Customized Cell", Url = SamplePageUrl , ViewName = "CustomizedCell"},
+                        new MenuItem { Name = "Custom Rendering", Url = SamplePageUrl , ViewName = "CustomRendering"},
                         new MenuItem { Name = "Append Rows Realtime", Url = SamplePageUrl , ViewName = "AppendRowsRealtime"}
                     }
                 },
@@ -137,11 +138,11 @@ namespace Fanex.Grid.Documentation.Controllers
         }
         
         // GET: Samples
-        public ActionResult Index()
+        public ActionResult Index(string sampleName)
         {
             ViewBag.MenuList = _sampleMenuList;
 
-            return View();
+            return View(model: sampleName);
         }
 
         public ActionResult SamplePage(string sampleName)

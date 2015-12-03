@@ -22,6 +22,7 @@
                     <li class="@(tabName == "tutorials" ? "active" : string.Empty)" id="commonControls">@Html.ActionLink("Tutorials", "Index", "Tutorials", new { @tutorialName = 1 }, null)</li>
                     <li class="@(tabName == "samples" ? "active" : string.Empty)">@Html.ActionLink("Samples", "Index", "Samples")</li>
                     <li class="@(tabName == "api" ? "active" : string.Empty)">@Html.ActionLink("API References", "ApiReferences", "Home")</li>
+                    <li class="@(tabName == "faq" ? "active" : string.Empty)">@Html.ActionLink("FAQ", "FrequentlyQuestions", "Home")</li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

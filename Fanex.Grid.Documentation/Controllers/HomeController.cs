@@ -22,5 +22,12 @@ namespace Fanex.Grid.Documentation.Controllers
 
             return View();
         }
+
+        public ActionResult FrequentlyQuestions()
+        {
+            ViewBag.TabName = "faq";
+
+            return View();
+        }
     }
 }

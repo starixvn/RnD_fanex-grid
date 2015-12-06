@@ -6,7 +6,8 @@ var site =
                 parentMenu: null,
                 toggleMenu: null,
                 leftPanel: null,
-                rightPanel: null
+                rightPanel: null,
+                sampleLinks: null
             },
         registerEvents: function () {
             site.cachedDOM.parentMenu
@@ -41,12 +42,20 @@ var site =
                     $this.data('is-hide', !isHide);
                     $(window).trigger('resize');
                 });
+
+            site.cachedDOM.sampleLinks
+            .off('click.sampleLinks')
+            .on('click.sampleLinks', function () {
+                var $this = $(this);
+                window.history.pushState(null, "CurrentSample", $this.attr('href'));
+            });
         },
         initialize: function () {
             site.cachedDOM.parentMenu = $('.list-menu-header');
             site.cachedDOM.toggleMenu = $('#toggleMenu');
             site.cachedDOM.leftPanel = $('#mainContent .left-panel');
             site.cachedDOM.rightPanel = $('#mainContent .right-panel');
+            site.cachedDOM.sampleLinks = site.cachedDOM.leftPanel.find('a[target=sampleFrameContent]');
 
             site.registerEvents();
         }

@@ -1,5 +1,6 @@
 ﻿@{
     string tabName = (string)ViewBag.TabName;
+    var displayNoneForToggleIcon = (tabName != "tutorials" && tabName != "samples") ? "style=\"display:none;\"" : string.Empty;
 }
 <header class="header">
     <nav class="navbar navbar-default" role="navigation">
@@ -10,7 +11,7 @@
                     Fanex
                     <span> Grid</span>
                 </a>
-                <i class="mdi-navigation-menu icon-left-panel withripple menu-show" id="toggleMenu"></i>
+                <i class="mdi-navigation-menu icon-left-panel withripple menu-show" id="toggleMenu" @Html.Raw(displayNoneForToggleIcon)></i>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topmenu">
                     <i class="mdi-navigation-more-horiz"></i>
                 </button>

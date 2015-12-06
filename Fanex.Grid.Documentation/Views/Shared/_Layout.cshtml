@@ -44,7 +44,8 @@
                                     <li>
                                         @foreach (var subMenu in menu.SubMenus)
                                         {
-                                            <a class="withripple withripple" href="@(Url.Content(subMenu.Url + menu.ViewName + "/" + subMenu.ViewName))" @(isShowInIframe ? Html.Raw("target=sampleFrameContent").ToString() : string.Empty) >
+                                            var sampleName = menu.ViewName + "/" + subMenu.ViewName;
+                                            <a class="withripple withripple " href="@(Url.Content(subMenu.Url + sampleName))" @(isShowInIframe ? Html.Raw("target=sampleFrameContent").ToString() : string.Empty)>
                                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                                 @subMenu.Name<div class="ripple-wrapper"></div>
                                             </a>

@@ -20,6 +20,11 @@
     </div>
 }
 
+@section javascriptSource
+{
+    <pre class="brush: javascript; highlight: [53, 54, 55, 56]" id="javascript-destination"></pre>
+}
+
 @section htmlSource
 {
     <pre class="brush: html">
@@ -88,7 +93,8 @@
             virtualScroller: true,
             numOfVirtualRows: 100,
             bodyRowHeight: 35,
-            virtualThresholdNumber: 25
+            virtualThresholdNumber: 25,
+            keepStateOnVirtualRow: true
         };
         $(function () {
             $('#btn-row-number').click(function () {

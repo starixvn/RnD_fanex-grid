@@ -4,7 +4,7 @@
 }
 
 <div class="col-sm-12">
-    In this tutorial, I will introduce how can we group header. Let’s suppose that we need to built a Grid Header like that:
+    In this tutorial, I will introduce how we can group header. Let’s suppose that we need to build a Grid Header like that:
 
     <p>
         <img width="100%" src="~/Content/Images/Part4Example1.png" />
@@ -33,14 +33,14 @@
         };
     </pre>
 
-    <p><b>Second</b> look at image below:</p>
+    <p><b>Second</b>, look at image below:</p>
 
     <p>
         <img width="100%" src="~/Content/Images/Part4Example1b.png" />
     </p>
 
     <p>
-        Row 1 is described on "columns" property of Grid option above, and the <text class="text-danger">others rows higher than row 1 will be described in "groupHeaderRows" property</text> in below example, we just add only one row over the row1. See configuration below:
+        Row 1st is described on "columns" property of Grid option above, and the <text class="text-danger">others rows higher than row 1st will be described in "groupHeaderRows" property</text>. In below example, we just want to add only one row over the row 1st:
     </p>
 
     <pre class="brush: javascript">
@@ -79,11 +79,11 @@
         <text class="text-danger">
             "customizeHeader" property set to "true"
         </text> to tell Fanex.Grid that we have more than one header row, and then
-        <text class="text-danger">"groupHeaderRows" will contain others Header rows except first row</text> was already declared in "columns" property. We noted that there are two column properties for merging are:
+        <text class="text-danger">"groupHeaderRows" will contain others Header rows except first row</text>which was already declared in "columns" property. We noted that there are two column properties for merging are:
     </p>
     <ul>
-        <li><text class="text-danger">MergeColNumber</text> merge columns of row, like attribute "colspan" of "td" element in table</li>
-        <li><text class="text-danger">MergeRowNumber</text> merge same column of many rows, like attribute "rowspan" of "td" element in table</li>
+        <li><text class="text-danger">MergeColNumber</text> merge columns of row, act like attribute "colspan" of "td" element in table</li>
+        <li><text class="text-danger">MergeRowNumber</text> merge same column of many rows, act like attribute "rowspan" of "td" element in table</li>
     </ul>
 
     <p>

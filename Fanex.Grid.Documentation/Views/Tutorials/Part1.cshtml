@@ -6,17 +6,19 @@
     <h4> 1) Simple Example</h4>
 
     <p>
-        We start the series of tutorial by very simple example. In this sample, we render grid by provided data. There are three steps to complete this example.
+        We start the series of tutorial by very simple example. In this sample, we render grid using provided data. There are three steps to complete this example.
     </p>
     <p>
-        <b>First</b>, we need a container to display grid.
+        <b>First</b>, we need a container to for Fanex.Grid renders all content in it.
     </p>
 
 <pre class="brush: javascript">
-<div id="gridId" class="freegrid"></div>
+    <div class="grid-boundary">
+    <div id="gridId" class="freegrid"></div>
+    </div>
 </pre>
     <p>
-        The container must have id, this id must unique for each container, and has "freegrid" class.
+        The container must have id, this id must be unique for each container, and has "freegrid" class.
     </p>
     <p>
         <b>Second</b>, we need a Grid option, which describes everything display on grid. Let’s see a simple example about Grid Option:
@@ -63,10 +65,11 @@ var gridOption = {
 }
 </pre>
     <p>
-        <text class="text-danger">The "columns" property, is an array, describes everything about Grid Columns</text> and three required properties are Width, Name, HeaderText, and Name is primary key for each column, this property contains all general information about columns form header, body to footer.
+        <text class="text-danger">The "columns" property, is an array, describes everything about Grid Columns</text> .Three required properties are Width, Name, and HeaderText. Name Property is primary key for each column, this property contains all general information about columns form header, body to footer. The order of Name Property should be consistent between Header Columns and Body Columns.
     </p>
     <p>
-        <text class="text-danger">The "bodyRows" property describes everything will display on the Grid body</text>, and each row will have a list of column map one by one with column of "columns". We can understand that is the way we bind data source. See image below for more details:
+        <text class="text-danger">The "bodyRows" property describes everything will display on the Grid body</text>, and each row has a list of column map one by one with column of "columns".
+        We can understand that is the way we bind data source to grid body. See image below for more details:
     </p>
     <p>
         Note:
@@ -76,14 +79,14 @@ var gridOption = {
             <text class="text-danger">All Properties of DataSource will name follow to the Pascal Case Convention</text> (for binding easily from server code return JSON).
         </li>
         <li>
-            <text class="text-danger">All Grid Options will name follow to Camel Case Convention.</text>
+            <text class="text-danger">All Grid Option will name follow to Camel Case Convention.</text>
         </li>
     </ul>
     <p>
         <img src="~/Content/Images/Part2Example1.png" />
     </p>
     <p>
-        <b>Last step</b>, We start render by calling "fanexGrid" function with prepared grid option .
+        <b>Last step</b>, We start to render by calling "fanexGrid" function with prepared grid option .
     </p>
 
 <pre class="brush: javascript">
@@ -111,10 +114,10 @@ var gridOption = {
         <img width="100%" src="~/Content/Images/Part2Example3.png" />
     </p>
     <p>
-        <b>b) Configurable Height:</b>
+        <b>b) Fixed Height:</b>
     </p>
     <p>
-        To use configurable height, we have to set <text class="text-danger">"fullHeight" property to "false"</text> and then set <text class="text-danger">"gridHeight" property to value</text> that we need. See example below:
+        To use fixed height, we have to set <text class="text-danger">"fullHeight" property to "false"</text> and then set <text class="text-danger">"gridHeight" property to value</text> that we need. See example below:
     </p>
     <img width="100%" src="~/Content/Images/Part2Example4.png" />
 </div>

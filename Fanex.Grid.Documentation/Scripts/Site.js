@@ -47,7 +47,9 @@ var site =
             .off('click.sampleLinks')
             .on('click.sampleLinks', function () {
                 var $this = $(this);
-                window.history.pushState(null, "CurrentSample", $this.attr('href').replace('SamplePage', 'Index'));
+                if (window.history.pushState) {
+                    window.history.pushState(null, "CurrentSample", $this.attr('href').replace('SamplePage', 'Index'));
+                }
             });
         },
         initialize: function () {

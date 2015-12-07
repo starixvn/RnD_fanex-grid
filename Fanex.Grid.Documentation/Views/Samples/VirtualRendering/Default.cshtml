@@ -19,6 +19,11 @@
 </div>
 }
 
+@section javascriptSource
+{
+    <pre class="brush: javascript; highlight: [53]" id="javascript-destination"></pre>
+}
+
 @section htmlSource
 {
     <pre class="brush: html">
@@ -84,10 +89,7 @@
                 itemsPerPageArray: [500, 2000, 5000],
                 showDetail: true
             },
-            virtualScroller: true,
-            numOfVirtualRows: 100,
-            virtualThresholdNumber: 30
-            //bodyRowHeight: 35
+            virtualScroller: true
         };
         $(function () {
             $('#btn-row-number').click(function () {

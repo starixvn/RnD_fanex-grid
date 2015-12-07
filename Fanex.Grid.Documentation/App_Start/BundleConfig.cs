@@ -63,10 +63,10 @@
 
             bundles.Add(new ScriptBundle("~/bundles/fanexgridlanguage").IncludeDirectory("~/Scripts/Fanex.Grid/Language", "*.js"));
 
-            bundles.Add(new LessBundle("~/Content/bootstrap").Include(
+            bundles.Add(new LessBundle("~/Content/bootstrapcss").Include(
                         "~/Content/Bootstrap/CSS/bootstrap.css"));
 
-            bundles.Add(new LessBundle("~/Content/materialdesign").Include(
+            bundles.Add(new LessBundle("~/Content/materialdesigncss").Include(
                         "~/Content/MaterialDesign/CSS/material-wfont.css",
                         "~/Content/MaterialDesign/CSS/ripples.min.css",
                         "~/Content/CustomizedControls/material-design.less"));
@@ -88,7 +88,7 @@
         /// <param name="bundles">The bundle collections.</param>
         private static void RegisterSitesBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/Bunldes/Scripts/Site").Include(
+            bundles.Add(new ScriptBundle("~/Bunldes/Scripts/Sitejs").Include(
                 "~/Scripts/Site.js"));
         }
     }

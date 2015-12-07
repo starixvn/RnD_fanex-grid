@@ -241,9 +241,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         reCalculateGrid: false,
         defaultCollapseAllGroups: false,
         virtualScroller: false,
-        numOfVirtualRows: 50,
-        thresholdNeedToVirtualRendering: 100,
-        virtualThresholdNumber: 15,
+        numOfVirtualRows: 100,
+        thresholdNeedToVirtualRendering: 150,
+        virtualThresholdNumber: 30,
         renderVirtualTimeout: 50,
         keepStateOnVirtualRow: false,
         minHeight: 300,
@@ -2166,7 +2166,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var top = yscrollbar.scrollTop();
 
                 if (fanexGridOption.shouldVirtualScroller) {
-                    if (top != me.yScrollPreTop) {
+                    if (top !== me.yScrollPreTop) {
                         if (me.renderVirtualTimeoutId) {
                             clearTimeout(me.renderVirtualTimeoutId);
                         }
@@ -2400,12 +2400,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             if (!isRemoveAllRows
                                 && me.yScrollPreTop !== top) {
                                 var containerOldTop = container.scrollTop();
-                                if (typeof (me.yScrollPreTop) == 'undefined') {
+                                if (typeof (me.yScrollPreTop) === 'undefined') {
                                     me.yScrollPreTop = 0;
                                 }
 
                                 var containerNewTop = containerOldTop + (top - me.yScrollPreTop) - scrollBackWhenTopZero + scrollForwardWhenScrollTopIsMax;
-                                if (top == 0) {
+                                if (top === 0) {
                                     containerNewTop = 0;
                                 }
 
@@ -2444,7 +2444,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var yScrollTop = yscrollbar.prop("scrollTop") + (top - (me.cPreTop || 0));
                 var isAddTop = false, isSubTop = false;
                 if (fanexGridOption.shouldVirtualScroller) {
-                    if (me.containerPreTop != top) {
+                    if (me.containerPreTop !== top) {
                         var maxLength = fanexGridOption.realLength;
                         var currentScrollIndex = parseInt((yScrollTop + containerHalfHeight) / bodyRowHeight);
                         var rowNeedRenderStartIndex = Math.max(0, currentScrollIndex - fanexGridOption.virtualThresholdNumber);
@@ -2569,7 +2569,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                         if (me.cPreTop !== top) {
                             var yscrollbarOldTop = yscrollbar.scrollTop();
-                            if (typeof (me.cPreTop) == 'undefined') {
+                            if (typeof (me.cPreTop) === 'undefined') {
                                 me.cPreTop = 0;
                             }
 
@@ -2614,7 +2614,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var yScrollTop = yscrollbar.prop("scrollTop") + (top - (me.rPreTop || 0));
                 var isAddTop = false, isSubTop = false;
                 if (fanexGridOption.shouldVirtualScroller) {
-                    if (me.rowHeaderPreTop != top) {
+                    if (me.rowHeaderPreTop !== top) {
                         var maxLength = fanexGridOption.realLength;
                         var currentScrollIndex = parseInt((yScrollTop + containerHalfHeight) / bodyRowHeight);
                         var rowNeedRenderStartIndex = Math.max(0, currentScrollIndex - fanexGridOption.virtualThresholdNumber);
@@ -2722,7 +2722,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                         if (me.rPreTop !== top) {
                             var yscrollbarOldTop = yscrollbar.scrollTop();
-                            if (typeof (me.rPreTop) == 'undefined') {
+                            if (typeof (me.rPreTop) === 'undefined') {
                                 me.rPreTop = 0;
                             }
 

@@ -806,7 +806,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 parentRowClass = 'parent-row parent-level-' + level;
             }
 
-            frozenRowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.CustomAttr || '') + trRowIndexAttr + trHighlightAtt + trAutoFixRowAtt + '>');
+            frozenRowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.CustomAttr || '')
+                + trRowIndexAttr + trHighlightAtt + trAutoFixRowAtt + '>');
             for (var columnIndex = 0; columnIndex < colsLength; columnIndex++) {
                 var currentCol = currentRow.Columns[columnIndex];
                 var customSpan = '';
@@ -899,7 +900,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 if (options.showTree === true && currentRow.SubRows) {
                     parentRowClass = 'parent-row parent-level-' + level;
                 }
-                rowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.CustomAttr || '') + trRowIndexAttr + trHighlightAtt + trAutoFixRow + '>');
+                rowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.CustomAttr || '')
+                    + trRowIndexAttr + trHighlightAtt + trAutoFixRow + '>');
 
                 for (var colIndex = 0; colIndex < colsLength; colIndex++) {
                     var currentCol = currentRow.Columns[colIndex];
@@ -2184,8 +2186,14 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             var isRemoveAllRows = false;
                             var gapMaxLength = 0;
                             var negativeRows = 0;
+                            var i = 0;
+                            var removeAllContainerScrollTop = false;
+                            var removeRowsLength = 0;
 
-                            //console.log('%cMain: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
+                            var removeRows = false;
+                            var removeHeight = false;
+
+                            
                             //var virtualTop = 0;
                             var scrollForwardWhenScrollTopIsMax = 0;
                             var newContainerScrollTop = 0;
@@ -2213,7 +2221,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                                 //console.log('%cMain: newStartIndex: ' + newStartIndex + ',toIndex: ' + toIndex, 'background: #95BAC6');
 
-                                for (var i = newStartIndex; i < toIndex; i++) {
+                                for (i = newStartIndex; i < toIndex; i++) {
                                     addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                     if (isShowFrozenCol) {
                                         addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
@@ -2240,7 +2248,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 currentTop = container.scrollTop();
 
                                 if (isRemoveAllRows) {
-                                    var removeAllContainerScrollTop = parseInt((toIndex - newStartIndex) * bodyRowHeight / 2) - yscrollbarHalfHeight;
+                                    removeAllContainerScrollTop = parseInt((toIndex - newStartIndex) * bodyRowHeight / 2) - yscrollbarHalfHeight;
                                     if (negativeRows < 0) {
                                         removeAllContainerScrollTop += negativeRows * bodyRowHeight;
                                     }
@@ -2252,37 +2260,39 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     }
                                 }
                                 else {
-                                    var removeRowsLength = toIndex - newStartIndex;
+                                    removeRowsLength = toIndex - newStartIndex;
                                     fanexGridOption.rowEndIndex = Math.max(fanexGridOption.rowEndIndex - removeRowsLength, 0);
 
                                     //console.log('%cMain: fanexGridOption.rowEndIndex: ' + fanexGridOption.rowEndIndex, 'background: #95BAC6');
                                     //// Remove end rows
 
-                                    var removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
-                                    var removeHeight = removeRowsLength * bodyRowHeight;
+                                    removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
+                                    removeHeight = removeRowsLength * bodyRowHeight;
                                     Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allBodyRowsHtml, removeRows);
                                     removeRows.remove();
                                     newContainerScrollTop = currentTop + removeHeight;
                                     me.containerPreTop = newContainerScrollTop;
                                     container.prop("scrollTop", newContainerScrollTop);
                                     if (isShowFrozenCol) {
-                                        var removeFrozenRows = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0) + ')');
+                                        var removeFrozenRows = tbodyRowHeader.find('tr:gt('
+                                            + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0)
+                                            + ')');
                                         Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allFrozenRowsHtml, removeFrozenRows);
                                         removeFrozenRows.remove();
                                         me.rowHeaderPreTop = newContainerScrollTop;
-                                        rowheader.prop("scrollTop", newContainerScrollTop)
+                                        rowheader.prop("scrollTop", newContainerScrollTop);
                                     }
 
 
                                     var containerContentHeight = container.find('.col_body_content').height();
-                                    var containerHeight = container.height()
+                                    var containerHeight = container.height();
                                     if (newContainerScrollTop > (containerContentHeight - containerHeight)) {
                                         scrollForwardWhenScrollTopIsMax = newContainerScrollTop - (containerContentHeight - containerHeight);
                                     }
 
                                 }
                             }
-                            //console.log('%cMain: top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
+                            
                             var scrollBackWhenTopZero = 0;
                             if (!isRemoveAllRows
                                 && rowNeedRenderEndIndex > fanexGridOption.rowEndIndex) {
@@ -2310,7 +2320,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                                 //console.log('%cMain: fromIndex: ' + fromIndex + ',newEndIndex: ' + newEndIndex, 'background: #D9C5C1');
 
-                                for (var i = fromIndex; i < newEndIndex; i++) {
+                                for (i = fromIndex; i < newEndIndex; i++) {
                                     addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                     if (isShowFrozenCol) {
                                         addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
@@ -2337,7 +2347,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 //// Remove start rows
                                 if (isRemoveAllRows) {
 
-                                    var removeAllContainerScrollTop = parseInt((newEndIndex - fromIndex + 1) * bodyRowHeight / 2) - yscrollbarHalfHeight;;
+                                    removeAllContainerScrollTop = parseInt((newEndIndex - fromIndex + 1) * bodyRowHeight / 2) - yscrollbarHalfHeight;
                                     if (gapMaxLength > 0) {
                                         //newEndIndex === maxLength
                                         //removeAllContainerScrollTop = parseInt((newEndIndex - fromIndex) * bodyRowHeight) - yscrollbarHeight;
@@ -2355,15 +2365,15 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                                 }
                                 else {
-                                    var removeRowsLength = newEndIndex - fromIndex;
+                                    removeRowsLength = newEndIndex - fromIndex;
 
                                     fanexGridOption.rowStartIndex += removeRowsLength;
 
                                     //console.log('%cMain: fanexGridOption.rowStartIndex: ' + fanexGridOption.rowStartIndex, 'background: #D9C5C1');
 
 
-                                    var removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
-                                    var removeHeight = removeRows.length * bodyRowHeight;
+                                    removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
+                                    removeHeight = removeRows.length * bodyRowHeight;
                                     Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allBodyRowsHtml, removeRows);
                                     removeRows.remove();
                                     newContainerScrollTop = currentTop - removeHeight;
@@ -2446,7 +2456,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         var toIndex = 0;
                         var newContainerScrollTop = 0;
                         var currentTop = 0;
-                        //console.log('%cSub: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
+                        var i = 0;
+                        var isRemoveAllRows = false;
+                        var removeRows = false;
+                        var removeHeight = false;
+                        var removeRowsHeader = 0;
+                        var removeRowsLength = 0;
+                        
                         if (fanexGridOption.rowStartIndex > 0
                             && rowNeedRenderStartIndex < fanexGridOption.rowStartIndex) {
                             toIndex = fanexGridOption.rowStartIndex;
@@ -2456,7 +2472,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 newStartIndex = rowNeedRenderStartIndex;
                             }
 
-                            for (var i = newStartIndex; i < toIndex; i++) {
+                            for (i = newStartIndex; i < toIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                 if (isShowFrozenCol) {
                                     addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
@@ -2471,12 +2487,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             currentTop = container.scrollTop();
 
-                            var removeRowsLength = toIndex - newStartIndex;
+                            removeRowsLength = toIndex - newStartIndex;
                             fanexGridOption.rowEndIndex = Math.max(fanexGridOption.rowEndIndex - removeRowsLength, 0);
 
 
-                            var removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
-                            var removeHeight = removeRowsLength * bodyRowHeight;
+                            removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
+                            removeHeight = removeRowsLength * bodyRowHeight;
                             Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allBodyRowsHtml, removeRows);
                             removeRows.remove();
                             newContainerScrollTop = currentTop + removeHeight;
@@ -2488,7 +2504,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             isAddTop = true;
 
                             if (isShowFrozenCol) {
-                                var removeRowsHeader = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0) + ')');
+                                removeRowsHeader = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0)
+                                    + ')');
                                 Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allFrozenRowsHtml, removeRowsHeader);
                                 removeRowsHeader.remove();
                                 me.rowHeaderPreTop = newContainerScrollTop;
@@ -2496,8 +2513,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 me.rPreTop = me.cPreTop;
                             }
                         }
-                        //console.log('%cSub: top: ' + (yScrollTop + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
-                        var scrollBackWhenTopZero = 0;
+
                         if (rowNeedRenderEndIndex > fanexGridOption.rowEndIndex) {
                             //// Add more end rows
                             fromIndex = fanexGridOption.rowEndIndex;
@@ -2510,7 +2526,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             if (newEndIndex > fanexGridOption.allBodyRowsHtml.length) {
                                 return;
                             }
-                            for (var i = fromIndex; i < newEndIndex; i++) {
+                            for (i = fromIndex; i < newEndIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                 if (isShowFrozenCol) {
                                     addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
@@ -2525,12 +2541,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             currentTop = container.scrollTop();
 
-                            var removeRowsLength = newEndIndex - fromIndex;
+                            removeRowsLength = newEndIndex - fromIndex;
 
                             fanexGridOption.rowStartIndex += removeRowsLength;
 
-                            var removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
-                            var removeHeight = removeRows.length * bodyRowHeight;
+                            removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
+                            removeHeight = removeRows.length * bodyRowHeight;
                             Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allBodyRowsHtml, removeRows);
                             removeRows.remove();
 
@@ -2542,7 +2558,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             isSubTop = true;
 
                             if (isShowFrozenCol) {
-                                var removeRowsHeader = tbodyRowHeader.find('tr:lt(' + removeRowsLength + ')');
+                                removeRowsHeader = tbodyRowHeader.find('tr:lt(' + removeRowsLength + ')');
                                 Fanex.Grid.Helper.KeepStateOfRows(fanexGridOption.allFrozenRowsHtml, removeRowsHeader);
                                 removeRowsHeader.remove();
                                 me.rowHeaderPreTop = newContainerScrollTop;
@@ -2610,7 +2626,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         var toIndex = 0;
                         var newContainerScrollTop = 0;
                         var currentTop = 0;
-                        //console.log('%cSub: containerTop:' + container.scrollTop() + ' top: ' + (top + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderStartIndex: ' + rowNeedRenderStartIndex, 'background: #95BAC6');
+                        var i = 0;
+                        var isRemoveAllRows = false;
+                        var removeRows = false;
+                        var removeHeight = false;
+                        var removeRowsLength = 0;
+                        
                         if (fanexGridOption.rowStartIndex > 0
                             && rowNeedRenderStartIndex < fanexGridOption.rowStartIndex) {
                             toIndex = fanexGridOption.rowStartIndex;
@@ -2620,7 +2641,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 newStartIndex = rowNeedRenderStartIndex;
                             }
 
-                            for (var i = newStartIndex; i < toIndex; i++) {
+                            for (i = newStartIndex; i < toIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                 addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
                             }
@@ -2631,12 +2652,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             currentTop = rowheader.scrollTop();
 
-                            var removeRowsLength = toIndex - newStartIndex;
+                            removeRowsLength = toIndex - newStartIndex;
                             fanexGridOption.rowEndIndex = Math.max(fanexGridOption.rowEndIndex - removeRowsLength, 0);
 
 
                             var removeFrozenRows = tbodyRowHeader.find('tr:gt(' + Math.max(tbodyRowHeader.children().length - removeRowsLength - 1, 0) + ')');
-                            var removeHeight = removeRowsLength * bodyRowHeight;
+                            removeHeight = removeRowsLength * bodyRowHeight;
                             removeFrozenRows.remove();
                             newContainerScrollTop = currentTop + removeHeight;
                             me.rPreTop += removeHeight;
@@ -2645,14 +2666,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             rowheader.prop("scrollTop", newContainerScrollTop);
                             isAddTop = true;
 
-                            var removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
+                            removeRows = tbodyContainer.find('tr:gt(' + Math.max(tbodyContainer.children().length - removeRowsLength - 1, 0) + ')');
                             removeRows.remove();
                             me.containerPreTop = newContainerScrollTop;
                             container.prop("scrollTop", newContainerScrollTop);
                             me.cPreTop += removeHeight;
                         }
-                        //console.log('%cSub: top: ' + (yScrollTop + yscrollbarHalfHeight) + ',currentScrollIndex: ' + currentScrollIndex + ',rowNeedRenderEndIndex: ' + rowNeedRenderEndIndex, 'background: #D9C5C1');
-                        var scrollBackWhenTopZero = 0;
+                        
                         if (rowNeedRenderEndIndex > fanexGridOption.rowEndIndex) {
                             //// Add more end rows
                             fromIndex = fanexGridOption.rowEndIndex;
@@ -2667,7 +2687,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 return;
                             }
 
-                            for (var i = fromIndex; i < newEndIndex; i++) {
+                            for (i = fromIndex; i < newEndIndex; i++) {
                                 addRowsHtml += fanexGridOption.allBodyRowsHtml[i];
                                 addFrozenRowsHtml += fanexGridOption.allFrozenRowsHtml[i];
                             }
@@ -2678,12 +2698,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                             currentTop = rowheader.scrollTop();
 
-                            var removeRowsLength = newEndIndex - fromIndex;
+                            removeRowsLength = newEndIndex - fromIndex;
 
                             fanexGridOption.rowStartIndex += removeRowsLength;
 
-                            var removeRows = tbodyRowHeader.find('tr:lt(' + removeRowsLength + ')');
-                            var removeHeight = removeRows.length * bodyRowHeight;
+                            removeRows = tbodyRowHeader.find('tr:lt(' + removeRowsLength + ')');
+                            removeHeight = removeRows.length * bodyRowHeight;
                             removeRows.remove();
 
                             newContainerScrollTop = Math.max(0, currentTop - removeHeight);
@@ -2693,7 +2713,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             rowheader.prop("scrollTop", newContainerScrollTop);
                             isSubTop = true;
 
-                            var removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
+                            removeRows = tbodyContainer.find('tr:lt(' + removeRowsLength + ')');
                             removeRows.remove();
                             me.containerPreTop = newContainerScrollTop;
                             container.prop("scrollTop", newContainerScrollTop);

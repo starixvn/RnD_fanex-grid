@@ -89,8 +89,7 @@
         private static void RegisterSitesBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Bunldes/Scripts/Site").Include(
-                "~/Scripts/Site.js"
-                ));
+                "~/Scripts/Site.js"));
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Fanex.Grid.Documentation.Models
+﻿namespace Fanex.Grid.Documentation.Models
 {
+    using System.Collections.Generic;
+
     public class MenuItem
     {
         public string Name { get; set; }

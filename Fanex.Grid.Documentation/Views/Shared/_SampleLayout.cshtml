@@ -51,18 +51,19 @@
                 </div>
             </div>
             <div class="tab-pane" id="html">
-                <pre class="brush: html">
                     @if (IsSectionDefined("htmlSource"))
                     {
-                        @RenderSection("htmlSource")                    
+                        @RenderSection("htmlSource")
                     }
                     else
                     {
-                        <div class="grid-container">
-                            <div id="gridId" class="freegrid"></div>
-                        </div>
+                        <pre class="brush: html">
+                            <div class="grid-container">
+                                <div id="gridId" class="freegrid"></div>
+                            </div>
+                        </pre>
                     }
-                </pre>
+                
             </div>
             <div class="tab-pane" id="css">
                 @if (IsSectionDefined("cssSource"))

@@ -2,6 +2,15 @@
     ViewBag.Title = "Customized Treeview";
 }
 
+@section css
+{
+    <style type="text/css" id="css-source">
+        .float-right {
+            float: right;
+        }
+    </style>
+}
+
 @section javascriptSource
 {
     <pre class="brush: javascript; highlight: [78, 88, 95, 96]" id="javascript-destination"></pre>
@@ -69,6 +78,50 @@
             return rows;
         }
 
+        var footerRows = [
+              {
+                  Columns: [
+                        { Name: "No", MergeColNumber: 2, Value: "<span class='right bold float-right'>Total</span>" },
+                        { Name: "Number1", Value: 2 },
+                        { Name: "Number2", Value: 3 },
+                        { Name: "Number3", Value: 4 },
+                        { Name: "Text2", Value: 5 },
+                        { Name: "Text3", Value: 6 },
+                        { Name: "Text4", Value: 7 },
+                        { Name: "Number4", Value: 8 },
+                        { Name: "Number5", Value: 9 }
+                  ],
+                  SubRows: [
+                      {
+                          Columns: [
+                        { Name: "No", MergeColNumber: 2, Value: "Sub Total", CellAlign: 'right', CssClass: 'float-right' },
+                        { Name: "Number1", Value: 2 },
+                        { Name: "Number2", Value: 3 },
+                        { Name: "Number3", Value: 4 },
+                        { Name: "Text2", Value: 5 },
+                        { Name: "Text3", Value: 6 },
+                        { Name: "Text4", Value: 7 },
+                        { Name: "Number4", Value: 8 },
+                        { Name: "Number5", Value: 9 }
+                          ]
+                      },
+                      {
+                          Columns: [
+                        { Name: "No", MergeColNumber: 2, Value: "Sub Total", CellAlign: 'right', CssClass: 'float-right' },
+                        { Name: "Number1", Value: 2 },
+                        { Name: "Number2", Value: 3 },
+                        { Name: "Number3", Value: 4 },
+                        { Name: "Text2", Value: 5 },
+                        { Name: "Text3", Value: 6 },
+                        { Name: "Text4", Value: 7 },
+                        { Name: "Number4", Value: 8 },
+                        { Name: "Number5", Value: 9 }
+                          ]
+                      }
+                  ]
+              }
+        ];
+
         var gridOptions =
         {
             customizeHeader: true,
@@ -105,7 +158,9 @@
                     showCollapseExpandButton: true
                 },
             showDistinctRow: false,
-            defaultCollapseAllGroups: true
+            defaultCollapseAllGroups: true,
+            showFooter: true,
+            footerRows: footerRows
         };
 
         $(function () {

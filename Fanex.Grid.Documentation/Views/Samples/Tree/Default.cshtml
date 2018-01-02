@@ -8,8 +8,28 @@
         .float-right {
             float: right;
         }
+        body
+        {
+            overflow: auto;
+        }
     </style>
 }
+
+@section sampleRender
+{
+<div class="grid-container">
+    <div id="gridId" class="freegrid">
+    </div>
+</div>
+<div class="grid-container">
+    <div id="gridId1" class="freegrid">
+    </div>
+</div>
+<div class="grid-container">
+    <div id="gridId2" class="freegrid">
+    </div>
+</div>
+    }
 
 @section javascriptSource
 {
@@ -200,6 +220,8 @@
             gridExpandHeight: 170,
             showTree: true,
             showTitle: true,
+            fullHeight: false,
+            gridHeight: 400,
             titleInfo:
                 {
                     text: "Demo Title",
@@ -213,6 +235,8 @@
 
         $(function () {
             var currentGrid = $("#gridId").fanexGrid(gridOptions);
+            var currentGrid = $("#gridId1").fanexGrid(gridOptions);
+            var currentGrid = $("#gridId2").fanexGrid(gridOptions);
         });
     </script>
 }

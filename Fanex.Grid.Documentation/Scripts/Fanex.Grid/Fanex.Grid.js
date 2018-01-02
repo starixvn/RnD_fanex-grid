@@ -111,6 +111,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var fanexGrid = new Fanex.Grid(this, { reCalculateGrid: true });
                 var gridOptions = Fanex.Grid.List[fanexGrid.tableContentId].gridOptions;
                 gridOptions.isResetScroller = false;
+
+                if (gridOptions.autoCalculateGridExpandHeight
+                    && gridOptions.fullHeight) {
+                    gridOptions.gridHeight = fanexGrid.CalculateGridExpandHeight(gridOptions);
+                }
+
                 fanexGrid.RenderGridScroller(gridOptions);
                 return fanexGrid.GetjQueryInstance();
             });
@@ -238,9 +244,10 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         virtualThresholdNumber: 30,
         renderVirtualTimeout: 50,
         keepStateOnVirtualRow: false,
-        minHeight: 200,
+        minHeight: 120,
         minWidth: 300,
-        fullWidth: true
+        fullWidth: true,
+        autoCalculateGridExpandHeight: false
     };
 
     var Fanex = Fanex || {};
@@ -464,12 +471,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var numberOfFrozenColumnNew = (options.enableHiddenColumns === false ?
                                             Fanex.Grid.Helper.ComputeNewFrozenColumn(options.hiddenColumns, options.numberOfFrozenColumn) :
                                             options.numberOfFrozenColumn);
+
             //// Render Grid Scroller
             me.gridOptions =
             {
                 tblContentId: me.tableContentId,
                 column: me.columnsWidth,
-                gridHeight: options.fullHeight ? options.gridExpandHeight : options.gridHeight,
+                gridHeight: options.fullHeight ? me.CalculateGridExpandHeight(options) : options.gridHeight,
                 gridWidth: options.gridWidth,
                 minHeight: options.minHeight,
                 minWidth: options.minWidth,
@@ -481,7 +489,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 bottomBorderWidth: options.bottomBorderWidth,
                 isResetScroller: options.isResetScroller,
                 fullHeight: options.fullHeight,
-                fullWidth: options.fullWidth
+                fullWidth: options.fullWidth,
+                autoCalculateGridExpandHeight: options.autoCalculateGridExpandHeight
             };
             me.InitGridScroller(options.showPager && (options.bodyRows.length > 0));
             me.RenderGridScroller(me.gridOptions);
@@ -493,6 +502,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             }
             me.RegisterEvents();
             me.AutoResizeRowHeight();
+        },
+        CalculateGridExpandHeight: function (options) {
+            if (!options.autoCalculateGridExpandHeight) {
+                return options.gridExpandHeight;
+            }
+            
+            return this.$grid.offset().top - (options.showTitle ? -17 : 0);
         },
         RenderTitle: function () {
             var me = this;

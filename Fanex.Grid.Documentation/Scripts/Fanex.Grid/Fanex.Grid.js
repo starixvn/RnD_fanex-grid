@@ -247,7 +247,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         minHeight: 120,
         minWidth: 300,
         fullWidth: true,
-        autoCalculateGridExpandHeight: false
+        autoCalculateGridExpandHeight: false,
+        numOfPaddingForGridExpandHeight: 10
     };
 
     var Fanex = Fanex || {};
@@ -490,7 +491,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 isResetScroller: options.isResetScroller,
                 fullHeight: options.fullHeight,
                 fullWidth: options.fullWidth,
-                autoCalculateGridExpandHeight: options.autoCalculateGridExpandHeight
+                autoCalculateGridExpandHeight: options.autoCalculateGridExpandHeight,
+                numOfPaddingForGridExpandHeight: options.numOfPaddingForGridExpandHeight
             };
             me.InitGridScroller(options.showPager && (options.bodyRows.length > 0));
             me.RenderGridScroller(me.gridOptions);
@@ -507,8 +509,10 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             if (!options.autoCalculateGridExpandHeight) {
                 return options.gridExpandHeight;
             }
-            
-            return this.$grid.offset().top - (options.showTitle ? -17 : 0);
+
+            var expandHeight = this.$grid.offset().top + options.numOfPaddingForGridExpandHeight;
+
+            return expandHeight;
         },
         RenderTitle: function () {
             var me = this;

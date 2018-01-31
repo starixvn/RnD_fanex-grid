@@ -4,6 +4,6 @@ if (fanexGridLanguage) {
         noData: 'Không có dữ liệu',
         pageSize: 'Dung lượng trang:',
         goToPage: 'Di chuyển đến trang',
-        pagingText: 'Displaying <b>{0}</b> to <b>{1}</b> of <b>{2}</b> item(s)'
+        pagingText: '<span class="pager-detail-text">Displaying <b>{0}</b> to <b>{1}</b> of </span><b>{2}</b> item(s)'
     };
 }

@@ -22,7 +22,10 @@
                     { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
                 ],
                 bodyRows: generateData(100),
-                autoCalculateGridExpandHeight: true
+                numberOfFrozenColumn: 3,
+                fullHeight: false,
+                gridHeight: 1000
+                //autoCalculateGridExpandHeight: true
             };
 
             $("#gridId").fanexGrid(gridOptions);

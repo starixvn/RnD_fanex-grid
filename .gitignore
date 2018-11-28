@@ -30,3 +30,7 @@ _ReSharper*/
 $tf*/
 test-reports*.*
 .vs/config/applicationhost.config
+/.vs/Fanex.Grid/v15/Server/sqlite3/db.lock
+/.vs/Fanex.Grid/v15/Server/sqlite3/storage.ide
+/.vs/Fanex.Grid/v15/Server/sqlite3/storage.ide-shm
+/.vs/Fanex.Grid/v15/Server/sqlite3/storage.ide-wal

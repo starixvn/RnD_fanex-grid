@@ -1,26 +1,26 @@
 ﻿namespace Fanex.Grid.HtmlHelperExtensions.Extensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Web.Script.Serialization;
-    using Fanex.Grid.HtmlHelperExtensions.Utilities;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
-    internal static class JSONExtensions
+    internal static class JsonExtensions
     {
-        public static string ToJSON(this object obj)
+        private static readonly JsonSerializerSettings camelCaseJsonSerializerSettings = new JsonSerializerSettings
         {
-            var serializer = new JavaScriptSerializer();
-            serializer.RegisterConverters(new JavaScriptConverter[] { new NullPropertiesConverter() });
-            return serializer.Serialize(obj);
-        }
-        public static string ToJSON(this object obj, int recursionDepth)
+            Formatting = Formatting.Indented,
+            ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            NullValueHandling = NullValueHandling.Ignore
+        };
+
+        private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
         {
-            var serializer = new JavaScriptSerializer();
-            serializer.RegisterConverters(new JavaScriptConverter[] { new NullPropertiesConverter() });
-            serializer.RecursionLimit = recursionDepth;
-            return serializer.Serialize(obj);
-        }
+            NullValueHandling = NullValueHandling.Ignore
+        };
+
+        public static string Serialize(object obj)
+            => JsonConvert.SerializeObject(obj, jsonSerializerSettings);
+
+        public static string SerializeWithCamelCase(object obj)
+            => JsonConvert.SerializeObject(obj, camelCaseJsonSerializerSettings);
     }
 }

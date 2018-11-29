@@ -1,10 +1,8 @@
 ﻿namespace Fanex.Grid.HtmlHelperExtensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
     using Fanex.Grid.HtmlHelperExtensions.Extensions;
+    using Newtonsoft.Json;
 
     public class TitleOption
     {
@@ -22,90 +20,69 @@
 
         public TitleOption(string text)
         {
-            _text = text;
+            Text = text;
         }
 
-        private string _text;
+        public string Text { get; private set; }
 
-        private bool? _showExcelButton;
+        public bool? ShowExcelButton { get; private set; }
 
-        private string _exportExcelFunction;
+        public string ExportExcelFunction { get; private set; }
 
-        private bool? _showBackButton;
+        public bool? ShowBackButton { get; private set; }
 
-        private string _backFunction;
+        public string BackFunction { get; private set; }
 
-        private bool? _showSendMailButton;
+        public bool? ShowSendMailButton { get; private set; }
 
-        private string _sendMailFunction;
+        public string SendMailFunction { get; private set; }
 
-        private bool? _showCollapseExpandButton;
+        public bool? ShowCollapseExpandButton { get; private set; }
 
-        private string _customButtonsHtml;
+        [JsonProperty(PropertyName = "customButtons")]
+        public string CustomButtonsHtml { get; private set; }
 
-        private bool? _showButtonsWhenNoData;
+        public bool? ShowButtonsWhenNoData { get; private set; }
 
         public TitleOption SetButtonsVisibleWhenNoData()
         {
-            _showButtonsWhenNoData = true;
+            ShowButtonsWhenNoData = true;
             return this;
         }
 
         public TitleOption SetExportExcelButton(string exportExcelFunction)
         {
-            _showExcelButton = true;
-            _exportExcelFunction = exportExcelFunction;
+            ShowExcelButton = true;
+            ExportExcelFunction = exportExcelFunction;
             return this;
         }
 
         public TitleOption SetBackButton(string backFunction)
         {
-            _showBackButton = true;
-            _backFunction = backFunction;
+            ShowBackButton = true;
+            BackFunction = backFunction;
 
             return this;
         }
 
         public TitleOption SetSendMailButton(string sendMailFunction)
         {
-            _showSendMailButton = true;
-            _sendMailFunction = sendMailFunction;
+            ShowSendMailButton = true;
+            SendMailFunction = sendMailFunction;
             return this;
         }
 
         public TitleOption SetCollapseExpandButtonVisible()
         {
-            _showCollapseExpandButton = true;
+            ShowCollapseExpandButton = true;
             return this;
         }
 
         public TitleOption SetCustomButtons(string customButtonsHtml)
         {
-            _customButtonsHtml = customButtonsHtml;
+            CustomButtonsHtml = customButtonsHtml;
 
             return this;
-        }
-
-        public override string ToString()
-        {
-            var script = new StringBuilder();
-
-            script.AppendLine("{");
-
-            script.AppendJavascriptProperty(_text, "text");
-            script.AppendJavascriptProperty(_showExcelButton, "showExcelButton");
-            script.AppendJavascriptFunction(_exportExcelFunction, "exportExcelFunction");
-            script.AppendJavascriptProperty(_showBackButton, "showBackButton");
-            script.AppendJavascriptFunction(_backFunction, "backFunction");
-            script.AppendJavascriptProperty(_showSendMailButton, "showSendMailButton");
-            script.AppendJavascriptFunction(_sendMailFunction, "sendMailFunction");
-            script.AppendJavascriptProperty(_showCollapseExpandButton, "showCollapseExpandButton");
-            script.AppendJavascriptProperty(_customButtonsHtml, "customButtons");
-            script.AppendJavascriptProperty(_showButtonsWhenNoData, "showButtonsWhenNoData");
-
-            script.AppendLine("}");
-
-            return script.ToString();
         }
     }
 }

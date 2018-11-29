@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using Fanex.Grid.HtmlHelperExtensions.Extensions;
+    using Newtonsoft.Json;
 
     public class PagerOption
     {
@@ -17,115 +18,100 @@
         //    afterPagedFunction: null,
         //    showDetail: true
 
-        private int? _itemsPerPage;
+        public PagerOption(int itemsPerPage, int[] itemsPerPageArray, int currentPage = 0)
+        {
+            CurrentPage = currentPage;
+            ItemsPerPage = itemsPerPage;
+            ItemsPerPageArray = itemsPerPageArray;
+        }
 
-        private int? _maxItemsPerPage;
+        public int? ItemsPerPage { get; private set; }
 
-        private int? _currentPage;
+        public int? MaxItemsPerPage { get; private set; }
 
-        private int? _totalItem;
+        public int? CurrentPage { get; private set; }
 
-        private int? _startPerPage;
+        public int? TotalItem { get; private set; }
 
-        private int? _pageStep;
+        public int? StartPerPage { get; private set; }
 
-        private string _afterPagedFunction;
+        public int? PageStep { get; private set; }
 
-        private bool? _showDetail = true;
+        public string AfterPagedFunction { get; private set; }
 
-        private int[] _itemsPerPageArray;
+        public bool? ShowDetail { get; private set; } = true;
 
-        private string _customRenderFooterFunction;
+        public int[] ItemsPerPageArray { get; private set; }
 
-        private string _pagerSelectCallBack;
+        [JsonProperty(PropertyName = "customRenderFooter")]
+        public string CustomRenderFooterFunction { get; private set; }
+
+        public string PagerSelectCallBack { get; private set; }
 
         public PagerOption SetItemsPerPage(int itemsPerPage)
         {
-            _itemsPerPage = itemsPerPage;
+            ItemsPerPage = itemsPerPage;
             return this;
         }
 
         public PagerOption SetMaxItemsPerPage(int maxItemsPerPage)
         {
-            _maxItemsPerPage = maxItemsPerPage;
+            MaxItemsPerPage = maxItemsPerPage;
             return this;
         }
 
         public PagerOption SetCurrentPage(int currentPage)
         {
-            _currentPage = currentPage;
+            CurrentPage = currentPage;
             return this;
         }
 
         public PagerOption SetTotalItem(int totalItem)
         {
-            _totalItem = totalItem;
+            TotalItem = totalItem;
             return this;
         }
 
         public PagerOption SetStartItemPerPage(int startPerPage)
         {
-            _startPerPage = startPerPage;
+            StartPerPage = startPerPage;
             return this;
         }
 
         public PagerOption SetPageStep(int pageStep)
         {
-            _pageStep = pageStep;
+            PageStep = pageStep;
             return this;
         }
 
         public PagerOption OnAfterPaged(string afterPagedFunction)
         {
-            _afterPagedFunction = afterPagedFunction;
+            AfterPagedFunction = afterPagedFunction;
             return this;
         }
 
         public PagerOption SetDetailHidden()
         {
-            _showDetail = false;
+            ShowDetail = false;
             return this;
         }
 
         public PagerOption SetItemsPerPageArray(int[] itemsPerPageArray)
         {
-            _itemsPerPageArray = itemsPerPageArray;
+            ItemsPerPageArray = itemsPerPageArray;
             return this;
         }
 
         public PagerOption OnRenderFooter(string customRenderFooterFunction)
         {
-            _customRenderFooterFunction = customRenderFooterFunction;
+            CustomRenderFooterFunction = customRenderFooterFunction;
             return this;
         }
 
         public PagerOption OnPageSelect(string pageSelectCallBackFunction)
         {
-            _pagerSelectCallBack = pageSelectCallBackFunction;
+            PagerSelectCallBack = pageSelectCallBackFunction;
             return this;
-        }
-
-        public override string ToString()
-        {
-            var script = new StringBuilder();
-
-            script.AppendLine("{");
-
-            script.AppendJavascriptProperty(_itemsPerPageArray, "itemsPerPageArray");
-            script.AppendJavascriptFunction(_afterPagedFunction, "afterPagedFunction");
-            script.AppendJavascriptFunction(_pagerSelectCallBack, "pagerSelectCallBack");
-            script.AppendJavascriptFunction(_customRenderFooterFunction, "customRenderFooter");
-            script.AppendJavascriptProperty(_currentPage, "currentPage");
-            script.AppendJavascriptProperty(_itemsPerPage, "itemsPerPage");
-            script.AppendJavascriptProperty(_maxItemsPerPage, "maxItemsPerPage");
-            script.AppendJavascriptProperty(_totalItem, "totalItem");
-            script.AppendJavascriptProperty(_startPerPage, "startPerPage");
-            script.AppendJavascriptProperty(_pageStep, "pageStep");
-            script.AppendJavascriptProperty(_showDetail, "showDetail");
-
-            script.AppendLine("}");
-
-            return script.ToString();
         }
     }
 }

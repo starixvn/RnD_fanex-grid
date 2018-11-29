@@ -1,48 +1,55 @@
 ﻿namespace Fanex.Grid.HtmlHelperExtensions
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
-    using System.Web;
     using Fanex.Grid.HtmlHelperExtensions.Extensions;
+    using Newtonsoft.Json;
 
-    public class Grid : IHtmlString
+    public class Grid
     {
-        private string _id = "gridId";
+        public string Id { get; private set; } = "gridId";
 
-        private string _class = "freegrid";
+        public string Class { get; private set; } = "freegrid";
 
-        private string _gridOptionsName;
+        public string GridOptionsName { get; private set; }
 
-        private string _customClasses;
+        public string CustomClasses { get; private set; }
+
         //customizeHeader: false,
-        private bool? _isHeaderCustomized;
+        [JsonProperty(PropertyName = "customizeHeader")]
+        public bool? IsHeaderCustomized { get; private set; }
 
         //headerRows: [],
-        private List<Row> _headerRows;
+        [JsonProperty(PropertyName = "groupHeaderRows")]
+        private List<Row> headerRows;
+
         //columns: [],
-        private List<Column> _columns = new List<Column>();
+        private List<Column> columns = new List<Column>();
+
         //bodyRows: [],
-        private List<Row> _bodyRows;
+        private List<Row> bodyRows;
 
         //numberOfFrozenColumn: 0,
-        private int? _numberOfFrozenColumn;
+        public int? NumberOfFrozenColumn { get; private set; }
 
         //showFooter: false,
-        private bool? _showFooter;
+        public bool? ShowFooter { get; private set; }
+
         //footerRows: [],
-        private List<Row> _footerRows;
-        
+        private List<Row> footerRows;
+
         //headerColumnHeight: 25,
-        private int? _headerColumnHeight;
+        public int? HeaderColumnHeight { get; private set; }
+
         //bodyRowHeight: 21,
-        private int? _bodyRowHeight;
+        public int? BodyRowHeight { get; private set; }
+
         //footerRowHeight: 21,
-        private int? _footerRowHeight;
+        public int? FooterRowHeight { get; private set; }
 
         //showTitle: false,
-        private bool? _showTitle;
+        public bool? ShowTitle { get; private set; }
+
         //titleInfo:
         //{
         //    text: "",
@@ -57,10 +64,12 @@
         //    customButtons: '',
         //    showButtonsWhenNoData: false
         //},
-        private TitleOption _titleOption;
+        [JsonProperty(PropertyName = "titleInfo")]
+        public TitleOption TitleOption { get; private set; }
 
         //showPager: false,
-        private bool? _showPager;
+        public bool? ShowPager { get; private set; }
+
         //pagerOption:
         //{
         //    itemsPerPage: 100,
@@ -72,34 +81,46 @@
         //    afterPagedFunction: null,
         //    showDetail: true
         //},
-        private PagerOption _pagerOption;
-        private bool? _customPager;
+        public PagerOption PagerOption { get; private set; }
+
+        public bool? CustomPager { get; private set; }
 
         //showTree: false,
-        private bool? _showTree;
+        public bool? ShowTree { get; private set; }
+
         //gridExpandHeight: 150,
-        private int? _gridExpandHeight;
+        public int? GridExpandHeight { get; private set; }
+
         //showNoDataOnFrozen: false,
-        private bool? _showNoDataOnFrozen;
+        public bool? ShowNoDataOnFrozen { get; private set; }
+
         //showColumnsShowHide: true,
         //enableHiddenColumns: true,
-        private bool? _enableHiddenColumns;
+        public bool? EnableHiddenColumns { get; private set; }
+
         //showDistinctRow: true,
-        private bool? _showDistinctRow;
+        public bool? ShowDistinctRow { get; private set; }
+
         //showHighlightRow: true,
-        private bool? _showHighlightRow;
+        public bool? ShowHighlightRow { get; private set; }
+
         //highlightFrozenWidth: 1,
-        private int? _highlightFrozenWidth;
+        public int? HighlightFrozenWidth { get; private set; }
+
         //showNumberColumn: false,
-        private bool? _showNumberColumn;
+        public bool? ShowNumberColumn { get; private set; }
+
         //marginRight: 5,
-        private int? _marginRight;
+        public int? MarginRight { get; private set; }
+
         //allowTruncate: false,
-        private bool? _allowTruncate;
+        public bool? AllowTruncate { get; private set; }
+
         //columnsNeedHide: [],
         //private string[] _columnsNeedHide;
         //hiddenColumns: [],
-        private int[] _hiddenColumns;
+        public int[] HiddenColumns { get; private set; }
+
         //sortOption:
         //{
         //    customGridSort: null,
@@ -107,225 +128,240 @@
         //    afterGridSorted: null,
         //    beforeGridSorted: null
         //},
-        private SortOption _sortOption;
+        public SortOption SortOption { get; private set; }
 
         //hideYBackGroundScroller: false,
-        private bool? _hideYBackGroundScroller;
+        public bool? HideYBackGroundScroller { get; private set; }
+
         //bottomBorderWidth: 1,
-        private int? _bottomBorderWidth;
+        public int? BottomBorderWidth { get; private set; }
+
         //treeParentPaddingLeft: 20,
-        private int? _treeParentPaddingLeft;
+        public int? TreeParentPaddingLeft { get; private set; }
+
         //isResetScroller: false,
-        private bool? _isResetScroller;
+        public bool? IsResetScroller { get; private set; }
+
         //fullHeight: true,
-        private bool? _isFullHeight;
+        public bool? IsFullHeight { get; private set; }
+
         //gridHeight: 400,
-        private int? _gridHeight;
+        public int? GridHeight { get; private set; }
+
         //gridWidth: 0,
-        private int? _gridWidth;
+        public int? GridWidth { get; private set; }
+
         //noDataText: "There is no data",
         //language: 'en-US',
-        private string _language;
+        public string Language { get; private set; }
+
         //autoFixFrozenRowHeight: false,
-        private bool? _autoFixFrozenRowHeight;
+        public bool? AutoFixFrozenRowHeight { get; private set; }
+
         //autoResizeColumn: false,
-        private bool? _autoResizeColumn;
+        public bool? AutoResizeColumn { get; private set; }
+
         //pixelsPerCharacter: 0,
-        private int? _pixelsPerCharacter;
+        public int? PixelsPerCharacter { get; private set; }
+
         //calTextWidthWithFontSize: true,
-        private bool? _calTextWidthWithFontSize;
+        public bool? CalTextWidthWithFontSize { get; private set; }
+
         //timeZone: '',
-        private string _timeZone;
+        public string TimeZone { get; private set; }
+
         //scrollWidth: 24
-        private int? _scrollWidth;
+        public int? ScrollWidth { get; private set; }
+
+        public bool? AutoCalculateGridExpandHeight { get; private set; }
 
         public Grid(string id)
         {
-            _id = id;
-            _gridOptionsName = id.Replace("-", string.Empty) + "Options";
+            Id = id;
+            GridOptionsName = id.Replace("-", string.Empty) + "Options";
         }
 
         public Grid SetCustomClasses(string customClasses)
         {
-            _customClasses = customClasses;
+            CustomClasses = customClasses;
 
             return this;
         }
 
         public Grid SetHeaderCustomized()
         {
-            _isHeaderCustomized = true;
+            IsHeaderCustomized = true;
             return this;
         }
 
-        public Grid AddHeaderRows(List<Row> headerRows)
+        public Grid GroupHeader(List<Row> headerRows)
         {
-            _isHeaderCustomized = true;
-            _headerRows = headerRows;
+            IsHeaderCustomized = true;
+            this.headerRows = headerRows;
             return this;
         }
 
-        public Grid AddColumn(Column column)
+        public Grid Column(Column column)
         {
-            _columns.Add(column);
+            columns.Add(column);
             return this;
         }
 
-        public Grid AddBodyRows(List<Row> bodyRows)
+        public Grid Body(List<Row> bodyRows)
         {
-            _bodyRows = bodyRows;
+            this.bodyRows = bodyRows;
             return this;
         }
 
-        public Grid AddFooterRows(List<Row> footerRows)
+        public Grid Footer(List<Row> footerRows)
         {
-            _showFooter = true;
-            _footerRows = footerRows;
+            ShowFooter = true;
+            this.footerRows = footerRows;
             return this;
         }
 
-        public Grid SetNumberOfFrozenColumns(int numberOfFrozenColumn)
+        public Grid SetFrozenColumns(int numberOfFrozenColumn)
         {
-            _numberOfFrozenColumn = numberOfFrozenColumn;
+            NumberOfFrozenColumn = numberOfFrozenColumn;
             return this;
         }
 
         public Grid SetHeaderColumnHeight(int headerColumnHeight)
         {
-            _headerColumnHeight = headerColumnHeight;
+            HeaderColumnHeight = headerColumnHeight;
 
             return this;
         }
 
         public Grid SetBodyRowHeight(int bodyRowHeight)
         {
-            _bodyRowHeight = bodyRowHeight;
+            BodyRowHeight = bodyRowHeight;
 
             return this;
         }
 
         public Grid SetFooterRowHeight(int footerRowHeight)
         {
-            _footerRowHeight = footerRowHeight;
+            FooterRowHeight = footerRowHeight;
 
             return this;
         }
 
         public Grid SetTitle(TitleOption titleOption)
         {
-            _showTitle = true;
-            _titleOption = titleOption;
+            ShowTitle = true;
+            TitleOption = titleOption;
 
             return this;
         }
 
-        public Grid SetPager(PagerOption pagerOption, bool customPager = false)
+        public Grid Pager(PagerOption pagerOption, bool customPager = false)
         {
-            _showPager = true;
-            _customPager = customPager;
-            _pagerOption = pagerOption;
+            ShowPager = true;
+            CustomPager = customPager;
+            PagerOption = pagerOption;
 
             return this;
         }
 
         public Grid SetDisplayWithTreeView()
         {
-            _showTree = true;
+            ShowTree = true;
 
             return this;
         }
 
         public Grid SetExpandHeight(int expandHeight)
         {
-            _gridExpandHeight = expandHeight;
+            GridExpandHeight = expandHeight;
 
             return this;
         }
 
         public Grid SetNoDataTextOnFrozenGrid(bool showNoDataOnFrozen)
         {
-            _showNoDataOnFrozen = showNoDataOnFrozen;
+            ShowNoDataOnFrozen = showNoDataOnFrozen;
             return this;
         }
 
         public Grid SetHiddenColumnsStatus(bool enable, int[] defaultHiddenColumns = null)
         {
-            _enableHiddenColumns = enable;
-            _hiddenColumns = defaultHiddenColumns;
+            EnableHiddenColumns = enable;
+            HiddenColumns = defaultHiddenColumns;
             return this;
         }
 
         public Grid SetDistinctRowDisable()
         {
-            _showDistinctRow = false;
+            ShowDistinctRow = false;
             return this;
         }
 
         public Grid SetHighlightRowDisable()
         {
-            _showHighlightRow = false;
+            ShowHighlightRow = false;
             return this;
         }
 
         public Grid SetHighlightFrozenWidth(int highlightFrozenWidth)
         {
-            _highlightFrozenWidth = highlightFrozenWidth;
+            HighlightFrozenWidth = highlightFrozenWidth;
 
             return this;
         }
 
         public Grid SetNumberColumnVisible()
         {
-            _showNumberColumn = true;
+            ShowNumberColumn = true;
 
             return this;
         }
 
         public Grid SetMarginRight(int marginRight)
         {
-            _marginRight = marginRight;
+            MarginRight = marginRight;
 
             return this;
         }
 
         public Grid SetAllowedTruncate()
         {
-            _allowTruncate = true;
+            AllowTruncate = true;
 
             return this;
         }
 
         public Grid SetSorting(SortOption sortOption)
         {
-            _sortOption = sortOption;
+            SortOption = sortOption;
 
             return this;
         }
 
         public Grid SetYBackgroundScrollerHidden()
         {
-            _hideYBackGroundScroller = true;
+            HideYBackGroundScroller = true;
 
             return this;
         }
 
         public Grid SetBottomBorderWith(int bottomBorderWidth)
         {
-            _bottomBorderWidth = bottomBorderWidth;
+            BottomBorderWidth = bottomBorderWidth;
 
             return this;
         }
 
         public Grid SetTreeParentPaddingLeft(int treeParrentPaddingLeft)
         {
-            _treeParentPaddingLeft = treeParrentPaddingLeft;
+            TreeParentPaddingLeft = treeParrentPaddingLeft;
 
             return this;
         }
 
         public Grid SetResetScroller(bool isResetScroller)
         {
-            _isResetScroller = isResetScroller;
+            IsResetScroller = isResetScroller;
             return this;
         }
 
@@ -338,64 +374,71 @@
 
         public Grid SetHeight(int gridHeight)
         {
-            _gridHeight = gridHeight;
-            _isFullHeight = false;
+            GridHeight = gridHeight;
+            IsFullHeight = false;
 
             return this;
         }
 
         public Grid SetLanguage(string language)
         {
-            _language = language;
+            Language = language;
 
             return this;
         }
 
         public Grid SetAutoFixFrozenRowHeight()
         {
-            _autoFixFrozenRowHeight = true;
+            AutoFixFrozenRowHeight = true;
 
             return this;
         }
 
         public Grid SetAutoResizeColumn()
         {
-            _autoResizeColumn = true;
+            AutoResizeColumn = true;
 
             return this;
         }
 
         public Grid SetPixelsPerCharacter(int pixelsPerCharacter)
         {
-            _pixelsPerCharacter = pixelsPerCharacter;
+            PixelsPerCharacter = pixelsPerCharacter;
 
             return this;
         }
 
         public Grid SetCalculatingWidthByFontSize(bool isCalTextWidthWithFontSize)
         {
-            _calTextWidthWithFontSize = isCalTextWidthWithFontSize;
+            CalTextWidthWithFontSize = isCalTextWidthWithFontSize;
 
             return this;
         }
 
         public Grid SetTimeZone(string timeZone)
         {
-            _timeZone = timeZone;
+            TimeZone = timeZone;
 
             return this;
         }
 
         public Grid SetScrollWidth(int scrollWidth)
         {
-            _scrollWidth = scrollWidth;
+            ScrollWidth = scrollWidth;
 
             return this;
         }
 
         public Grid SetGridOptionsName(string gridOptionsName)
         {
-            _gridOptionsName = gridOptionsName;
+            GridOptionsName = gridOptionsName;
+
+            return this;
+        }
+
+        public Grid AutoFullHeight()
+        {
+            AutoCalculateGridExpandHeight = true;
 
             return this;
         }
@@ -403,112 +446,60 @@
         public string RenderHtml()
         {
             var html = new StringBuilder();
-
-            //<div id="sourcecontainer">
-            //    <div id="gridId" class="freegrid  content-grid">
-            //    </div>
-            //</div>
-
-            html.AppendLine(string.Format("<div id=\"{0}-fanex-grid-container\">", _id));
+            html.Append($"<div id=\"{Id}-fanex-grid-container\">");
 
             var fanexGridClass = "freegrid";
 
-            if(!string.IsNullOrEmpty(_customClasses))
+            if (!string.IsNullOrEmpty(CustomClasses))
             {
-                fanexGridClass += " " + _customClasses;
+                fanexGridClass += " " + CustomClasses;
             }
 
-            html.AppendLine(string.Format("<div id=\"{0}\" class=\"{1}\">", _id, fanexGridClass));
-
-            html.AppendLine("</div></div>");
-
-            return html.ToString();
+            return html
+                .Append($"<div id=\"{Id}\" class=\"{fanexGridClass}\">")
+                .Append("</div></div>")
+                .ToString();
         }
 
-        public string RenderJavascript()
+        public string RenderJavascript(string parentElement)
         {
-            // Create javascript
             var script = new StringBuilder();
 
-            script.AppendLine("<script type=\"text/javascript\">");
+            script
+                .AppendLine("<script type=\"text/javascript\">")
+                .AppendLine($"jQuery('{parentElement}').append('{RenderHtml()}')")
+                .AppendLine(string.Format("var {0} = null;", GridOptionsName))
+                .AppendLine("jQuery(function () {")
+                .AppendLine($"{GridOptionsName} = {JsonExtensions.SerializeWithCamelCase(this)};");
 
-            script.AppendLine(string.Format("var {0} = null;", _gridOptionsName));
+            if(headerRows != null)
+            {
+                script.AppendLine($"{GridOptionsName}.{nameof(headerRows)} = {JsonExtensions.Serialize(headerRows)};");
+            }
 
-            script.AppendLine("jQuery(function () {");
+            if (footerRows != null)
+            {
+                script.AppendLine($"{GridOptionsName}.{nameof(footerRows)} = {JsonExtensions.Serialize(footerRows)};");
+            }
 
-            script.AppendLine(string.Format("{0} = {{", _gridOptionsName));
+            if (bodyRows != null)
+            {
+                script.AppendLine($"{GridOptionsName}.{nameof(bodyRows)} = {JsonExtensions.Serialize(bodyRows)};");
+            }
 
-            script.AppendJavascriptProperty(_numberOfFrozenColumn, "numberOfFrozenColumn");
-            script.AppendJavascriptProperty(_headerColumnHeight, "headerColumnHeight");
-            script.AppendJavascriptProperty(_bodyRowHeight, "bodyRowHeight");
-            script.AppendJavascriptProperty(_footerRowHeight, "footerRowHeight");
-            script.AppendJavascriptProperty(_showTree, "showTree");
-            script.AppendJavascriptProperty(_gridExpandHeight, "gridExpandHeight");
-            script.AppendJavascriptProperty(_showNoDataOnFrozen, "showNoDataOnFrozen");
-            script.AppendJavascriptProperty(_showDistinctRow, "showDistinctRow");
-            script.AppendJavascriptProperty(_showHighlightRow, "showHighlightRow");
-            script.AppendJavascriptProperty(_highlightFrozenWidth, "highlightFrozenWidth");
-            script.AppendJavascriptProperty(_showNumberColumn, "showNumberColumn");
-            script.AppendJavascriptProperty(_marginRight, "marginRight");
-            script.AppendJavascriptProperty(_allowTruncate, "allowTruncate");
-            script.AppendJavascriptProperty(_hideYBackGroundScroller, "hideYBackGroundScroller");
-            script.AppendJavascriptProperty(_bottomBorderWidth, "bottomBorderWidth");
-            script.AppendJavascriptProperty(_treeParentPaddingLeft, "treeParentPaddingLeft");
-            script.AppendJavascriptProperty(_isResetScroller, "isResetScroller");
-            script.AppendJavascriptProperty(_isFullHeight, "fullHeight");
-            script.AppendJavascriptProperty(_gridHeight, "gridHeight");
-            script.AppendJavascriptProperty(_language, "language");
-            script.AppendJavascriptProperty(_autoFixFrozenRowHeight, "autoFixFrozenRowHeight");
-            script.AppendJavascriptProperty(_autoResizeColumn, "autoResizeColumn");
-            script.AppendJavascriptProperty(_pixelsPerCharacter, "pixelsPerCharacter");
-            script.AppendJavascriptProperty(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
-            script.AppendJavascriptProperty(_timeZone, "timeZone");
-            script.AppendJavascriptProperty(_scrollWidth, "scrollWidth");
-            script.AppendJavascriptProperty(_calTextWidthWithFontSize, "calTextWidthWithFontSize");
+            if (columns != null)
+            {
+                script.AppendLine($"{GridOptionsName}.{nameof(columns)} = {JsonExtensions.Serialize(columns)};");
+            }
 
-            script.AppendJavascriptProperty(_enableHiddenColumns, "enableHiddenColumns");
-            script.AppendJavascriptProperty(_hiddenColumns, "hiddenColumns");
-
-            script.AppendJavascriptProperty(_showTitle, "showTitle");
-            script.AppendJavascriptProperty(_titleOption, "titleInfo");
-
-            script.AppendJavascriptProperty(_showPager, "showPager");
-            script.AppendJavascriptProperty(_pagerOption, "pagerOption");
-            script.AppendJavascriptProperty(_customPager, "customPager");
-
-            script.AppendJavascriptProperty(_sortOption, "sortOption");
-
-            script.AppendJavascriptProperty(_isHeaderCustomized, "customizeHeader");
-            script.AppendJavascriptPropertyLine<Row>(_headerRows, "groupHeaderRows");
-
-            script.AppendJavascriptPropertyLine<Column>(_columns, "columns");
-            script.AppendJavascriptPropertyLine<Row>(_bodyRows, "bodyRows");
-
-
-            script.AppendJavascriptProperty(_showFooter, "showFooter");
-            script.AppendJavascriptPropertyLine<Row>(_footerRows, "footerRows");
-            //script.AppendJavascriptProperty(_titleOption, "titleInfo");
-            //script.AppendJavascriptProperty(_titleOption, "titleInfo");
-
-            //if (_pagerOption != null)
-            //{
-            //    script.AppendLine("showFooter:true,");
-            //}
-
-            script.AppendLine("};");
-
-            script.AppendLine(string.Format("jQuery('#{0}').fanexGrid({1});", _id, _gridOptionsName));
-
-            script.AppendLine("});");
-            script.AppendLine("</script>");
-
-            return script.ToString();
+            return script
+                .AppendLine(string.Format("jQuery('#{0}').fanexGrid({1});", Id, GridOptionsName))
+                .AppendLine("});")
+                .AppendLine("</script>")
+                .ToString();
         }
 
-
-        public string ToHtmlString()
-        {
-            return RenderHtml() + RenderJavascript();
-        }
+        public string ToHtml(string parentElement)
+            => RenderJavascript(parentElement);
     }
 }

@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Grid.HtmlHelperExtensions.Enumerations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    
-    public enum TextAlign : int
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum TextAlign
     {
         Left = 0,
 

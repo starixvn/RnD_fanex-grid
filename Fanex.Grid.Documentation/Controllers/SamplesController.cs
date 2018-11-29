@@ -164,6 +164,15 @@
                         new MenuItem { Name = "Default", Url = SamplePageUrl, ViewName = "Default" },
                         new MenuItem { Name = "Customized", Url = SamplePageUrl, ViewName = "Customized" }
                     }
+                },
+                new MenuItem
+                {
+                    Name = "Html Helpers",
+                    ViewName = "HtmlHelpers",
+                    SubMenus = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Default", Url = SamplePageUrl, ViewName = "Default" }
+                    }
                 }
             };
 

@@ -1,68 +1,45 @@
 ﻿namespace Fanex.Grid.HtmlHelperExtensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Grid.HtmlHelperExtensions.Extensions;
-
     public class SortOption
     {
-
         //    customGridSort: null,
         //    serverSortFunction: null,
         //    afterGridSorted: null,
         //    beforeGridSorted: null
 
-        private string _customGridSort;
+        public string CustomGridSort { get; private set; }
 
-        private string _serverSortFunction;
+        public string ServerSortFunction { get; private set; }
 
-        private string _afterGridSorted;
+        public string AfterGridSorted { get; private set; }
 
-        private string _beforeGridSorted;
+        public string BeforeGridSorted { get; private set; }
 
         public SortOption SetCustomGridSortFunction(string customGridSortFunction)
         {
-            _customGridSort = customGridSortFunction;
+            CustomGridSort = customGridSortFunction;
             return this;
         }
 
         public SortOption SetServerSortFunction(string serverSortFunction)
         {
-            _serverSortFunction = serverSortFunction;
+            ServerSortFunction = serverSortFunction;
 
             return this;
         }
 
         public SortOption OnAfterGridSorted(string afterGridSortedFunction)
         {
-            _afterGridSorted = afterGridSortedFunction;
+            AfterGridSorted = afterGridSortedFunction;
 
             return this;
         }
 
         public SortOption OnBeforeGridSort(string beforeGridSortFunction)
         {
-            _beforeGridSorted = beforeGridSortFunction;
+            BeforeGridSorted = beforeGridSortFunction;
 
             return this;
-        }
-
-        public override string ToString()
-        {
-            var script = new StringBuilder();
-
-            script.AppendLine("{");
-
-            script.AppendJavascriptFunction(_customGridSort, "customGridSort");
-            script.AppendJavascriptFunction(_serverSortFunction, "serverSortFunction");
-            script.AppendJavascriptFunction(_afterGridSorted, "afterGridSorted");
-            script.AppendJavascriptFunction(_beforeGridSorted, "beforeGridSorted");
-
-            script.AppendLine("}");
-
-            return script.ToString();
         }
     }
 }

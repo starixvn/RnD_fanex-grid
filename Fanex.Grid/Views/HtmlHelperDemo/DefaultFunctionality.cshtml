@@ -1,21 +1,23 @@
 ﻿@{
     ViewBag.Title = "Default Functionality";
     Layout = "~/Views/Shared/_DemoLayout.cshtml";
-    var gridViewModel = new GridViewModel();
+    var gridViewModel = new GridViewModel(100, );
 }
 
 <div id="sourcecontainer">
-    @(Html.FanexGrid("grid-id")
-        .AddColumn(new Column(gridViewModel.FirstColumnName, gridViewModel.FirstColumnText, 300))
-        .AddColumn(new Column(gridViewModel.SecondColumnName, gridViewModel.SecondColumnText, 300))
-        .AddColumn(new Column(gridViewModel.ThirdColumnName, gridViewModel.ThirdColumnText, 300))
-        .AddColumn(new Column(gridViewModel.FourthColumnName, gridViewModel.FourthColumnText, 300))
-        .AddColumn(new Column(gridViewModel.FifthColumnName, gridViewModel.FifthColumnText, 300))
-        .AddColumn(new Column(gridViewModel.SixthColumnName, gridViewModel.SixthColumnText, 150))
-        .AddColumn(new Column(gridViewModel.SeventhColumnName, gridViewModel.SeventhColumnText, 120))
-        .AddColumn(new Column(gridViewModel.EighthColumnName, gridViewModel.EighthColumnText, 140))
-        .AddColumn(new Column(gridViewModel.NinthColumnName, gridViewModel.NinthColumnText, 180))
-        .AddBodyRows(gridViewModel.BodyRows)
+    @(Html.Raw(
+        new Grid("grid-id")
+            .Column(new Column(gridViewModel.FirstColumnName, gridViewModel.FirstColumnText, 300))
+            .Column(new Column(gridViewModel.SecondColumnName, gridViewModel.SecondColumnText, 300))
+            .Column(new Column(gridViewModel.ThirdColumnName, gridViewModel.ThirdColumnText, 300))
+            .Column(new Column(gridViewModel.FourthColumnName, gridViewModel.FourthColumnText, 300))
+            .Column(new Column(gridViewModel.FifthColumnName, gridViewModel.FifthColumnText, 300))
+            .Column(new Column(gridViewModel.SixthColumnName, gridViewModel.SixthColumnText, 150))
+            .Column(new Column(gridViewModel.SeventhColumnName, gridViewModel.SeventhColumnText, 120))
+            .Column(new Column(gridViewModel.EighthColumnName, gridViewModel.EighthColumnText, 140))
+            .Column(new Column(gridViewModel.NinthColumnName, gridViewModel.NinthColumnText, 180))
+            .Body(gridViewModel.BodyRows)
+            .ToHtml())
     )
 </div>
 <div id="viewsourcecontainer" style="height: 760px; overflow: auto; display: none;">

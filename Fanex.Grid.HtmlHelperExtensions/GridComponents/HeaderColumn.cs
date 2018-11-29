@@ -1,17 +1,15 @@
 ﻿namespace Fanex.Grid.HtmlHelperExtensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
-    public class HeaderColumn : RowColumn
+    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+
+    public class HeaderColumn : Cell
     {
         public HeaderColumn(string name, string headerText) : base(name, null)
         {
-            _headerText = headerText;
+            HeaderText = headerText;
         }
-
-        private string _headerText;
     }
 }

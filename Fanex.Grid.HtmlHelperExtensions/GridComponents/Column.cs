@@ -1,187 +1,152 @@
-﻿
-
-namespace Fanex.Grid.HtmlHelperExtensions
+﻿namespace Fanex.Grid.HtmlHelperExtensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.Grid.HtmlHelperExtensions.Enumerations;
-    using Fanex.Grid.HtmlHelperExtensions.Extensions;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
+    [JsonObject(NamingStrategyType = typeof(DefaultNamingStrategy))]
     public class Column
     {
         public Column(string name, string headerText, int width)
         {
-            _name = name;
-            _headerText = headerText;
-            _width = width;
+            Name = name;
+            HeaderText = headerText;
+            Width = width;
         }
 
-        private string _headerText;
+        public string HeaderText { get; private set; }
 
-        private string _name;
+        public string Name { get; private set; }
 
-        private int _width;
+        public int Width { get; private set; }
 
-        private string _cssClass;
+        public string CssClass { get; private set; }
 
-        private string _tdClass;
+        public string TdClass { get; private set; }
 
-        private string _cellCssClass;
+        public string CellCssClass { get; private set; }
 
-        private TextAlign? _headerAlign;
+        public TextAlign? HeaderAlign { get; private set; }
 
-        private TextAlign? _cellAlign;
+        public TextAlign? CellAlign { get; private set; }
 
-        private bool? _isSortable;
+        [JsonProperty(PropertyName = "Sort")]
+        public bool? IsSortable { get; private set; }
 
-        private string _formatNumber;
+        public string FormatNumber { get; private set; }
 
-        private string _formatNegative;
+        public string FormatNegative { get; private set; }
 
-        private string _formatPositive;
+        public string FormatPositive { get; private set; }
 
-        private bool? _showCollapseExpandIcon;
+        [JsonProperty(PropertyName = "ShowCollapseExpand")]
+        public bool? ShowCollapseExpandIcon { get; private set; }
 
-        private bool? _allowTruncate;
+        public bool? AllowTruncate { get; private set; }
 
-        private string _customHeaderRender;
+        public string CustomHeaderRender { get; private set; }
 
-        private string _customCellRender;
+        public string CustomCellRender { get; private set; }
 
-        private string _sortDirection;
+        public string SortDirection { get; private set; }
 
-        private string _customSortFunction;
+        public string CustomSortFunction { get; private set; }
 
-        private string _sortType;
+        public string SortType { get; private set; }
 
         public Column SetCssClass(string cssClass)
         {
-            _cssClass = cssClass;
+            CssClass = cssClass;
 
             return this;
         }
 
         public Column SetTdClass(string tdClass)
         {
-            _tdClass = tdClass;
+            TdClass = tdClass;
             return this;
         }
 
         public Column SetCellCssClass(string cellCssClass)
         {
-            _cellCssClass = cellCssClass;
+            CellCssClass = cellCssClass;
 
             return this;
         }
 
         public Column SetHeaderTextAlign(TextAlign headerTextAlign)
         {
-            _headerAlign = headerTextAlign;
+            HeaderAlign = headerTextAlign;
             return this;
         }
 
         public Column SetCellTextAlign(TextAlign cellTextAlign)
         {
-            _cellAlign = cellTextAlign;
+            CellAlign = cellTextAlign;
             return this;
         }
 
         public Column SetSortable(string sortDirection = "", string customSortFunction = "", string sortType = "")
         {
-            if(!string.IsNullOrEmpty(sortDirection))
+            if (!string.IsNullOrEmpty(sortDirection))
             {
-                _sortDirection = sortDirection;
+                SortDirection = sortDirection;
             }
 
-            if(!string.IsNullOrEmpty(customSortFunction))
+            if (!string.IsNullOrEmpty(customSortFunction))
             {
-                _customSortFunction = customSortFunction;
+                CustomSortFunction = customSortFunction;
             }
 
-            if(!string.IsNullOrEmpty(sortType))
+            if (!string.IsNullOrEmpty(sortType))
             {
-                _sortType = sortType;
+                SortType = sortType;
             }
 
-            _isSortable = true;
+            IsSortable = true;
             return this;
         }
 
-        
-
         public Column SetFormatNumber(string formatNumber)
         {
-            _formatNumber = formatNumber;
+            FormatNumber = formatNumber;
             return this;
         }
 
         public Column SetFormatNegative(string formatNegative)
         {
-            _formatNegative = formatNegative;
+            FormatNegative = formatNegative;
             return this;
         }
 
         public Column SetFormatPositive(string formatPositive)
         {
-            _formatPositive = formatPositive;
+            FormatPositive = formatPositive;
             return this;
         }
 
         public Column SetCollapseExpandIcon()
         {
-            _showCollapseExpandIcon = true;
+            ShowCollapseExpandIcon = true;
             return this;
         }
 
         public Column SetTextTruncate()
         {
-            _allowTruncate = true;
+            AllowTruncate = true;
             return this;
         }
 
         public Column SetCustomHeaderRender(string customHeaderRenderFunction)
         {
-            _customHeaderRender = customHeaderRenderFunction;
+            CustomHeaderRender = customHeaderRenderFunction;
             return this;
         }
 
         public Column SetCustomCellRender(string customCellRenderFunction)
         {
-            _customCellRender = customCellRenderFunction;
+            CustomCellRender = customCellRenderFunction;
             return this;
-        }
-
-        public override string ToString()
-        {
-            var script = new StringBuilder();
-
-            script.AppendLine("{");
-            script.AppendLine(_headerText.ToJavascriptProperty("HeaderText"));
-            script.AppendLine(_name.ToJavascriptProperty("Name"));
-            script.AppendLine(_width.ToJavascriptProperty("Width"));
-
-
-            //script
-            script.AppendJavascriptProperty(_cssClass, "CssClass");
-            script.AppendJavascriptProperty(_tdClass, "TdClass");
-            script.AppendJavascriptProperty(_cellCssClass, "CellCssClass");
-            script.AppendJavascriptProperty(_headerAlign, "HeaderAlign");
-            script.AppendJavascriptProperty(_cellAlign, "CellAlign");
-            script.AppendJavascriptProperty(_isSortable, "Sort");
-            script.AppendJavascriptProperty(_sortDirection, "SortDirection");
-            script.AppendJavascriptProperty(_customSortFunction, "CustomSortFunction");
-            script.AppendJavascriptProperty(_sortType, "SortType");
-            script.AppendJavascriptProperty(_showCollapseExpandIcon, "ShowCollapseExpand");
-            script.AppendJavascriptProperty(_allowTruncate, "AllowTruncate");
-            script.AppendJavascriptProperty(_formatNumber, "FormatNumber");
-
-            script.AppendJavascriptFunction(_customCellRender, "CustomCellRender");
-            script.AppendJavascriptFunction(_customHeaderRender, "CustomHeaderRender");
-
-            script.AppendLine("},");
-            return script.ToString();
         }
     }
 }

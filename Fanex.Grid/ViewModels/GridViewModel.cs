@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
 using Fanex.Grid.HtmlHelperExtensions;
 using Fanex.Grid.HtmlHelperExtensions.Enumerations;
 
@@ -191,15 +189,15 @@ namespace Fanex.Grid.ViewModels
             {
                 BodyRows.Add(
                     new Row()
-                        .AddColumn(new RowColumn(FirstColumnName, i))
-                        .AddColumn(new RowColumn(SecondColumnName, RandomString(6)))
-                        .AddColumn(new RowColumn(ThirdColumnName, random.Next()))
-                        .AddColumn(new RowColumn(FourthColumnName, RandomString(3)))
-                        .AddColumn(new RowColumn(FifthColumnName, i * 2))
-                        .AddColumn(new RowColumn(SixthColumnName, i))
-                        .AddColumn(new RowColumn(SeventhColumnName, i))
-                        .AddColumn(new RowColumn(EighthColumnName, i))
-                        .AddColumn(new RowColumn(NinthColumnName, i))
+                        .AddCell(new Cell(FirstColumnName, i))
+                        .AddCell(new Cell(SecondColumnName, RandomString(6)))
+                        .AddCell(new Cell(ThirdColumnName, random.Next()))
+                        .AddCell(new Cell(FourthColumnName, RandomString(3)))
+                        .AddCell(new Cell(FifthColumnName, i * 2))
+                        .AddCell(new Cell(SixthColumnName, i))
+                        .AddCell(new Cell(SeventhColumnName, i))
+                        .AddCell(new Cell(EighthColumnName, i))
+                        .AddCell(new Cell(NinthColumnName, i))
                         );
             }
         }
@@ -211,18 +209,18 @@ namespace Fanex.Grid.ViewModels
             {
                 BodyRows.Add(
                     new Row()
-                        .AddColumn(new RowColumn(FirstColumnName, i))
-                        .AddColumn(new RowColumn(SecondColumnName, RandomString(6)))
-                        .AddColumn(new RowColumn(ThirdColumnName, random.Next()))
-                        .AddColumn(new RowColumn(FourthColumnName, RandomString(3)))
-                        .AddColumn(new RowColumn(FifthColumnName, new ComplexColumnViewModel
+                        .AddCell(new Cell(FirstColumnName, i))
+                        .AddCell(new Cell(SecondColumnName, RandomString(6)))
+                        .AddCell(new Cell(ThirdColumnName, random.Next()))
+                        .AddCell(new Cell(FourthColumnName, RandomString(3)))
+                        .AddCell(new Cell(FifthColumnName, new ComplexColumnViewModel
                         {
                             IntValue = i
                         }))
-                        .AddColumn(new RowColumn(SixthColumnName, i))
-                        .AddColumn(new RowColumn(SeventhColumnName, i))
-                        .AddColumn(new RowColumn(EighthColumnName, i))
-                        .AddColumn(new RowColumn(NinthColumnName, i))
+                        .AddCell(new Cell(SixthColumnName, i))
+                        .AddCell(new Cell(SeventhColumnName, i))
+                        .AddCell(new Cell(EighthColumnName, i))
+                        .AddCell(new Cell(NinthColumnName, i))
                         );
             }
         }
@@ -232,14 +230,14 @@ namespace Fanex.Grid.ViewModels
             HeaderRows = new List<Row>();
             HeaderRows.Add(
                 new Row()
-                    .AddColumn(new RowColumn(FirstColumnName).SetHeaderText("Group 1").SetMergeColumnNumber(2).SetTextAlign(TextAlign.Center))
-                    .AddColumn(new RowColumn(ThirdColumnName).SetHeaderText(ThirdColumnText).SetMergeRowNumber(2))
-                    .AddColumn(new RowColumn(FourthColumnName).SetHeaderText(FourthColumnText).SetMergeRowNumber(2))
-                    .AddColumn(new RowColumn(FifthColumnName).SetHeaderText(FifthColumnText).SetMergeRowNumber(2))
-                    .AddColumn(new RowColumn(SixthColumnName).SetHeaderText(SixthColumnText).SetMergeRowNumber(2))
-                    .AddColumn(new RowColumn(SeventhColumnName).SetHeaderText(SeventhColumnText).SetMergeRowNumber(2))
-                    .AddColumn(new RowColumn(EighthColumnName).SetHeaderText(EighthColumnText).SetMergeRowNumber(2))
-                    .AddColumn(new RowColumn(NinthColumnName).SetHeaderText(NinthColumnText).SetMergeRowNumber(2))
+                    .AddCell(new HeaderColumn(FirstColumnName, "Group 1").SetMergeColumnNumber(2).SetTextAlign(TextAlign.Center))
+                    .AddCell(new HeaderColumn(ThirdColumnName, ThirdColumnText).SetMergeRowNumber(2))
+                    .AddCell(new HeaderColumn(FourthColumnName, FourthColumnText).SetMergeRowNumber(2))
+                    .AddCell(new HeaderColumn(FifthColumnName, FifthColumnText).SetMergeRowNumber(2))
+                    .AddCell(new HeaderColumn(SixthColumnName, SixthColumnText).SetMergeRowNumber(2))
+                    .AddCell(new HeaderColumn(SeventhColumnName, SeventhColumnText).SetMergeRowNumber(2))
+                    .AddCell(new HeaderColumn(EighthColumnName, EighthColumnText).SetMergeRowNumber(2))
+                    .AddCell(new HeaderColumn(NinthColumnName, NinthColumnText).SetMergeRowNumber(2))
             );
         }
 
@@ -248,24 +246,25 @@ namespace Fanex.Grid.ViewModels
             FooterRows = new List<Row>();
             FooterRows.Add(
                     new Row()
-                        .AddColumn(new RowColumn(FirstColumnName, 1).SetMergeRowNumber(2))
-                        .AddColumn(new RowColumn(SecondColumnName, 2))
-                        .AddColumn(new RowColumn(ThirdColumnName, 3).SetMergeColumnNumber(2))
-                        .AddColumn(new RowColumn(FifthColumnName, 5).SetMergeRowNumber(2).SetTextAlign(TextAlign.Center))
-                        .AddColumn(new RowColumn(SixthColumnName, 6).SetMergeColumnNumber(4))
+                        .AddCell(new Cell(FirstColumnName, 1).SetMergeRowNumber(2))
+                        .AddCell(new Cell(SecondColumnName, 2))
+                        .AddCell(new Cell(ThirdColumnName, 3).SetMergeColumnNumber(2))
+                        .AddCell(new Cell(FifthColumnName, 5).SetMergeRowNumber(2).SetTextAlign(TextAlign.Center))
+                        .AddCell(new Cell(SixthColumnName, 6).SetMergeColumnNumber(4))
 
                 );
             FooterRows.Add(
                     new Row()
-                        .AddColumn(new RowColumn(SecondColumnName, 22))
-                        .AddColumn(new RowColumn(ThirdColumnName, 3))
-                        .AddColumn(new RowColumn(FourthColumnName, 4))
-                        .AddColumn(new RowColumn(SixthColumnName, 6).SetMergeColumnNumber(2))
-                        .AddColumn(new RowColumn(EighthColumnName, 8).SetMergeColumnNumber(2))
+                        .AddCell(new Cell(SecondColumnName, 22))
+                        .AddCell(new Cell(ThirdColumnName, 3))
+                        .AddCell(new Cell(FourthColumnName, 4))
+                        .AddCell(new Cell(SixthColumnName, 6).SetMergeColumnNumber(2))
+                        .AddCell(new Cell(EighthColumnName, 8).SetMergeColumnNumber(2))
                         );
         }
 
         private static Random random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
+
         private string RandomString(int size)
         {
             StringBuilder builder = new StringBuilder();
@@ -278,6 +277,5 @@ namespace Fanex.Grid.ViewModels
 
             return builder.ToString();
         }
-
     }
 }

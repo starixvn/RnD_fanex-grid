@@ -16,11 +16,11 @@
     {
         bodyRows.Add(
             new Row()
-                .AddColumn(new RowColumn(firstColumnName, i))
-                .AddColumn(new RowColumn(secondColumnName, i))
-                .AddColumn(new RowColumn(thirdColumnName, i))
-                .AddColumn(new RowColumn(fourthColumnName, i))
-                .AddColumn(new RowColumn(fifthColumnName, new SampleColumn { 
+                .AddColumn(new Cell(firstColumnName, i))
+                .AddColumn(new Cell(secondColumnName, i))
+                .AddColumn(new Cell(thirdColumnName, i))
+                .AddColumn(new Cell(fourthColumnName, i))
+                .AddColumn(new Cell(fifthColumnName, new SampleColumn { 
                     IntValue = i
                 }))
                 );
@@ -28,24 +28,24 @@
 
     footerRows.Add(
             new Row()
-                .AddColumn(new RowColumn(firstColumnName, 1).SetMergeRowNumber(2))
-                .AddColumn(new RowColumn(secondColumnName, 2))
-                .AddColumn(new RowColumn(thirdColumnName, 3).SetMergeColumnNumber(2))
-                .AddColumn(new RowColumn(fifthColumnName, 5).SetMergeRowNumber(2).SetTextAlign(TextAlign.Center))
+                .AddColumn(new Cell(firstColumnName, 1).SetMergeRowNumber(2))
+                .AddColumn(new Cell(secondColumnName, 2))
+                .AddColumn(new Cell(thirdColumnName, 3).SetMergeColumnNumber(2))
+                .AddColumn(new Cell(fifthColumnName, 5).SetMergeRowNumber(2).SetTextAlign(TextAlign.Center))
                 );
     footerRows.Add(
             new Row()
-                .AddColumn(new RowColumn(secondColumnName, 2))
-                .AddColumn(new RowColumn(thirdColumnName, 3))
-                .AddColumn(new RowColumn(fourthColumnName, 4))
+                .AddColumn(new Cell(secondColumnName, 2))
+                .AddColumn(new Cell(thirdColumnName, 3))
+                .AddColumn(new Cell(fourthColumnName, 4))
                 );  
 
     headerRows.Add(
         new Row()
-            .AddColumn(new RowColumn(firstColumnName).SetHeaderText("Group 1").SetMergeColumnNumber(2).SetTextAlign(TextAlign.Center))
-            .AddColumn(new RowColumn(thirdColumnName).SetHeaderText("Third Column").SetMergeRowNumber(2))
-            .AddColumn(new RowColumn(fourthColumnName).SetHeaderText("Fourth Column").SetMergeRowNumber(2))
-            .AddColumn(new RowColumn(fifthColumnName).SetHeaderText("Fifth Column").SetMergeRowNumber(2))
+            .AddColumn(new Cell(firstColumnName).SetHeaderText("Group 1").SetMergeColumnNumber(2).SetTextAlign(TextAlign.Center))
+            .AddColumn(new Cell(thirdColumnName).SetHeaderText("Third Column").SetMergeRowNumber(2))
+            .AddColumn(new Cell(fourthColumnName).SetHeaderText("Fourth Column").SetMergeRowNumber(2))
+            .AddColumn(new Cell(fifthColumnName).SetHeaderText("Fifth Column").SetMergeRowNumber(2))
             );
 }
 

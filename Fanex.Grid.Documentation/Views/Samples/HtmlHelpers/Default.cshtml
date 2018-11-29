@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Htm Helpers";
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Default options";
+    var gridViewModel = new GridViewModel(100);
+    var grid = new Grid("grid-Id-1")
+                    .Column(new Column(gridViewModel.Master, gridViewModel.MasterText, 120))
+                    .Column(new Column(gridViewModel.Turnover, gridViewModel.TurnoverText, 120))
+                    .Column(new Column(gridViewModel.GrossComm, gridViewModel.GrossCommText, 120))
+                    .Column(new Column(gridViewModel.MasterTotal, gridViewModel.MasterTotalText, 120))
+                    .Column(new Column(gridViewModel.WinLoss, gridViewModel.WinLossText, 120))
+                    .Column(new Column(gridViewModel.Comm, gridViewModel.CommText, 100))
+                    .Column(new Column(gridViewModel.Total, gridViewModel.TotalText, 120))
+                    .Column(new Column(gridViewModel.Company, gridViewModel.CompanyText, 120))
+                    .SetTitle(new TitleOption("MASTER WIN LOSS"))
+                    .SetFrozenColumns(1)
+                    .GroupHeader(gridViewModel.HeaderRows)
+                    .Body(gridViewModel.BodyRows)
+                    .Footer(gridViewModel.FooterRows)
+                    .Pager(new PagerOption(50, new int[] { 10, 50, 200 }))
+                    .AutoFullHeight();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=yes">
+    <title>Fanex Grid Html Helper</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/bootstrapcss")
+    @Styles.Render("~/Content/materialdesigncss")
+    @Styles.Render("~/Content/style")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/highlightcss")
+</head>
+<body>
+    <div id="sample-container">
+
+    </div>
+</body>
+
+<script type="text/javascript" src="~/Scripts/Libraries/jQuery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/Fanex.Grid/Fanex.Pagination.js"></script>
+<script type="text/javascript" src="~/Scripts/Fanex.Grid/Fanex.Grid.js"></script>
+
+@(Html.Raw(grid.ToHtml("#sample-container")))
+</html>

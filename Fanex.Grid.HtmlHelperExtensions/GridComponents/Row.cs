@@ -1,70 +1,54 @@
 ﻿namespace Fanex.Grid.HtmlHelperExtensions
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Grid.HtmlHelperExtensions.Extensions;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
+    [JsonObject(NamingStrategyType = typeof(DefaultNamingStrategy))]
     public class Row
     {
-        private string _cssClass;
+        public string CssClass { get; private set; }
 
-        private string _customAttributes;
+        public string CustomAttributes { get; private set; }
 
-        private List<RowColumn> _columns = new List<RowColumn>();
+        [JsonProperty(PropertyName = "Columns")]
+        public List<Cell> Cells { get; private set; } = new List<Cell>();
 
-        private List<Row> _subRows;
+        public List<Row> SubRows { get; private set; }
 
-        public Row AddColumns(List<RowColumn> columns)
+        public Row AddCells(List<Cell> columns)
         {
-            _columns.AddRange(columns);
+            Cells.AddRange(columns);
 
             return this;
         }
 
-        public Row AddColumn(RowColumn column)
+        public Row AddCell(Cell cell)
         {
-            _columns.Add(column);
+            Cells.Add(cell);
 
             return this;
         }
 
         public Row AddSubRows(List<Row> subRows)
         {
-            _subRows = subRows;
+            SubRows = subRows;
 
             return this;
         }
 
         public Row SetCssClass(string cssClass)
         {
-            _cssClass = cssClass;
+            CssClass = cssClass;
 
             return this;
         }
 
         public Row SetCustomAttributes(string customAttributes)
         {
-            _customAttributes = customAttributes;
+            CustomAttributes = customAttributes;
 
             return this;
-        }
-
-        public override string ToString()
-        {
-            var script = new StringBuilder();
-
-            script.AppendLine("{");
-
-            script.AppendJavascriptProperty(_cssClass, "CssClass");
-            script.AppendJavascriptProperty(_customAttributes, "CustomAttr");
-            script.AppendJavascriptPropertyLine<Row>(_subRows, "SubRows");
-            script.AppendJavascriptPropertyLine<RowColumn>(_columns, "Columns");
-
-            script.AppendLine("},");
-
-            return script.ToString();
         }
     }
 }

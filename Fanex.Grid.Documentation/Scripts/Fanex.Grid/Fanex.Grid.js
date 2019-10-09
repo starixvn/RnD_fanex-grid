@@ -1180,7 +1180,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var sort = cellInfo.Sort || false;
             var cellColumnName = cellInfo.CellColumnName || '';
             var showClass = (isValid(cellInfo.CanShowHide) && cellInfo.CanShowHide) ? ('grid-show-hide-column') : ' ' + thClass;
-            var cellPaddingRight = cellInfo.IsLastCol ? ('padding-right:' + options.iOSLastColumnPaddingRight + 'px;') : '';
+            var cellPaddingRight = cellInfo.IsLastCol && isIOS ? ('padding-right:' + options.iOSLastColumnPaddingRight + 'px;') : '';
 
             cellHtml.push('<' + cellTag + ' ' + customSpan + ' class="' + showClass + '" >');
 

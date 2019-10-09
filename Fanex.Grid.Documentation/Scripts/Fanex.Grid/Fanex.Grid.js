@@ -719,7 +719,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                     CanShowHide: (me.columnsHastable[currentCol.Name].CanShowHide && (!options.enableHiddenColumns) && showHeaderMergeCol),
                                     TdClass: me.columnsHastable[currentCol.Name].TdClass || '',
                                     ThClass: currentRow.Columns[colIndex].ThClass || '',
-                                    CellAlign: me.columnsHastable[currentCol.Name].HeaderAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'center')
+                                    CellAlign: me.columnsHastable[currentCol.Name].HeaderAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'center'),
+                                    IsLastCol: (currentRow.Columns.length - 1) === colIndex
                                 };
                                 trsHeader.push(me.RenderHeaderCell(cellInfo, currentCol));
                             }
@@ -757,7 +758,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         CanShowHide: me.columnsHastable[currentCol.Name].CanShowHide && (!options.enableHiddenColumns),
                         TdClass: me.columnsHastable[currentCol.Name].TdClass || '',
                         ThClass: me.columnsHastable[currentCol.Name].ThClass || '',
-                        CellAlign: me.columnsHastable[currentCol.Name].HeaderAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'center')
+                        CellAlign: me.columnsHastable[currentCol.Name].HeaderAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'center'),
+                        IsLastCol: (columnLength - 1) === colIndex
                     };
                     trsHeader.push(me.RenderHeaderCell(cellInfo, currentCol));
                 }
@@ -1178,11 +1180,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var sort = cellInfo.Sort || false;
             var cellColumnName = cellInfo.CellColumnName || '';
             var showClass = (isValid(cellInfo.CanShowHide) && cellInfo.CanShowHide) ? ('grid-show-hide-column') : ' ' + thClass;
+            var cellPaddingRight = cellInfo.IsLastCol ? ('padding-right:' + options.iOSLastColumnPaddingRight + 'px;') : '';
 
             cellHtml.push('<' + cellTag + ' ' + customSpan + ' class="' + showClass + '" >');
 
             cellHtml.push('<div class="table-cell ' + cssClass + ' ' + sortClass +
-                            '" style="' + cellWidth + cellHeight + '" ' + cellId +
+                            '" style="' + cellWidth + cellHeight + cellPaddingRight + '" ' + cellId +
                             ' align="' + cellInfo.CellAlign + '" ' + customAttr + '>');
             if (sort === true) {
                 cellHtml.push('<div class="display-inline-block">');

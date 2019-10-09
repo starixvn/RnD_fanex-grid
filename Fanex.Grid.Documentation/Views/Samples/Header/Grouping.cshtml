@@ -21,7 +21,8 @@
                         Columns: [
                                { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 3},
                                { HeaderText: "Header 4", Name: "Number2", MergeColNumber: 5, MergeRowNumber: 2 },
-                               { HeaderText: "Header 10", Name: "Number4", MergeColNumber: 2 }
+                                { HeaderText: "Header 10", Name: "Number4", MergeColNumber: 2 },
+                               { HeaderText: "Header 10", Name: "Number11", MergeColNumber: 2 }
                         ]
                     },
                      {
@@ -29,22 +30,26 @@
                                 { HeaderText: "Group Header 1", Name: "No", MergeColNumber: 2 },
                                 { HeaderText: "Header 3", Name: "Number1", MergeRowNumber: 2 },
                                 //{ HeaderText: "Header 4", Name: "Number2", MergeColNumber: 5 },
-                                { HeaderText: "Header 10", Name: "Number4", MergeRowNumber: 2 },
-                                { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 }
+                                { HeaderText: "Header 9", Name: "Number4", MergeRowNumber: 2 },
+                             { HeaderText: "Header 10", Name: "Number5", MergeRowNumber: 2 },
+                                { HeaderText: "Header 9", Name: "Number11", MergeRowNumber: 2 },
+                                { HeaderText: "Header 10", Name: "Number12", MergeRowNumber: 2 }
                          ]
                      }
            ],
            columns: [
-               { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center"},
-               { HeaderText: "Header 2", Width: 70, Name: "Text1", HeaderAlign: "center", CellAlign: "right" },
-               { HeaderText: "Header 3", Width: 100, Name: "Number1", HeaderAlign: "center", CellAlign: "right" },
+               { HeaderText: "Header 1", Width: 60, Name: "No", HeaderAlign: "center", CellAlign: "center", Sort: true },
+               { HeaderText: "Header 2", Width: 70, Name: "Text1", HeaderAlign: "center", CellAlign: "right", Sort: true  },
+               { HeaderText: "Header 3", Width: 100, Name: "Number1", HeaderAlign: "center", CellAlign: "right", Sort: true  },
                { HeaderText: "Header 4", Width: 100, Name: "Number2", MergeHeaderColNumber: 2 },
-               { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right" },
+               { HeaderText: "Header 5", Width: 160, Name: "Number3", HeaderAlign: "center", CellAlign: "right", Sort: true  },
                { HeaderText: "Header 6", Width: 110, Name: "Text2", MergeHeaderColNumber: 3 },
                { HeaderText: "Header 7", Width: 120, Name: "Text3" },
                { HeaderText: "Header 8", Width: 150, Name: "Text4" },
-               { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right" },
-               { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right" }
+               { HeaderText: "Header 9", Width: 90, Name: "Number4", HeaderAlign: "center", CellAlign: "right", Sort: true  },
+               { HeaderText: "Header 10", Width: 120, Name: "Number5", HeaderAlign: "center", CellAlign: "right", Sort: true },
+                    { HeaderText: "Header 11", Width: 90, Name: "Number11", HeaderAlign: "center", CellAlign: "right", Sort: true  },
+               { HeaderText: "Header 12", Width: 120, Name: "Number12", HeaderAlign: "center", CellAlign: "right", Sort: true  }
            ],
            bodyRows: generateData(100),
            gridExpandHeight: 120,
@@ -68,7 +73,9 @@
                             { Name: "Text3", Value: Math.random().toString(36).substring(16) },
                             { Name: "Text4", Value: Math.random().toString(36).substring(18) },
                             { Name: "Number4", Value: parseFloat((Math.random() * 1000).toFixed(3)) },
-                            { Name: "Number5", Value: parseFloat((index % 2 == 0 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) }
+                        { Name: "Number5", Value: parseFloat((index % 2 == 0 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) },
+                             { Name: "Number11", Value: parseFloat((Math.random() * 1000).toFixed(3)) },
+                            { Name: "Number12", Value: parseFloat((index % 2 == 0 ? (Math.random() * 500).toFixed(3) : (Math.random() * 500 * -1).toFixed(3))) }
                     ]
                 };
                 rows.push(row);

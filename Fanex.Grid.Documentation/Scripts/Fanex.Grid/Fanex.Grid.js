@@ -1080,15 +1080,16 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 cell.Width -= totalPaddingLeft;
             }
 
+            var cellWidth = cell.Width;
             if (isIOS && cell.IsLastCol) {
-                customStyle += 'padding-right:' + options.iOSLastColumnPaddingRight + 'px;';
+                cellWidth -= options.iOSLastColumnPaddingRight;
             }
 
             cellHtml.push('<' + container.HtmlTag + ' ' + container.CustomSpan + ' class="' + tdClass + '"' + ' style="' + container.Height + '"' + ' >');
             cellHtml.push('<div class="table-cell ' +
                             cell.CssClass + ' ' +
                             truncateClass +
-                            '" style="width:' + cell.Width + 'px;' + customStyle + '" ' +
+                            '" style="width:' + cellWidth + 'px;' + customStyle + '" ' +
                             'align="' + cell.Align + '" ' + titleTooltip + cell.CustomAttr + '>');
 
             if (isCurrentColShowTree) {
@@ -1174,13 +1175,14 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var sortClass = cellInfo.SortClass || ' ';
             var customAttr = cellInfo.CustomAttr || ' ';
             var thClass = cellInfo.ThClass || ' ';
-            var cellWidth = 'width:' + (cellInfo.CellWidth || '200') + 'px;';
+            
             var cellHeight = isValid(cellInfo.CellHeight) ? ('height:' + (cellInfo.CellHeight || options.headerColumnHeight) + 'px;') : ' ';
             var cellId = isValid(cellInfo.CellId) ? ' id="' + cellInfo.CellId + '"' : " ";
             var sort = cellInfo.Sort || false;
             var cellColumnName = cellInfo.CellColumnName || '';
             var showClass = (isValid(cellInfo.CanShowHide) && cellInfo.CanShowHide) ? ('grid-show-hide-column') : ' ' + thClass;
-            var cellPaddingRight = cellInfo.IsLastCol && isIOS ? ('padding-right:' + options.iOSLastColumnPaddingRight + 'px;') : '';
+            var cellPaddingRight = cellInfo.IsLastCol && isIOS ? options.iOSLastColumnPaddingRight : '';
+            var cellWidth = 'width:' + ((cellInfo.CellWidth || '200')) + 'px;';
 
             cellHtml.push('<' + cellTag + ' ' + customSpan + ' class="' + showClass + '" >');
 

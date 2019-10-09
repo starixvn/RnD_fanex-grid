@@ -26,6 +26,7 @@
 //          + 08/04/2016: Use bottomBorderWidth to calculate top for footer
 //          + 08/01/2018: Support Smartphone Friendly
 //          + 31/01/2018: Support Smartphone Friendly for pager
+//          + 10/09/2019: Workaround for IOS 13 to display full column
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false, strict:false*/
@@ -251,7 +252,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         minWidth: 300,
         fullWidth: true,
         autoCalculateGridExpandHeight: false,
-        numOfPaddingForGridExpandHeight: 10
+        numOfPaddingForGridExpandHeight: 10,
+        iOS13LastColumnPaddingRight: 15
     };
 
     var Fanex = Fanex || {};
@@ -925,7 +927,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                         Align: (currentCol.CellAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'left')),
                         CustomAttr: (currentCol.CustomAttr || ''),
                         ParentHighlight: parentHighlight,
-                        MergeColumnIndex: currentMergeColsIndex
+                            MergeColumnIndex: currentMergeColsIndex,
+                            IsLastCol: (colsLength - 1) === colIndex
                     },
                         currentCol,
                         currentRow,
@@ -1063,23 +1066,27 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             currentRow.SubRows &&
             currentRow.SubRows.length > 0 && me.columnsHastable[currentCol.Name].ShowCollapseExpand === true);
 
-            var paddingLeft = '';
+            var customStyle = '';
             if ((isCurrentColShowTree && level !== 0) ||
-            (level > 0 &&
-                !(currentRow.SubRows && currentRow.SubRows.length > 0) &&
-                me.columnsHastable[currentCol.Name].ShowCollapseExpand === true) ||
-            (level === 0 && isCurrentColShowTree &&
-                (!isValid(currentRow.SubRows) || currentRow.SubRows.length === 0))) {
+                (level > 0 &&
+                    !(currentRow.SubRows && currentRow.SubRows.length > 0) &&
+                    me.columnsHastable[currentCol.Name].ShowCollapseExpand === true) ||
+                (level === 0 && isCurrentColShowTree &&
+                    (!isValid(currentRow.SubRows) || currentRow.SubRows.length === 0))) {
                 var totalPaddingLeft = level * options.treeParentPaddingLeft;
-                paddingLeft = 'padding-left:' + totalPaddingLeft + 'px;';
+                customStyle = 'padding-left:' + totalPaddingLeft + 'px; ';
                 cell.Width -= totalPaddingLeft;
+            }
+
+            if (iOS13 && cell.IsLastCol) {
+                customStyle += 'padding-right:' + options.iOS13LastColumnPaddingRight + 'px;';
             }
 
             cellHtml.push('<' + container.HtmlTag + ' ' + container.CustomSpan + ' class="' + tdClass + '"' + ' style="' + container.Height + '"' + ' >');
             cellHtml.push('<div class="table-cell ' +
                             cell.CssClass + ' ' +
                             truncateClass +
-                            '" style="width:' + cell.Width + 'px;' + paddingLeft + '" ' +
+                            '" style="width:' + cell.Width + 'px;' + customStyle + '" ' +
                             'align="' + cell.Align + '" ' + titleTooltip + cell.CustomAttr + '>');
 
             if (isCurrentColShowTree) {
@@ -1983,7 +1990,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 parentWidth = browserWindowWidth;
             }
 
-            var gridWidth = options.fullWidth ? ((parentWidth < options.minWidth ? options.minWidth : parentWidth) - options.marginRight) : options.gridWidth;
+            var gridWidth = options.fullWidth
+                ? ((parentWidth < options.minWidth ? options.minWidth : parentWidth) - options.marginRight)
+                : options.gridWidth;
             var isScrollX = gridWidth < tblWidth + 17;
             gridWidth = isScrollX ? gridWidth : (tblWidth + bar);
 
@@ -2812,6 +2821,14 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 };
             }
 
+            function iOSversion() {
+                if (/iP(hone|od|ad)/.test(navigator.platform)) {
+                    // supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
+                    var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+                    return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+                }
+            }
+
             matchedBrowser = ubMatch(navigator.userAgent);
             browserDectect = {};
 
@@ -2824,11 +2841,16 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 }
             }
 
+            browserDectect.isIOS13 = false;
             // Chrome is Webkit, but Webkit is also Safari.
             if (browserDectect.chrome) {
                 browserDectect.webkit = true;
             } else if (browserDectect.webkit) {
                 browserDectect.safari = true;
+                var iOSVersion = iOSversion();
+                if (iOSVersion && iOSVersion.length > 0) {
+                    browserDectect.isIOS13 = iOSVersion[0] >= 13;
+                }
             }
 
             return browserDectect;
@@ -3391,6 +3413,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
     var ff16 = ub.mozilla && parseInt(ub.version, 10) >= 16;
     var ff18 = ub.mozilla && (parseInt(ub.version, 10) >= 18 && parseInt(ub.version, 10) < 25);
     var extraPosition = ff18 ? 1 : 0;
+    var iOS13 = ub.isIOS13;
 
     function isValid(obj) {
         if (typeof obj !== "undefined" && obj != null) {

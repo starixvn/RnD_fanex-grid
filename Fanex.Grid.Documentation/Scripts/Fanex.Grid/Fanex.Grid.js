@@ -26,7 +26,7 @@
 //          + 08/04/2016: Use bottomBorderWidth to calculate top for footer
 //          + 08/01/2018: Support Smartphone Friendly
 //          + 31/01/2018: Support Smartphone Friendly for pager
-//          + 10/09/2019: Workaround for IOS 13 to display full column
+//          + 10/09/2019: Workaround for IOS to display full column
 // </copyright>
 // --------------------------------------------------------------------------
 /*jshint maxdepth:false, maxstatements:false, strict:false*/
@@ -253,7 +253,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         fullWidth: true,
         autoCalculateGridExpandHeight: false,
         numOfPaddingForGridExpandHeight: 10,
-        iOS13LastColumnPaddingRight: 15
+        iOSLastColumnPaddingRight: 15
     };
 
     var Fanex = Fanex || {};
@@ -1078,8 +1078,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 cell.Width -= totalPaddingLeft;
             }
 
-            if (iOS13 && cell.IsLastCol) {
-                customStyle += 'padding-right:' + options.iOS13LastColumnPaddingRight + 'px;';
+            if (isIOS && cell.IsLastCol) {
+                customStyle += 'padding-right:' + options.iOSLastColumnPaddingRight + 'px;';
             }
 
             cellHtml.push('<' + container.HtmlTag + ' ' + container.CustomSpan + ' class="' + tdClass + '"' + ' style="' + container.Height + '"' + ' >');
@@ -2841,7 +2841,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 }
             }
 
-            browserDectect.isIOS13 = false;
+            browserDectect.isIOS = false;
             // Chrome is Webkit, but Webkit is also Safari.
             if (browserDectect.chrome) {
                 browserDectect.webkit = true;
@@ -2849,7 +2849,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 browserDectect.safari = true;
                 var iOSVersion = iOSversion();
                 if (iOSVersion && iOSVersion.length > 0) {
-                    browserDectect.isIOS13 = iOSVersion[0] >= 13;
+                    browserDectect.isIOS = iOSVersion[0] >= 10;
                 }
             }
 
@@ -3413,7 +3413,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
     var ff16 = ub.mozilla && parseInt(ub.version, 10) >= 16;
     var ff18 = ub.mozilla && (parseInt(ub.version, 10) >= 18 && parseInt(ub.version, 10) < 25);
     var extraPosition = ff18 ? 1 : 0;
-    var iOS13 = ub.isIOS13;
+    var isIOS = ub.isIOS;
 
     function isValid(obj) {
         if (typeof obj !== "undefined" && obj != null) {

@@ -2854,7 +2854,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 browserDectect.safari = true;
                 var iOSVersion = iOSversion();
                 if (iOSVersion && iOSVersion.length > 0) {
-                    browserDectect.isIOS = iOSVersion[0] >= 10;
+                    browserDectect.isIOS = iOSVersion[0] >= 13;
                 }
             }
 
